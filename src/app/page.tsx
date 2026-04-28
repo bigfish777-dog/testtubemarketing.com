@@ -18,10 +18,10 @@ const researchers = [
   { name: 'Nick "Fish" Fisher', role: "Co-founder, Systems & Strategy", id: "ID: 002 / UK", k9: false, photo: "/assets/team/nick-fisher.png" },
   { name: "Grace Harrold", role: "Head of Client Happiness", id: "ID: 003 / UK", k9: false, photo: "/assets/team/grace-harrold.png" },
   { name: "Gabriella Neocleous", role: "Head of Copywriting", id: "ID: 004 / UK", k9: false, photo: "/assets/team/gabriella-neocleous.png" },
-  { name: "Jossiah Pinto-Days", role: "Head of Paid Traffic", id: "ID: 005 / UK", k9: false },
+  { name: "Wayne Naldo", role: "Head of Design", id: "ID: 005 / UK", k9: false, photo: "/assets/team/wayne-naldo.png" },
   { name: "Emma Garcia", role: "Head of Finance", id: "ID: 006 / UK", k9: false, photo: "/assets/team/emma-garcia.png" },
-  { name: "Cooper", role: "Head of Security", id: "ID: K9-01 / UK", k9: true },
-  { name: "Thula", role: "Head of Treats", id: "ID: K9-02 / UK", k9: true },
+  { name: "Cooper", role: "Head of Security", id: "ID: K9-01 / UK", k9: true, photo: "/assets/team/cooper.png" },
+  { name: "Thula", role: "Head of Treats", id: "ID: K9-02 / UK", k9: true, photo: "/assets/team/thula.png" },
 ];
 
 function FindingCard({ f }: { f: (typeof findings)[number] }) {
@@ -56,7 +56,7 @@ export default function Home() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/ttm-secondary.png" alt="Test Tube Marketing" />
           </a>
-          <a href="#book" className="btn btn-outline">
+          <a href="https://book.testtubemarketing.com" className="btn btn-outline">
             See If We&apos;re A Fit
           </a>
         </div>
@@ -82,7 +82,7 @@ export default function Home() {
                   make more money.
                 </p>
                 <div className="hero-cta-row">
-                  <a href="#book" className="btn btn-primary">
+                  <a href="https://book.testtubemarketing.com" className="btn btn-primary">
                     Book a Call <span aria-hidden="true">&rarr;</span>
                   </a>
                 </div>
@@ -421,7 +421,7 @@ export default function Home() {
                 Just a conversation about whether what we do would work for your
                 business.
               </p>
-              <a href="#" className="btn btn-primary lg">
+              <a href="https://book.testtubemarketing.com" className="btn btn-primary lg">
                 Book Your Marketing Growth Call{" "}
                 <span aria-hidden="true">&rarr;</span>
               </a>
