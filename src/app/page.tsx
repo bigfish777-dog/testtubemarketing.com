@@ -14,9 +14,9 @@ const findings = [
 ];
 
 const researchers = [
-  { name: "Adam Ashburn", role: "Co-founder, Chief Experimenter", id: "ID: 001 / UK", k9: false },
-  { name: 'Nick "Fish" Fisher', role: "Co-founder, Systems & Strategy", id: "ID: 002 / UK", k9: false },
-  { name: "Grace Harrold", role: "Head of Client Happiness", id: "ID: 003 / UK", k9: false },
+  { name: "Adam Ashburn", role: "Co-founder, Chief Experimenter", id: "ID: 001 / UK", k9: false, photo: "/assets/team/adam-ashburn.png" },
+  { name: 'Nick "Fish" Fisher', role: "Co-founder, Systems & Strategy", id: "ID: 002 / UK", k9: false, photo: "/assets/team/nick-fisher.png" },
+  { name: "Grace Harrold", role: "Head of Client Happiness", id: "ID: 003 / UK", k9: false, photo: "/assets/team/grace-harrold.png" },
   { name: "Gabriella Neocleous", role: "Head of Copywriting", id: "ID: 004 / UK", k9: false, photo: "/assets/team/gabriella-neocleous.png" },
   { name: "Jossiah Pinto-Days", role: "Head of Paid Traffic", id: "ID: 005 / UK", k9: false },
   { name: "Emma Garcia", role: "Head of Finance", id: "ID: 006 / UK", k9: false, photo: "/assets/team/emma-garcia.png" },
