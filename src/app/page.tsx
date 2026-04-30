@@ -405,8 +405,8 @@ export default function Home() {
 
             <div className="final-cta reveal">
               <div
-                className="mono-tag"
-                style={{ justifyContent: "center", display: "inline-flex" }}
+                className="mono"
+                style={{ display: "block", textAlign: "center" }}
               >
                 06 / Initiate
               </div>
