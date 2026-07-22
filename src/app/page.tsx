@@ -493,7 +493,7 @@ export default function Home() {
                 </a>
               </div>
               <div className="links">
-                <a href="#">Privacy Policy</a>
+                <a href="/privacy">Privacy Policy</a>
                 <a href="#">Contact Us</a>
               </div>
             </div>
