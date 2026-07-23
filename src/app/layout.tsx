@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "Test Tube Marketing - Your marketing brains, on retainer",
     description:
       "We're the marketing leadership you keep and the execution team you hire. A retainer buys our heads: planning, judgement, accountability. Projects are quoted when you want our hands.",
-    images: [{ url: "/assets/og-flask.jpg" }],
+    images: [{ url: "/assets/v2/og-split.jpg" }],
   },
 };
 
