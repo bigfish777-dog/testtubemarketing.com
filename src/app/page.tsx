@@ -82,7 +82,7 @@ const findings = [
   { code: "TTM-0006", name: "Aran Curry", biz: "Insight Education", text: "6 figures in revenue from a 5-day Facebook challenge." },
   { code: "TTM-0007", name: "Michelle Clarke", biz: "Veblen Directors", text: "250 calls booked from a first campaign, target was 50." },
   { code: "TTM-0008", name: "Richard Parsons", biz: "Platinum Commercial Academy", text: "Full marketing rebuild. Went from ad-hoc to systemised." },
-  { code: "TTM-0009", name: "Ian Davies", biz: "PPS Pumps", text: "More email replies in 2 days than the previous 2 years combined." },
+  { code: "TTM-0009", name: "Ian Davis", biz: "PPS Pumps", text: "More email replies in 2 days than the previous 2 years combined." },
   { code: "TTM-0010", name: "Steve Hindley", biz: "iNarrator", text: "Massive new contract landed after TTM took over email database." },
 ];
 
@@ -483,15 +483,15 @@ export default function Home() {
               <figure className="founder-photo reveal">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/founders/nick-fisher-award.jpg"
+                  src="/assets/founders/nick-fisher-eca.jpg"
                   alt="Nick Fisher, co-founder of Test Tube Marketing"
-                  width={647}
-                  height={1024}
+                  width={1067}
+                  height={1600}
                   loading="lazy"
                 />
                 <figcaption className="mono figcap">
                   <span>FIG. 03 / FISHER, N.</span>
-                  <span>MIDLANDS STARTUP AWARDS 2026</span>
+                  <span>ON STAGE, ECA BELFAST</span>
                 </figcaption>
               </figure>
               <div className="founder-copy reveal">
@@ -502,15 +502,13 @@ export default function Home() {
                 <p>
                   Fish is a marketer by accident. He dropped out of uni, fell
                   into the nearest job going, and realised he was good at it.
-                  That job turned into years inside Expert Empires, the events
-                  business that put names like Gary Vaynerchuk and Grant
-                  Cardone on UK stages, where he wrote the copy and built the
-                  launches through years of rapid growth. Direct response is
-                  his lane: emails, offers, funnels, the words that make people
-                  buy. Here in the lab he runs systems and strategy, the
-                  behind-the-scenes engine for every client account. He&apos;s
-                  also dad to two kids, which he&apos;ll tell you is the harder
-                  of the two jobs.
+                  Direct response is his lane: emails, offers, funnels, the
+                  words that make people buy. He spent years as the
+                  behind-the-scenes strategist and copywriter on big launches,
+                  the name you never saw on the sales page. Here in the lab he
+                  runs systems and strategy, the engine behind every client
+                  account. He&apos;s also dad to two kids, which he&apos;ll
+                  tell you is the harder of the two jobs.
                 </p>
               </div>
             </article>
@@ -538,10 +536,12 @@ export default function Home() {
                 <p>
                   Adam was meant to be a golf pro. Then he got run over, and
                   marketing got him instead. He spent years as Head of
-                  Marketing at Expert Empires, known around the office as the
-                  founder&apos;s no.2, steering the marketing across the
-                  group&apos;s businesses, including Elite Closing Academy, as
-                  they grew. Strategy is where he&apos;s strongest:
+                  Marketing at Expert Empires, the events business that put
+                  names like Gary Vaynerchuk and Grant Cardone on UK stages.
+                  Around the office he was known as the founder&apos;s no.2,
+                  steering marketing across the group&apos;s businesses,
+                  including Elite Closing Academy, as they grew. Strategy is
+                  where he&apos;s strongest:
                   positioning, offers, and the plan that decides what&apos;s
                   worth doing before anyone touches an ad account. Here in the
                   lab he&apos;s our Chief Experimenter, testing ideas with our
@@ -561,10 +561,25 @@ export default function Home() {
               Independently checked
             </h2>
             <div className="award reveal">
-              <p className="award-line display lg">
-                Marketing &amp; Advertising StartUp of the Year
-              </p>
-              <p className="mono award-sub">MIDLANDS STARTUP AWARDS 2026</p>
+              <div>
+                <p className="award-line display lg">
+                  Marketing &amp; Advertising StartUp of the Year
+                </p>
+                <p className="mono award-sub">MIDLANDS STARTUP AWARDS 2026</p>
+              </div>
+              <figure className="award-photo">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/proof/award-group.jpg"
+                  alt="The Marketing and Advertising StartUp of the Year trophy held on stage at the Midlands StartUp Awards 2026"
+                  width={900}
+                  height={1106}
+                  loading="lazy"
+                />
+                <figcaption className="mono figcap">
+                  <span>FIG. 05 / AWARD NIGHT</span>
+                </figcaption>
+              </figure>
             </div>
             <hr className="rule" />
             <div className="trusted reveal">

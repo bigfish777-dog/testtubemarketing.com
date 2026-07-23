@@ -529,8 +529,21 @@ header.site.scrolled { border-bottom-color: var(--rule); }
 
 /* ---------------- Proof band ---------------- */
 .proof { background: var(--paper-2); }
+.award {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) min(240px, 32%);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+}
 .award-line { max-width: 24ch; }
 .award-sub { display: block; margin-top: 10px; }
+.award-photo { margin: 0; width: 100%; }
+.award-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
 .trusted-label { display: block; margin: 0 0 16px; }
 .trusted-row {
   list-style: none;
@@ -680,6 +693,8 @@ html.js .reveal.in { opacity: 1; transform: none; }
   .fork-col { border-left-color: var(--fushia); }
   .fork-col.alt { border-left: 2px solid var(--fushia); }
   .figcap { flex-direction: column; gap: 2px; }
+  .award { grid-template-columns: 1fr; }
+  .award-photo { width: min(240px, 100%); }
   .findings-head { flex-direction: column; align-items: flex-start; }
   .findings-meta { text-align: left; }
   .finding-row { grid-template-columns: 1fr; gap: 6px; }
