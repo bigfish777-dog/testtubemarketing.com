@@ -92,6 +92,7 @@ body::before {
   letter-spacing: -0.03em;
   line-height: 0.95;
   margin: 0;
+  text-wrap: balance;
 }
 .h2 {
   font-family: var(--font-display), sans-serif;
@@ -101,6 +102,7 @@ body::before {
   letter-spacing: -0.02em;
   line-height: 1.05;
   margin: 0 0 24px;
+  text-wrap: balance;
 }
 .h3 {
   font-family: var(--font-display), sans-serif;
@@ -110,6 +112,7 @@ body::before {
   letter-spacing: -0.02em;
   line-height: 1.2;
   margin: 0 0 16px;
+  text-wrap: balance;
 }
 p { max-width: 66ch; margin: 0 0 20px; }
 .body-soft { color: var(--ink-soft); }
@@ -229,9 +232,9 @@ header.site.scrolled { border-bottom-color: var(--rule); }
   object-fit: cover;
   opacity: 0.14;
 }
-/* The still poster is denser than the diffuse video: keep it
-   background-grade on the viewports that show it */
-.hero-media img.texture-poster { opacity: 0.07; }
+/* The still poster is denser than the diffuse video: one step below
+   the video's grade so on mobile it reads as trace, not wash */
+.hero-media img.texture-poster { opacity: 0.05; }
 .hero-inner { position: relative; z-index: 1; }
 .hero-eyebrow { margin: 0 0 28px; display: block; }
 .hero-display { margin: 0 0 32px; }
@@ -650,10 +653,42 @@ header.site.scrolled { border-bottom-color: var(--rule); }
 .rec-row .name { font-weight: 500; }
 .rec-row.reserved { color: var(--ink-mono); }
 
-/* ---------------- Pricing (night 2) ---------------- */
+/* ---------------- Pricing (night 2): the ledger ----------------
+   The Split's two-room identity restated: hairline ledger rows keyed
+   by the room mono-labels, the figures carried as big mono objects
+   (t-h2, same register as the stat strip and record rail), the
+   sentences demoted to support lines. Night-band tokens only. */
 .pricing-head { margin-bottom: clamp(32px, 4vw, 56px); }
-.pricing-copy { position: relative; }
-.pricing-copy p { margin-bottom: 20px; }
+/* Fix 4: the band's own bottom padding, trimmed so the night surface
+   ends close under the ledger instead of a ~130px empty strip before
+   the speaking note. */
+#pricing { padding-bottom: clamp(40px, 5vw, 56px); }
+.price-ledger { list-style: none; margin: 0; padding: 0; position: relative; }
+.price-row {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: clamp(16px, 3vw, 40px);
+  align-items: start;
+  padding: clamp(24px, 3vw, 40px) 0;
+  border-top: 1px solid var(--night-rule);
+}
+.price-row:last-child { border-bottom: 1px solid var(--night-rule); }
+.price-room { padding-top: 10px; }
+.price-fig {
+  font-family: var(--font-mono), monospace;
+  font-weight: 500;
+  font-size: var(--t-h2);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 14px;
+  max-width: none;
+}
+.night .price-fig { color: var(--paper); }
+.night .price-fig.accent { color: var(--fushia); }
+.price-support { max-width: 60ch; margin: 0; }
+.price-footnote { display: block; margin-top: clamp(24px, 3vw, 40px); }
 .pricing-cta { margin-top: 36px; }
 
 /* ---------------- Speaking strip ---------------- */
@@ -749,12 +784,11 @@ footer.site.night a { color: var(--paper); }
   }
   /* Confession collage insert: offset right at reduced scale */
   .insert-photo { margin: 8px 0 0 auto; width: min(420px, 84%); }
-  /* Retainer year, vertical variant: no sticky, stages stack, the
-     fill runs top-to-bottom beside each stage, ~60vh scroll per stage */
+  /* Retainer year, vertical variant: no sticky, compact stacked
+     stages - label, fill bar and detail cohabit one frame; the fill
+     scrubs to each stage's short entry transit, no stretched scroll */
   .ry-active .ry-tall { min-height: 0; }
   .ry-active .ry-sticky { position: static; min-height: 0; display: block; }
-  /* Scroll room per stage only when the effect is live (JS on) */
-  .ry-active .ry-stage { min-height: 58vh; }
   .ry-stage {
     border-top: 0;
     display: grid;
@@ -774,6 +808,9 @@ footer.site.night a { color: var(--paper); }
   .ry-detail { grid-column: 2; grid-row: 2; padding-left: 0; }
   .ry-track-always { height: 2px; }
   .ry-track-always .ry-fill { transform-origin: left center; }
+  /* Pricing ledger: label stacks above its figure, full-width rows */
+  .price-row { grid-template-columns: 1fr; gap: 10px; }
+  .price-room { padding-top: 0; }
   .record-grid { grid-template-columns: 1fr; }
   .record-rail { position: static; }
   .record-rail-name { display: none; }

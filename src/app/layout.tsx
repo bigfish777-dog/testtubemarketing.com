@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
   Bricolage_Grotesque,
   Public_Sans,
@@ -28,6 +28,10 @@ const mono = JetBrains_Mono({
   weight: ["400", "500"],
   subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+  themeColor: "#F7F3EC",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.testtubemarketing.com"),

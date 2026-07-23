@@ -746,7 +746,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* PRICING (night band 2) */}
+        {/* PRICING (night band 2): the Split's two-room identity restated
+            as a hairline ledger. Room mono-labels, the figures promoted to
+            the big mono objects, the original sentences demoted to support
+            lines. Copy verbatim from site-copy-v2.md: every figure line is
+            an exact substring of its support sentence, no new claims. */}
         <section className="band night" id="pricing" aria-labelledby="pricing-h">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -759,28 +763,46 @@ export default function Home() {
           />
           <div className="container" style={{ position: "relative" }}>
             <h2 className="h2 pricing-head" id="pricing-h">What it costs.</h2>
-            <div className="pricing-copy" data-burst-rows>
-              <p>
-                A standalone half-day session with the two of us starts at
-                £2,500 + VAT. Some businesses book exactly that: one room, one
-                afternoon, one plan, off you go.
-              </p>
-              <p>
-                The retainer starts from £2,500 a month. For that you get four
-                in-person planning sessions a year, us on tap in between, and
-                two people who already know your business holding you to the
-                plan. Do the maths against the half-day and you&apos;ll see why
-                most clients pick the retainer.
-              </p>
-              <p>
-                Execution is quoted per project on top, so you always see the
-                price before anything starts.
-              </p>
-              <p className="mono">
-                STANDALONE SESSIONS: PLUS 7.5% EXPENSES WITHIN THE UK.
-                INTERNATIONAL SESSIONS QUOTED INDIVIDUALLY.
-              </p>
-            </div>
+            <ul className="price-ledger" data-burst-rows>
+              <li className="price-row">
+                <span className="mono price-room">Standalone session</span>
+                <div>
+                  <p className="price-fig">Starts at &pound;2,500 + VAT</p>
+                  <p className="price-support">
+                    A standalone half-day session with the two of us starts at
+                    £2,500 + VAT. Some businesses book exactly that: one room,
+                    one afternoon, one plan, off you go.
+                  </p>
+                </div>
+              </li>
+              <li className="price-row">
+                <span className="mono price-room">The Retainer</span>
+                <div>
+                  <p className="price-fig accent">From &pound;2,500 a month</p>
+                  <p className="price-support">
+                    The retainer starts from £2,500 a month. For that you get
+                    four in-person planning sessions a year, us on tap in
+                    between, and two people who already know your business
+                    holding you to the plan. Do the maths against the half-day
+                    and you&apos;ll see why most clients pick the retainer.
+                  </p>
+                </div>
+              </li>
+              <li className="price-row">
+                <span className="mono price-room">Execution</span>
+                <div>
+                  <p className="price-fig">Quoted per project</p>
+                  <p className="price-support">
+                    Execution is quoted per project on top, so you always see
+                    the price before anything starts.
+                  </p>
+                </div>
+              </li>
+            </ul>
+            <p className="mono price-footnote">
+              STANDALONE SESSIONS: PLUS 7.5% EXPENSES WITHIN THE UK.
+              INTERNATIONAL SESSIONS QUOTED INDIVIDUALLY.
+            </p>
             <a href={BOOK_URL} className="btn btn-outline pricing-cta">
               See If We&apos;re A Fit <span aria-hidden="true">&rarr;</span>
             </a>
@@ -824,7 +846,7 @@ export default function Home() {
               </a>
             </span>
             <p className="mono cta-note">
-              {"// NO OBLIGATION / EXPERT BUSINESSES ONLY"}
+              {"// NO OBLIGATION / FOR ESTABLISHED BUSINESSES"}
             </p>
           </div>
         </section>

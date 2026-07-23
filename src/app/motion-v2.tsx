@@ -95,9 +95,29 @@ export function MotionV2() {
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+    // Texture videos must never run indefinitely: paused outright under
+    // reduced motion, and paused whenever their band leaves the viewport.
+    const textureVideos = Array.from(
+      document.querySelectorAll<HTMLVideoElement>(".texture-video")
+    );
     if (reduced) {
+      textureVideos.forEach((v) => {
+        v.autoplay = false;
+        v.pause();
+      });
       return () => window.removeEventListener("scroll", onScroll);
     }
+    const videoIo = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const v = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) {
+          v.play().catch(() => {});
+        } else {
+          v.pause();
+        }
+      });
+    });
+    textureVideos.forEach((v) => videoIo.observe(v));
 
     // Lenis smooth scroll: desktop pointer-fine only (scrub feels welded
     // to the wheel); native scroll everywhere else.
@@ -466,9 +486,12 @@ export function MotionV2() {
         end: "top 30%",
       });
 
-      // THE RETAINER YEAR, vertical variant: stages stack, each fill
-      // runs top-to-bottom scrubbed to that stage's own transit
-      // (~60vh of scroll per stage); details lift in as bars complete
+      // THE RETAINER YEAR, vertical variant: compact stacked stages
+      // (no per-stage scroll stretching - the stack reads in roughly one
+      // viewport). Each stage's label, fill bar and detail sentence are
+      // on screen together; the detail lifts in at the start of the
+      // stage's short transit while the bar inks alongside it, so no
+      // scroll position ever shows a label-only screen.
       const rySection = document.getElementById("retainer-year");
       if (rySection) {
         rySection.classList.add("ry-active");
@@ -479,19 +502,19 @@ export function MotionV2() {
             defaults: { ease: "none" },
             scrollTrigger: {
               trigger: stage,
-              start: "top 75%",
-              end: "bottom 70%",
+              start: "top 85%",
+              end: "top 50%",
               scrub: true,
             },
           });
-          if (fill) stTl.fromTo(fill, { scaleY: 0 }, { scaleY: 1, duration: 0.8 }, 0);
           if (detail)
             stTl.fromTo(
               detail,
-              { opacity: 0, y: 12 },
-              { opacity: 1, y: 0, duration: 0.2 },
-              0.72
+              { opacity: 0, y: 8 },
+              { opacity: 1, y: 0, duration: 0.25 },
+              0
             );
+          if (fill) stTl.fromTo(fill, { scaleY: 0 }, { scaleY: 1, duration: 1 }, 0);
         });
         const ryAlways = document.querySelector("[data-ry-always]");
         if (ryAlways)
@@ -532,6 +555,7 @@ export function MotionV2() {
 
     return () => {
       window.removeEventListener("scroll", onScroll);
+      videoIo.disconnect();
       if (raf) gsap.ticker.remove(raf);
       lenis?.destroy();
       mm.revert();
