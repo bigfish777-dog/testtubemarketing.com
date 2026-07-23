@@ -220,8 +220,11 @@ export default function Home() {
               Then we noticed how they felt.
             </h2>
             <div className="confession-grid">
-              <div className="confession-copy">
-                <p data-fade>
+              {/* Body paragraphs carry the scroll-scrubbed text fill
+                  (data-fill): the story inks itself in as you read.
+                  No data-fade here; the fill IS the entrance. */}
+              <div className="confession-copy" data-fill-scope>
+                <p data-fill>
                   Big, big monthly fees, everything bundled in. And that was
                   fine when there was lots of stuff happening. But every client
                   has months where they&apos;re on holiday, or between launches,
@@ -230,10 +233,10 @@ export default function Home() {
                   where nothing much seemed to move. We&apos;d been active the
                   whole time. The feeling still didn&apos;t match the number.
                 </p>
-                <p data-fade>
+                <p data-fill>
                   <strong>So we tore the model up.</strong>
                 </p>
-                <p data-fade>
+                <p data-fill>
                   Now our clients pay a smaller retainer to be a client. That
                   buys our time, our thinking, and a plan we&apos;re accountable
                   to. Then they pay for deliverables when they need them. Busy
@@ -379,6 +382,84 @@ export default function Home() {
           </div>
         </section>
 
+        {/* THE RETAINER YEAR: scroll-scrubbed stage timeline (Steady).
+            Stage copy verbatim from site-copy-v2.md how-it-works content.
+            No-JS / reduced-motion: every bar rendered filled, every
+            detail visible (CSS default; JS sets the empty states). */}
+        <section className="ry" id="retainer-year" aria-labelledby="ry-h">
+          <div className="ry-tall" data-ry>
+            <div className="ry-sticky">
+              <div className="container">
+                <p className="mono ry-eyebrow">THE RETAINER YEAR</p>
+                <h2 className="h2" id="ry-h">
+                  Four in-person planning sessions{" "}
+                  <span className="accent">a year.</span>
+                </h2>
+                <ol className="ry-stages">
+                  <li className="ry-stage" data-ry-stage>
+                    <div className="ry-stage-head">
+                      <span className="mono ry-label">Annual session</span>
+                      <span className="ry-track" aria-hidden="true">
+                        <span className="ry-fill" data-ry-fill />
+                      </span>
+                    </div>
+                    <p className="ry-detail" data-ry-detail>
+                      One annual session, up to a full day, to set the year.
+                    </p>
+                  </li>
+                  <li className="ry-stage" data-ry-stage>
+                    <div className="ry-stage-head">
+                      <span className="mono ry-label">Q1 sit-down</span>
+                      <span className="ry-track" aria-hidden="true">
+                        <span className="ry-fill" data-ry-fill />
+                      </span>
+                    </div>
+                    <p className="ry-detail" data-ry-detail>
+                      A quarterly half-day to review the last 90 days and map
+                      the next 90.
+                    </p>
+                  </li>
+                  <li className="ry-stage" data-ry-stage>
+                    <div className="ry-stage-head">
+                      <span className="mono ry-label">Q2 sit-down</span>
+                      <span className="ry-track" aria-hidden="true">
+                        <span className="ry-fill" data-ry-fill />
+                      </span>
+                    </div>
+                    <p className="ry-detail" data-ry-detail>
+                      A quarterly half-day to review the last 90 days and map
+                      the next 90.
+                    </p>
+                  </li>
+                  <li className="ry-stage" data-ry-stage>
+                    <div className="ry-stage-head">
+                      <span className="mono ry-label">Q3 sit-down</span>
+                      <span className="ry-track" aria-hidden="true">
+                        <span className="ry-fill" data-ry-fill />
+                      </span>
+                    </div>
+                    <p className="ry-detail" data-ry-detail>
+                      A quarterly half-day to review the last 90 days and map
+                      the next 90.
+                    </p>
+                  </li>
+                </ol>
+                <p className="mono ry-footnote">AT OUR PLACE OR YOURS.</p>
+                <div className="ry-always">
+                  <span className="ry-track ry-track-always" aria-hidden="true">
+                    <span className="ry-fill" data-ry-always />
+                  </span>
+                  <p className="mono ry-always-label">ALWAYS-ON ACCESS</p>
+                  <p className="ry-always-line">
+                    Drop us a WhatsApp, send us a voice note, give us a call.
+                    No monthly-call ceremony, no usage meter.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* AI (night band 1) */}
         <section className="band night" id="ai" aria-labelledby="ai-h">
           <video
@@ -403,7 +484,9 @@ export default function Home() {
           />
           <div className="container" style={{ position: "relative" }}>
             <p className="mono">THE LAB, NOW</p>
-            <h2 className="display ai-head" id="ai-h">
+            {/* Poster statement carries the cream-fill variant of the
+                scrubbed text fill (faint cream to full cream / fushia). */}
+            <h2 className="display ai-head" id="ai-h" data-fill-night>
               Everyone&apos;s using AI.{" "}
               <span className="accent">
                 Almost nobody&apos;s using it properly.

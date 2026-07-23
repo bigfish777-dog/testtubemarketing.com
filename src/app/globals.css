@@ -22,6 +22,11 @@
   --night-rule: rgba(247, 243, 236, 0.18);
   --night-rule-strong: rgba(247, 243, 236, 0.35);
   --paper-soft: rgba(247, 243, 236, 0.8);
+  /* Text-fill resting states: alpha derivatives of --ink / --paper only,
+     no new hues. --ink-mono (0.66) is the paper-side rest (5.2:1, AA at
+     body size); --paper-faint is the night-side rest for display-size
+     fill (4.9:1, AA-large). The scrub fill takes both to full ink/cream. */
+  --paper-faint: rgba(247, 243, 236, 0.5);
   --maxw: 1240px;
   --pad: clamp(20px, 4vw, 56px);
   --seam: 55%; /* the two-offer asymmetry, reused wherever both appear */
@@ -305,7 +310,18 @@ header.site.scrolled { border-bottom-color: var(--rule); }
 }
 .confession-copy p { color: var(--ink-soft); }
 .confession-copy p strong { color: var(--ink); }
-.insert-photo { margin: 0; }
+/* Split words (JS-only wrapping) fill to FULL ink, not the soft body
+   tone: the inked-in state is the point of the effect. No-JS never
+   splits, so paragraphs keep their normal soft render. */
+.confession-copy .fill-word { color: var(--ink); }
+.fill-word { display: inline; }
+/* Editorial collage: the insert floats offset against the text column
+   (dropped low, bleeding slightly into the right pad) instead of
+   sitting in a slot. Placement and scale do the composition. */
+.insert-photo {
+  margin: clamp(56px, 9vw, 136px) calc(var(--pad) * -0.35) 0 clamp(8px, 1.5vw, 28px);
+  will-change: transform;
+}
 .insert-photo img {
   width: 100%;
   height: auto;
@@ -397,6 +413,61 @@ header.site.scrolled { border-bottom-color: var(--rule); }
 .split-caption strong { font-weight: 500; }
 .split-caption .mono { display: block; }
 
+/* ---------------- THE RETAINER YEAR: scrubbed stage timeline ----------------
+   byq mechanic, TTM restyle: hairline tracks, fushia fill, mono
+   uppercase stage labels, body detail on paper. No pastel card-bars,
+   no icon tiles. No-JS / reduced-motion default: bars filled
+   (transform: none), details visible; JS sets the empty states. */
+.ry { position: relative; z-index: 2; background: var(--paper); }
+.ry-tall { min-height: 100vh; }
+/* JS (desktop) stretches the wrapper and pins the stack via sticky:
+   scrub room without spending the page's single GSAP pin. */
+.ry-active .ry-tall { min-height: 280vh; }
+.ry-active .ry-sticky {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.ry-sticky { padding: clamp(64px, 9vw, 120px) 0; width: 100%; }
+.ry-eyebrow { display: block; margin-bottom: 16px; }
+.ry .h2 { max-width: 22ch; }
+.ry-stages { list-style: none; margin: clamp(32px, 4vw, 56px) 0 0; padding: 0; }
+.ry-stage { padding: 18px 0 6px; border-top: 1px solid var(--rule); }
+.ry-stage-head {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: clamp(16px, 3vw, 40px);
+  align-items: center;
+}
+.ry-label { white-space: nowrap; }
+.ry-track {
+  position: relative;
+  display: block;
+  height: 2px;
+  background: var(--rule);
+  overflow: hidden;
+}
+.ry-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--fushia);
+  transform-origin: left center;
+  will-change: transform;
+}
+.ry-detail {
+  color: var(--ink-soft);
+  max-width: 52ch;
+  margin: 12px 0 8px 0;
+  padding-left: calc(200px + clamp(16px, 3vw, 40px));
+}
+.ry-footnote { display: block; margin-top: 20px; }
+.ry-always { margin-top: clamp(32px, 4vw, 56px); }
+.ry-track-always { margin-bottom: 16px; }
+.ry-always-label { display: block; margin-bottom: 8px; }
+.ry-always-line { color: var(--ink-soft); max-width: 52ch; margin: 0; }
+
 /* ---------------- AI band (night 1) ---------------- */
 .band-texture {
   position: absolute;
@@ -479,12 +550,18 @@ header.site.scrolled { border-bottom-color: var(--rule); }
 
 /* ---------------- Founders: hairline-bound units ---------------- */
 .founders-lead { color: var(--ink-soft); max-width: 52ch; margin-bottom: clamp(40px, 5vw, 64px); }
+/* Asymmetric editorial collage: Fish's unit large and offset left,
+   Adam's at a visibly different scale, dropped low to counterbalance.
+   Scale contrast and whitespace do the composition; the units stay
+   architecturally unbreakable (attribution weld untouched). */
 .founders-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(24px, 4vw, 56px);
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(32px, 6vw, 96px);
   align-items: start;
 }
+.founder-unit:nth-child(2) { margin-top: clamp(72px, 12vw, 176px); }
+.founder-unit { will-change: transform; }
 /* A unit is architecturally unbreakable: photo, name-bar and bio share
    one hairline-bound container; the name-bar overlaps the photo edge. */
 .founder-unit {
@@ -667,11 +744,39 @@ footer.site.night a { color: var(--paper); }
     height: clamp(120px, 30vw, 220px);
     object-fit: cover;
   }
+  /* Confession collage insert: offset right at reduced scale */
+  .insert-photo { margin: 8px 0 0 auto; width: min(420px, 84%); }
+  /* Retainer year, vertical variant: no sticky, stages stack, the
+     fill runs top-to-bottom beside each stage, ~60vh scroll per stage */
+  .ry-active .ry-tall { min-height: 0; }
+  .ry-active .ry-sticky { position: static; min-height: 0; display: block; }
+  /* Scroll room per stage only when the effect is live (JS on) */
+  .ry-active .ry-stage { min-height: 58vh; }
+  .ry-stage {
+    border-top: 0;
+    display: grid;
+    grid-template-columns: 2px minmax(0, 1fr);
+    gap: 0 18px;
+    padding: 0 0 24px;
+  }
+  .ry-stage-head { display: contents; }
+  .ry-track {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    height: auto;
+    align-self: stretch;
+  }
+  .ry-fill { transform-origin: center top; }
+  .ry-label { grid-column: 2; grid-row: 1; padding-top: 2px; }
+  .ry-detail { grid-column: 2; grid-row: 2; padding-left: 0; }
+  .ry-track-always { height: 2px; }
+  .ry-track-always .ry-fill { transform-origin: left center; }
   .record-grid { grid-template-columns: 1fr; }
   .record-rail { position: static; }
   .record-rail-name { display: none; }
   .record-row { grid-template-columns: 1fr; gap: 6px; }
   .founders-grid { grid-template-columns: 1fr; }
+  .founder-unit:nth-child(2) { margin-top: 0; }
   .award { grid-template-columns: 1fr; }
   .award-photo { width: min(280px, 100%); }
   .testimonial.narrow { margin-left: 0; max-width: 640px; }

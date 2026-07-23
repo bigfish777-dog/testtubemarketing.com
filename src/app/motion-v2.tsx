@@ -20,6 +20,69 @@ import Lenis from "lenis";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+/*
+ * Hand-rolled SplitText fallback, word granularity (same zero-licence
+ * approach as the hero line masks, GSAP-9). Wraps each word in a
+ * .fill-word span so the scrubbed text fill can ink units
+ * individually. JS-only: no-JS never splits, text renders complete.
+ * Idempotent: re-runs reuse the existing spans.
+ */
+function splitWords(root: HTMLElement): HTMLElement[] {
+  const existing = root.querySelectorAll<HTMLElement>(".fill-word");
+  if (existing.length) return Array.from(existing);
+  const walk = (node: Node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent || "";
+      if (!text.trim()) return;
+      const frag = document.createDocumentFragment();
+      text.split(/(\s+)/).forEach((part) => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) {
+          frag.appendChild(document.createTextNode(part));
+        } else {
+          const span = document.createElement("span");
+          span.className = "fill-word";
+          span.textContent = part;
+          frag.appendChild(span);
+        }
+      });
+      node.parentNode?.replaceChild(frag, node);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      Array.from(node.childNodes).forEach(walk);
+    }
+  };
+  Array.from(root.childNodes).forEach(walk);
+  return Array.from(root.querySelectorAll<HTMLElement>(".fill-word"));
+}
+
+/*
+ * Scroll-scrubbed text fill (Steady family, byq reference): each word
+ * animates color from the AA-compliant faint rest state to its full
+ * computed ink, staggered so the fill front moves through the copy,
+ * reversible on scroll-back. Color only: no layout properties.
+ */
+function buildTextFill(
+  selector: string,
+  rest: string,
+  st: { start: string; end: string }
+) {
+  gsap.utils.toArray<HTMLElement>(selector).forEach((el) => {
+    const words = splitWords(el);
+    if (!words.length) return;
+    // Capture each word's final ink BEFORE any faint state is applied
+    const targets = words.map((w) => getComputedStyle(w).color);
+    const tl = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: { trigger: el, start: st.start, end: st.end, scrub: true },
+    });
+    words.forEach((w, i) => {
+      // duration 3 vs step 1: ~3 words are mid-fill at any moment, so
+      // the boundary reads as landing mid-word
+      tl.fromTo(w, { color: rest }, { color: targets[i], duration: 3 }, i);
+    });
+  });
+}
+
 export function MotionV2() {
   useGSAP(() => {
     // Header scroll state (runs regardless of motion preference)
@@ -142,6 +205,73 @@ export function MotionV2() {
           );
       }
 
+      // Text fills (Steady, scrubbed, reversible): confession body inks
+      // itself in as you read; AI poster statement is the cream variant
+      buildTextFill("[data-fill]", "rgba(32, 29, 26, 0.66)", {
+        start: "top 78%",
+        end: "bottom 40%",
+      });
+      buildTextFill("[data-fill-night]", "rgba(247, 243, 236, 0.5)", {
+        start: "top 75%",
+        end: "top 30%",
+      });
+
+      // Confession collage: the editorial insert drifts against the text
+      // column with a slight scale settle (Steady, GSAP-13 family)
+      gsap.fromTo(
+        ".insert-photo",
+        { yPercent: 4, scale: 1.04 },
+        {
+          yPercent: -8,
+          scale: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".confession-grid",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+
+      // ===== THE RETAINER YEAR (Steady, byq stage-timeline mechanic):
+      // sticky stack + one scrubbed timeline; each stage's hairline
+      // track inks left-to-right, its detail lifts in when the bar
+      // completes, then the scrub hands off to the next stage. The
+      // always-on track fills continuously beneath. Fully reversible.
+      // Sticky, not pin: the Split keeps the page's single pin.
+      const ry = document.querySelector<HTMLElement>("[data-ry]");
+      const rySection = document.getElementById("retainer-year");
+      if (ry && rySection) {
+        rySection.classList.add("ry-active");
+        const ryTl = gsap.timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: {
+            trigger: ry,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true,
+          },
+        });
+        gsap.utils.toArray<HTMLElement>("[data-ry-stage]").forEach((stage, i) => {
+          const fill = stage.querySelector("[data-ry-fill]");
+          const detail = stage.querySelector("[data-ry-detail]");
+          const at = i * 0.22;
+          if (fill)
+            ryTl.fromTo(fill, { scaleX: 0 }, { scaleX: 1, duration: 0.17 }, at);
+          if (detail)
+            ryTl.fromTo(
+              detail,
+              { opacity: 0, y: 14 },
+              { opacity: 1, y: 0, duration: 0.05 },
+              at + 0.16
+            );
+        });
+        const ryAlways = document.querySelector("[data-ry-always]");
+        if (ryAlways)
+          ryTl.fromTo(ryAlways, { scaleX: 0 }, { scaleX: 1, duration: 0.9 }, 0);
+      }
+
       // ===== THE SPLIT (GSAP-6: the page's single pinned scrub section)
       const stage = document.querySelector<HTMLElement>("[data-split-stage]");
       if (stage) {
@@ -247,6 +377,26 @@ export function MotionV2() {
           tlF.from(bar, { opacity: 0, y: 16, duration: 0.4, ease: "power2.out" }, "-=0.2");
       });
 
+      // Founders collage parallax (Steady, GSAP-13): the two image
+      // masses drift at slightly different rates; the welded units move
+      // whole, so attribution never separates from its photo
+      const founderUnits = gsap.utils.toArray<HTMLElement>("[data-founder-unit]");
+      const foundersGrid = document.querySelector<HTMLElement>(".founders-grid");
+      if (foundersGrid && founderUnits.length) {
+        founderUnits.forEach((unit, i) => {
+          gsap.to(unit, {
+            yPercent: i === 0 ? -4 : 3,
+            ease: "none",
+            scrollTrigger: {
+              trigger: foundersGrid,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+        });
+      }
+
       // Magnetic CTA (GSAP-3, one focal element, pull clamped 0.3)
       if (pointerFine) {
         const magnet = document.querySelector<HTMLElement>("[data-magnetic]");
@@ -305,6 +455,62 @@ export function MotionV2() {
           ease: "power1.out",
           scrollTrigger: { trigger: right, start: "top 88%", once: true },
         });
+      // Text fills, shortened scrub: a paragraph fills within roughly
+      // one viewport of scroll (Steady, reversible)
+      buildTextFill("[data-fill]", "rgba(32, 29, 26, 0.66)", {
+        start: "top 88%",
+        end: "top 22%",
+      });
+      buildTextFill("[data-fill-night]", "rgba(247, 243, 236, 0.5)", {
+        start: "top 85%",
+        end: "top 30%",
+      });
+
+      // THE RETAINER YEAR, vertical variant: stages stack, each fill
+      // runs top-to-bottom scrubbed to that stage's own transit
+      // (~60vh of scroll per stage); details lift in as bars complete
+      const rySection = document.getElementById("retainer-year");
+      if (rySection) {
+        rySection.classList.add("ry-active");
+        gsap.utils.toArray<HTMLElement>("[data-ry-stage]").forEach((stage) => {
+          const fill = stage.querySelector("[data-ry-fill]");
+          const detail = stage.querySelector("[data-ry-detail]");
+          const stTl = gsap.timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: {
+              trigger: stage,
+              start: "top 75%",
+              end: "bottom 70%",
+              scrub: true,
+            },
+          });
+          if (fill) stTl.fromTo(fill, { scaleY: 0 }, { scaleY: 1, duration: 0.8 }, 0);
+          if (detail)
+            stTl.fromTo(
+              detail,
+              { opacity: 0, y: 12 },
+              { opacity: 1, y: 0, duration: 0.2 },
+              0.72
+            );
+        });
+        const ryAlways = document.querySelector("[data-ry-always]");
+        if (ryAlways)
+          gsap.fromTo(
+            ryAlways,
+            { scaleX: 0 },
+            {
+              scaleX: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: ".ry-always",
+                start: "top 85%",
+                end: "top 45%",
+                scrub: true,
+              },
+            }
+          );
+      }
+
       // Founders: simple fade-rise, units stay whole
       gsap.utils.toArray<HTMLElement>("[data-founder-unit]").forEach((unit) => {
         gsap.from(unit, {
@@ -316,6 +522,13 @@ export function MotionV2() {
         });
       });
     });
+
+    // Recompute all trigger positions once the full choreography exists:
+    // the Split's pin spacing and the retainer-year stretch change the
+    // page height AFTER later triggers were measured, so anything below
+    // them (ry timeline, AI fill) would otherwise sit on stale positions.
+    ScrollTrigger.sort();
+    ScrollTrigger.refresh();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
