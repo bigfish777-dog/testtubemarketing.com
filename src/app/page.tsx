@@ -510,13 +510,12 @@ export default function Home() {
               delegated to someone you&apos;ve never met.
             </p>
             <div className="founders-grid">
-              {/* Unit: Fish. Photo provisional pending Fish's contact-sheet pick. */}
               <article className="founder-unit" data-founder-unit>
                 <figure className="founder-photo">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/assets/founders/fish-provisional-v2-5.jpg"
-                    alt="Nick Fisher, co-founder of Test Tube Marketing"
+                    src="/assets/founders/nick-fisher.jpg"
+                    alt="Nick Fisher, co-founder of Test Tube Marketing, mid-sentence with a microphone in hand, gesturing, against a dark grey wall"
                     width={1200}
                     height={1500}
                   />
@@ -544,10 +543,10 @@ export default function Home() {
                 <figure className="founder-photo">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/assets/founders/adam-provisional-v2-1.jpg"
-                    alt="Adam Ashburn, co-founder of Test Tube Marketing"
-                    width={1200}
-                    height={1500}
+                    src="/assets/founders/adam-ashburn.jpg"
+                    alt="Adam Ashburn, co-founder of Test Tube Marketing, seated relaxed in a navy polo shirt against a blue stage curtain"
+                    width={1000}
+                    height={1250}
                   />
                 </figure>
                 <div className="founder-name-bar">
