@@ -87,16 +87,19 @@ export function ClientEffects() {
       onBurette = () => {
         const rect = fork.getBoundingClientRect();
         const vh = window.innerHeight;
-        // 0 when the section top hits 80% viewport, 1 when its bottom
-        // reaches 40% viewport
-        const total = rect.height + vh * 0.4;
+        // 0 when the section top hits 85% viewport, 1 by the time the
+        // 240px fork area has scrolled to ~30% viewport - so the pour
+        // completes while the fork and column headlines are on screen.
+        const total = vh * 0.55 + 240;
         const progress = Math.min(
-          Math.max((vh * 0.8 - rect.top) / total, 0),
+          Math.max((vh * 0.85 - rect.top) / total, 0),
           1
         );
         fills.forEach((p, i) => {
           p.style.strokeDashoffset = `${lengths[i] * (1 - progress)}`;
         });
+        // Completion: branches land into the columns (fushia left-rules)
+        fork.classList.toggle("filled", progress >= 1);
       };
       window.addEventListener("scroll", onBurette, { passive: true });
       window.addEventListener("resize", onBurette);

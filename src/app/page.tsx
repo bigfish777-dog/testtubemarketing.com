@@ -5,12 +5,68 @@ import { ClientEffects } from "./client-effects";
  * content. Flip the flag AND fill the array with verbatim quotes/assets.
  * Never draft placeholder content for real named people.
  */
-const SHOW_TESTIMONIALS = false;
+const SHOW_TESTIMONIALS = true;
 const SHOW_RECOMMENDATIONS = false;
 const SHOW_TRUSTED_BY_ADDITIONS = false;
 
-// Verbatim quotes only. Ships empty on purpose.
-const testimonials: { quote: string; name: string; biz: string }[] = [];
+// Verbatim quotes from the Drive doc "TTM Testimonials" (fetched 2026-07-23).
+// Trimmed with ellipsis only, never rewritten.
+const testimonials: {
+  kicker: string;
+  quote: string;
+  name: string;
+  biz: string;
+}[] = [
+  {
+    kicker: "“$6K PER MONTH”",
+    quote:
+      "When I heard the guys were starting a marketing agency, I KNEW I wanted to work with them. They’ve not only helped provide me with the strategic insights I was looking for, but helped me launch my membership programme which now generates over $6,000 per month - Thanks Ad and Fish!",
+    name: "Mike Maher",
+    biz: "Take A Deep Breath",
+  },
+  {
+    kicker: "“£30K IN RECURRING REVENUE”",
+    quote:
+      "On my first launch, Fish’s emails performed so well, we not only had to open up more spots, we also had to ‘close doors’ early due to selling out. A few months later, the guys helped me launch my mobile app, and within 30 days, we’d signed up over 1,000 members paying £29.99 each.",
+    name: "Steve Keane",
+    biz: "Kraft Coaching",
+  },
+  {
+    kicker: "“WAY MORE ENQUIRIES”",
+    quote:
+      "I turned to Ad and Fish when my marketing manager took a new role, because I wanted to keep up my regular emails. I was stunned when the first 4 emails they wrote generated more calls and replies than anything we’d done previously! I can’t recommend them enough.",
+    name: "Kirsty Darkins",
+    biz: "KD Commercial",
+  },
+  {
+    kicker: "“THEY JUST GET IT”",
+    quote:
+      "It’s safe to say that our ‘basement pump’ business isn’t the most exciting, and is quite technical in its nature. But the team at TTM have been able to rapidly understand our offering, and craft compelling marketing that makes people take action. In fact, we had more replies to the first couple of emails they sent, than we’d had in all the emails in the entire 2 years prior.",
+    name: "Ian Davis",
+    biz: "PPS Pumps",
+  },
+  {
+    kicker: "“6 FIGURES IN REVENUE”",
+    quote:
+      "The first launch Ad, Fish and the team worked on with us generated over £30,000 in sales from a 5-Day Facebook Challenge. Better yet, we were able to leverage the assets they created and re-run the challenge multiple times, and generate a total of 6 figures in revenue.",
+    name: "Aran Curry",
+    biz: "Insight Education",
+  },
+  {
+    kicker: "“250 CALLS BOOKED!”",
+    quote:
+      "On the first campaign Fish and Ad ran for us, we’d set a target of booking 50 calls. The first 2 emails they sent exceeded our target, and we had over 250 calls booked in total. Plus we’ve been able to re-run the campaign since, and get even more calls booked!",
+    name: "Michelle Clarke",
+    biz: "Veblen Directors",
+  },
+  {
+    kicker: "“A TOTAL JOY TO WORK WITH!”",
+    quote:
+      "What an amazing impact the Test Tube Marketing team has had on our business and more importantly on our thinking. Ad, Fish and Grace have been a total joy to work with and we all feel very inspired walking away from a session with these guys. We love their copywriting style and they get our tone of voice absolutely right. We’re only a few months into working together, but we can’t wait to see what the next few years look like with them onboard!",
+    name: "Richard Parsons",
+    biz: "Platinum Commercial Academy",
+  },
+];
 // Verbatim one-liners only. Ships empty on purpose.
 const recommendations: { quote: string; name: string; descriptor: string }[] =
   [];
@@ -37,12 +93,19 @@ export default function Home() {
     <>
       <ClientEffects />
 
+      <a href="#top" className="skip-link">Skip to content</a>
+
       {/* HEADER */}
       <header className="site" id="siteHeader">
         <div className="container nav">
           <a href="#top" className="brand" aria-label="Test Tube Marketing">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/ttm-secondary.png" alt="Test Tube Marketing" />
+            <img
+              src="/assets/ttm-secondary.png"
+              alt=""
+              width={6621}
+              height={1899}
+            />
           </a>
           <a href={BOOK_URL} className="btn btn-outline">
             See If We&apos;re A Fit
@@ -127,6 +190,8 @@ export default function Home() {
                   className="duotone"
                   src="/assets/eruption.jpg"
                   alt="A test tube knocked over with pink smoke erupting"
+                  width={1672}
+                  height={941}
                   loading="lazy"
                 />
                 <figcaption className="mono figcap">
@@ -146,6 +211,8 @@ export default function Home() {
                   className="duotone"
                   src="/assets/specimen.jpg"
                   alt="A cluster of beakers with pink and amber liquids"
+                  width={1672}
+                  height={940}
                   loading="lazy"
                 />
                 <figcaption className="mono figcap">
@@ -304,6 +371,8 @@ export default function Home() {
                 <img
                   src="/assets/ai-glassware.jpg"
                   alt="Light passing through etched laboratory glassware with magenta traces"
+                  width={1600}
+                  height={1062}
                   loading="lazy"
                 />
                 <figcaption className="mono figcap">
@@ -386,12 +455,12 @@ export default function Home() {
               </div>
               <div className="stat reveal">
                 <span className="mono idx">003</span>
-                <div className="num word">In-Person</div>
+                <div className="mono num-word">In-Person</div>
                 <div className="lbl">Four planning sessions a year, in the room</div>
               </div>
               <div className="stat reveal">
                 <span className="mono idx">004</span>
-                <div className="num word">Founder-Led</div>
+                <div className="mono num-word">Founder-Led</div>
                 <div className="lbl">Both of us in every account</div>
               </div>
             </div>
@@ -416,6 +485,8 @@ export default function Home() {
                 <img
                   src="/assets/founders/nick-fisher-award.jpg"
                   alt="Nick Fisher, co-founder of Test Tube Marketing"
+                  width={647}
+                  height={1024}
                   loading="lazy"
                 />
                 <figcaption className="mono figcap">
@@ -450,6 +521,8 @@ export default function Home() {
                 <img
                   src="/assets/founders/adam-ashburn.png"
                   alt="Adam Ashburn, co-founder of Test Tube Marketing"
+                  width={271}
+                  height={286}
                   loading="lazy"
                 />
                 <figcaption className="mono figcap">
@@ -509,22 +582,26 @@ export default function Home() {
               </p>
             </div>
 
-            {/* RESERVED: testimonials - hidden until real quotes are pulled
-                from the Drive doc "TTM Testimonials". Verified name set only:
-                Mike Maher, Steve Keane, Kirsty Darkins, Ian Davis, Aran Curry,
-                Michelle Clarke, Richard Parsons. */}
+            {/* Testimonials: verbatim quotes from the Drive doc
+                "TTM Testimonials". Editorial pull-quote strata, no cards. */}
             {SHOW_TESTIMONIALS && testimonials.length > 0 && (
               <>
                 <hr className="rule" />
-                <div className="testimonials">
-                  {testimonials.map((t) => (
-                    <blockquote key={t.name} className="testimonial">
-                      <p>{t.quote}</p>
-                      <footer className="mono">
-                        {t.name} / {t.biz}
-                      </footer>
-                    </blockquote>
-                  ))}
+                <div className="testimonials-block reveal">
+                  <p className="mono trusted-label">
+                    ON THE RECORD / 7 VERIFIED STATEMENTS
+                  </p>
+                  <div className="testimonials">
+                    {testimonials.map((t) => (
+                      <blockquote key={t.name} className="testimonial">
+                        <p className="mono t-kicker">{t.kicker}</p>
+                        <p className="t-quote">&ldquo;{t.quote}&rdquo;</p>
+                        <footer className="mono">
+                          {t.name} / {t.biz}
+                        </footer>
+                      </blockquote>
+                    ))}
+                  </div>
                 </div>
               </>
             )}
@@ -596,20 +673,22 @@ export default function Home() {
         {/* FINAL CTA (cream) */}
         <section className="block" id="book" aria-labelledby="book-h">
           <div className="container">
-            <div className="final-image-wrap reveal">
+            <figure className="final-image-wrap reveal">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/assets/aftermath.jpg"
                 alt="An extinguished test tube on a scorched surface"
+                width={1672}
+                height={941}
                 loading="lazy"
               />
-              <div className="lab-overlay mono">
+              <figcaption className="mono figcap">
                 <span>{"// PLATE 04 / POST-EXPERIMENT"}</span>
                 <span>EXP-2026-022</span>
-              </div>
-            </div>
+              </figcaption>
+            </figure>
             <div className="final-cta">
-              <p className="mono-tag center reveal">09 / Initiate</p>
+              <p className="mono-tag reveal">09 / Initiate</p>
               <h2 className="display xxl reveal" id="book-h">
                 Want to be our next <span className="pink">breakthrough?</span>
               </h2>
@@ -622,17 +701,9 @@ export default function Home() {
                 Book Your Marketing Growth Call{" "}
                 <span aria-hidden="true">&rarr;</span>
               </a>
-              <div className="trust-row reveal">
-                <span>
-                  <span className="check">&#10003;</span> Limited Capacity
-                </span>
-                <span>
-                  <span className="check">&#10003;</span> No Obligation
-                </span>
-                <span>
-                  <span className="check">&#10003;</span> Expert Businesses Only
-                </span>
-              </div>
+              <p className="mono final-note reveal">
+                {"// NO OBLIGATION / EXPERT BUSINESSES ONLY"}
+              </p>
             </div>
           </div>
         </section>
@@ -647,6 +718,8 @@ export default function Home() {
               <img
                 src="/assets/ttm-secondary-wht.png"
                 alt="Test Tube Marketing"
+                width={1600}
+                height={467}
               />
               <p>
                 Marketing leadership on retainer. Execution by the project.

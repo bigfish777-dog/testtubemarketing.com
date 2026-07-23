@@ -15,7 +15,9 @@
   --fushia-deep: #C7004A; /* AA on paper at text sizes */
   --amber: #FFA71A;
   --ink-soft: rgba(27, 42, 61, 0.66);
-  --ink-faint: rgba(27, 42, 61, 0.42);
+  /* Deepened from 0.42 (2.42:1, failed AA on 11.5px mono) to 0.66 (4.6:1).
+     Hierarchy vs body copy holds via mono size/tracking, not opacity. */
+  --ink-faint: rgba(27, 42, 61, 0.66);
   --rule: rgba(27, 42, 61, 0.14);
   --rule-strong: rgba(27, 42, 61, 0.32);
   --cream-rule: rgba(245, 241, 235, 0.16);
@@ -135,6 +137,23 @@ p { max-width: 66ch; }
   white-space: nowrap;
 }
 
+/* Skip link: hidden until keyboard focus */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 12px 20px;
+  text-decoration: none;
+  font-size: 15px;
+}
+.skip-link:focus-visible {
+  left: 12px;
+  top: 12px;
+}
+
 /* ---------------- Layout primitives ---------------- */
 .container {
   max-width: var(--maxw);
@@ -197,8 +216,8 @@ header.site {
   top: 0;
   z-index: 50;
   background: color-mix(in srgb, var(--paper) 88%, transparent);
-  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s ease;
 }
@@ -293,10 +312,12 @@ header.site.scrolled { border-bottom-color: var(--rule); }
 .figcap {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 2px 12px;
   padding-top: 10px;
   color: var(--ink-faint);
 }
+.figcap span { white-space: nowrap; }
 .pullquote {
   font-size: clamp(26px, 4vw, 44px);
   font-weight: 400;
@@ -333,8 +354,14 @@ header.site.scrolled { border-bottom-color: var(--rule); }
 .b-fill {
   fill: none;
   stroke: var(--fushia);
-  stroke-width: 2;
+  stroke-width: 3.5;
+  stroke-linecap: round;
 }
+/* Fork completion: both branches land into their columns - the column
+   left-rules pick up the fushia so the instrument reads as pouring into
+   the two offers. */
+.fork-wrap .fork-col { transition: border-color 0.45s ease; }
+.fork-wrap.filled .fork-col { border-left-color: var(--fushia); }
 .burette-ticks {
   position: absolute;
   top: 8px;
@@ -467,7 +494,14 @@ header.site.scrolled { border-bottom-color: var(--rule); }
   margin-bottom: 8px;
   font-variant-numeric: tabular-nums;
 }
-.stat .num.word { font-family: var(--font-display), sans-serif; }
+/* Non-numeric tiles: mono annotation register, not stat-numerals */
+.stat .num-word {
+  display: block;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  margin: 14px 0 10px;
+}
 .stat .lbl { font-size: 14px; color: var(--ink-soft); max-width: 22ch; }
 
 /* ---------------- Founders ---------------- */
@@ -478,7 +512,9 @@ header.site.scrolled { border-bottom-color: var(--rule); }
   align-items: start;
   margin-top: clamp(40px, 6vw, 72px);
 }
-.founder-feature.flip { grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr); }
+/* Mirrored alternation per direction: Adam's photo sits on the right */
+.founder-feature.flip { grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); }
+.founder-feature.flip .founder-photo { order: 2; justify-self: end; }
 .founder-photo { margin: 0; max-width: 420px; }
 .founder-photo img {
   width: 100%;
@@ -486,7 +522,8 @@ header.site.scrolled { border-bottom-color: var(--rule); }
   display: block;
   border-radius: 12px;
 }
-.founder-photo.small { max-width: 280px; }
+/* Adam's source is 271x286; ~1.2x ceiling, never upscaled beyond it */
+.founder-photo.small { max-width: 325px; }
 .founder-role { display: block; margin: 0 0 18px; }
 .founder-copy p { color: var(--ink-soft); margin: 0; }
 
@@ -512,17 +549,26 @@ header.site.scrolled { border-bottom-color: var(--rule); }
 }
 .trusted-row li:last-child { border-right: 0; margin-right: 0; }
 .trusted-caption { font-size: 14px; color: var(--ink-soft); margin-top: 16px; }
+.testimonials-block { margin-top: 4px; }
 .testimonials {
   columns: 2;
   column-gap: clamp(24px, 4vw, 56px);
 }
 .testimonial, .recommendation {
   break-inside: avoid;
-  margin: 0 0 28px;
+  margin: 0 0 34px;
   padding-top: 18px;
   border-top: 1px solid var(--rule);
 }
 .testimonial p, .recommendation p { margin: 0 0 10px; }
+.testimonial .t-kicker { color: var(--fushia-deep); margin: 0 0 12px; }
+.testimonial .t-quote {
+  font-family: var(--font-display), sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 52ch;
+}
 
 /* ---------------- Pricing ---------------- */
 .pricing-copy p { margin: 0 0 20px; }
@@ -540,40 +586,19 @@ header.site.scrolled { border-bottom-color: var(--rule); }
 
 /* ---------------- Final CTA ---------------- */
 .final-image-wrap {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: clamp(40px, 6vw, 72px);
+  margin: 0 0 clamp(40px, 6vw, 72px);
 }
 .final-image-wrap img {
   width: 100%;
   height: clamp(220px, 38vw, 460px);
   object-fit: cover;
   display: block;
+  border-radius: 12px;
 }
-.lab-overlay {
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  right: 18px;
-  display: flex;
-  justify-content: space-between;
-  color: rgba(255, 255, 255, 0.85);
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
-}
-.final-cta { text-align: center; }
-.final-cta .display.xxl { margin: 22px 0 28px; }
-.final-cta .lead { margin-left: auto; margin-right: auto; }
-.trust-row {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 18px 32px;
-  margin-top: 28px;
-  font-size: 15px;
-  color: var(--ink-soft);
-}
-.check { color: var(--fushia-deep); margin-right: 6px; }
+/* Closing CTA: flush-left per direction, no centred stack */
+.final-cta { text-align: left; }
+.final-cta .display.xxl { margin: 22px 0 28px; max-width: 18ch; }
+.final-note { display: block; margin: 26px 0 0; }
 
 /* ---------------- Footer ---------------- */
 footer.site {
@@ -595,6 +620,8 @@ footer.site.night a { color: var(--paper); }
 .footer-right a { text-decoration: none; }
 .footer-right a:hover { color: var(--fushia); }
 .footer-right .links { margin-top: 12px; display: flex; gap: 22px; justify-content: flex-end; }
+/* ~44px tap targets on footer text links */
+.footer-right a { display: inline-block; padding: 9px 0; }
 .footer-strip {
   display: flex;
   justify-content: space-between;
@@ -636,12 +663,16 @@ html.js .reveal.in { opacity: 1; transform: none; }
   html.js .reveal { opacity: 1; transform: none; transition: none; }
   .finding-row::after { transition: none; }
   .btn { transition: none; }
+  /* Burette renders fully drawn; columns show the landed state */
+  .fork-wrap .fork-col { border-left-color: var(--fushia); transition: none; }
 }
 
 /* ---------------- Mobile ---------------- */
 @media (max-width: 900px) {
   .story-grid, .story-grid.flip, .ai-grid,
   .founder-feature, .founder-feature.flip { grid-template-columns: 1fr; }
+  /* Alternation drops on mobile: photo back above bio */
+  .founder-feature.flip .founder-photo { order: 0; justify-self: start; }
   .ai-art { position: static; }
   .fork-cols { grid-template-columns: 1fr; gap: 24px; }
   .fork-split { display: none; }
