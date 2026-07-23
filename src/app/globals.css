@@ -739,8 +739,8 @@ footer.site.night a { color: var(--paper); }
   .confession-grid, .ai-grid { grid-template-columns: 1fr; }
   /* The Split degrades to stacked full-bleed bands, cream then night,
      separation carried by surface inversion and mono room-labels */
-  .split-rooms { grid-template-columns: 1fr; }
-  .room { min-height: auto; }
+  .split-rooms { grid-template-columns: 1fr; overflow: hidden; }
+  .room { min-height: auto; max-width: 100%; }
   .split-divider {
     display: block;
     width: 100%;

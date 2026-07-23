@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Test Tube Marketing",
+  title: "Privacy Policy - Test Tube Marketing",
   description: "How Test Tube Marketing collects, uses and protects personal data.",
 };
 
