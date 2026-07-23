@@ -621,7 +621,7 @@ footer.site.night a { color: var(--paper); }
 .footer-right a:hover { color: var(--fushia); }
 .footer-right .links { margin-top: 12px; display: flex; gap: 22px; justify-content: flex-end; }
 /* ~44px tap targets on footer text links */
-.footer-right a { display: inline-block; padding: 9px 0; }
+.footer-right a { display: inline-block; padding: 10px 0; }
 .footer-strip {
   display: flex;
   justify-content: space-between;
@@ -691,4 +691,14 @@ html.js .reveal.in { opacity: 1; transform: none; }
   .footer-right { text-align: left; }
   .footer-right .links { justify-content: flex-start; }
   .testimonials { columns: 1; }
+  /* Names wrap to their own line at mobile widths; a trailing divider
+     stroke on each wrapped line reads as a stray mark, so drop the
+     dividers and force one name per line (two short names can otherwise
+     land on the same flex row with nothing between them). */
+  .trusted-row li {
+    flex: 1 0 100%;
+    border-right: 0;
+    padding-right: 0;
+    margin-right: 0;
+  }
 }
