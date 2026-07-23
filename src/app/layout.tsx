@@ -1,19 +1,25 @@
 import type { Metadata } from "next";
-import { Poppins, JetBrains_Mono } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Public_Sans,
+  JetBrains_Mono,
+} from "next/font/google";
 import "./globals.css";
 
 /*
- * Display + body face: Primeform Pro is the brand face (licence owned).
- * The only local files found are PrimeformProDemo cuts with a 76-glyph
- * character set (no pound sign, %, &, /, :) so they cannot carry a site
- * that quotes prices in pounds. Poppins is the guideline-named fallback.
- * SWAP: when the licensed Primeform Pro webfont files land, replace the
- * Poppins import below with next/font/local and keep the same
- * `--font-display` variable. Nothing else changes.
+ * Type candidate 3 (approved 2026-07): Bricolage Grotesque carries
+ * display/h2/h3 (variable, opsz axis on, used at 400/500 only - the
+ * weight-restraint rule caps everything at 500), Public Sans carries
+ * body/UI at 400/500, JetBrains Mono unchanged for labels.
  */
-const display = Poppins({
+const display = Bricolage_Grotesque({
   variable: "--font-display",
-  weight: ["400", "500"],
+  subsets: ["latin"],
+  axes: ["opsz"],
+});
+
+const body = Public_Sans({
+  variable: "--font-body",
   subsets: ["latin"],
 });
 
@@ -42,7 +48,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-GB" className={`${display.variable} ${mono.variable}`}>
+    <html
+      lang="en-GB"
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
+    >
       <body>{children}</body>
     </html>
   );
