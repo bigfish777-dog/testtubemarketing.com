@@ -28,15 +28,15 @@ const walkaway: { label: string; body: string }[] = [
   },
   {
     label: "Where AI actually earns its keep",
-    body: "For your business, not in general. The handful of places it moves the needle, and the places it's a waste of your afternoon.",
+    body: "For your business, not in general. The handful of places it's genuinely worth it, and the places it's a waste of your afternoon.",
   },
   {
-    label: "A step-by-step way to do it",
-    body: "Not theory. The actual tools, prompts and workflow, written down so you can go and build it.",
+    label: "A staged plan, today to six months",
+    body: "What to put in place today, what to line up next, and what to build towards over the next six months. Sequenced, so you're never guessing what comes next.",
   },
   {
-    label: "The plan on paper",
-    body: "You walk out with it written up, so none of this lives only in your memory by Friday.",
+    label: "A full guide, built for you",
+    body: "A web-based strategy guide made for your business: custom instructions to drop straight into your AI, maps, breakdowns, and the pros and cons of each route. The lot, written up.",
   },
 ];
 
@@ -85,19 +85,22 @@ export default function AiAudit() {
             <p className="audit-hero-sub">
               Usually the tools are fine. The problem is where they&apos;re
               pointed: more capacity poured into the work that was never moving
-              the needle. This session fixes that. An hour or two, just the two
-              of us, working out the one thing actually holding your business
-              back and where AI moves the needle on it. Then I show you how to
-              do it, step by step.
+              the needle. This session fixes that. 90 minutes, just the two of
+              us. Whether you&apos;re barely scratching the surface with AI or
+              already knee-deep in it, we work out the one thing actually
+              holding your business back, and where you can use AI to get it
+              done faster and better. Then I show you how, step by step.
             </p>
-            <p className="mono audit-offer">
-              7 slots over the next fortnight &nbsp;&middot;&nbsp; &pound;499 +
-              VAT{" "}
-              <span className="audit-offer-was">(usually &pound;1,250)</span>
-            </p>
-            <a href="#apply" className="btn btn-primary lg audit-hero-cta">
-              Apply for a slot
-            </a>
+            <div className="audit-hero-actions">
+              <p className="mono audit-offer">
+                7 slots over the next fortnight &nbsp;&middot;&nbsp; &pound;499 +
+                VAT{" "}
+                <span className="audit-offer-was">(usually &pound;1,250)</span>
+              </p>
+              <a href="#apply" className="btn btn-primary lg audit-hero-cta">
+                Apply for a slot
+              </a>
+            </div>
           </div>
         </section>
 
@@ -121,10 +124,12 @@ export default function AiAudit() {
           <div className="container">
             <p className="mono audit-eyebrow">{"// FROM A RECENT SESSION"}</p>
             <p className="audit-proof-lead">
-              A bloke asked me to build him a stack of AI systems. I said no.
-              What he needed was someone to sit with him, work out where AI
-              would actually move the needle for his business, and show him how.
-              Here&apos;s a look at what he walked out with.
+              I had a call a while back with a guy who&apos;d enquired about
+              working with us. It became clear he wanted to crack it himself
+              rather than hand it over. So he paid for my time, we sat down and
+              worked out where AI could actually pay off for his business, and I
+              turned it into an instruction manual he could follow, step by
+              step. Here&apos;s a look at what he walked out with.
             </p>
             {/* Anonymised montage of a real session's output (identifying
                 frames dropped, hero frame cropped). Source frames + build
