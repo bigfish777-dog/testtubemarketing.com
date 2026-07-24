@@ -12,7 +12,9 @@ import { NextResponse } from "next/server";
  */
 
 const NOTIFY_TO = "bigfish@testtubemarketing.com";
-const FROM = "TTM Applications <hello@testtubemarketing.com>";
+// Sends only to Fish, so the from-domain just needs to be Resend-verified.
+// send.mediabuyersystems.com is a verified TTM sub-brand domain.
+const FROM = "AI Audit Applications <ai-audit@send.mediabuyersystems.com>";
 
 type Payload = {
   name?: string;
