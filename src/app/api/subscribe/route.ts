@@ -6,6 +6,10 @@ import { NextResponse } from "next/server";
  * linking to /ai-ladder. Requires RESEND_API_KEY + RESEND_AUDIENCE_ID;
  * when unset the route returns a clean 503 so the form can show its
  * graceful failure state (honest states only - no fake success).
+ *
+ * ORCHESTRATOR-COPY-TODO: the asset-delivery email below (subject +
+ * body) is worker-drafted in Fish's register - review/replace before
+ * the Resend key goes live.
  */
 
 const SITE = "https://www.testtubemarketing.com";

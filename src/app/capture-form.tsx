@@ -7,6 +7,9 @@ import { useState } from "react";
  * POSTs to /api/subscribe. Honest states only: the success message shows
  * on an actual 200 and nothing else; any other response shows a graceful
  * failure with a real fallback (email us).
+ *
+ * ORCHESTRATOR-COPY-TODO: all microcopy in this component (button label,
+ * success line, error line, placeholder) is worker-drafted - review/replace.
  */
 export function CaptureForm({
   idPrefix,

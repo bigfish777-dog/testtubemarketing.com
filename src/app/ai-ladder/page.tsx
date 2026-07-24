@@ -7,6 +7,13 @@ import type { Metadata } from "next";
  * "business owners don't use AI"; the defensible line is that almost
  * everyone now uses AI but very few operate past casual use. No
  * invented statistics: qualitative framing only.
+ *
+ * ORCHESTRATOR-COPY-TODO: ALL body copy on this page (intro, the five
+ * rung entries below, "Where you sit." / "The Everest." / "The
+ * in-between." sections, closing line) is worker-drafted placeholder
+ * prose written before the scope change landed - the orchestrator is
+ * rewriting it from the transcript + ai-skill-lead-research memory.
+ * The page STRUCTURE, styling and print treatment are final.
  */
 
 export const metadata: Metadata = {

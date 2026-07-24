@@ -219,6 +219,8 @@ export default function Home() {
               care of the &lsquo;doing&rsquo; too.
             </p>
             <div className="hero-capture">
+              {/* ORCHESTRATOR-COPY-TODO: hero capture lead below is
+                  worker-drafted (not Fish-verbatim) - review/replace */}
               <p className="hero-capture-lead">
                 Start with <strong>The AI Leverage Ladder</strong>: where your
                 business actually sits with AI, and what the next rung up
@@ -385,6 +387,8 @@ export default function Home() {
               <div className="room room-exec" data-room-right>
                 <div className="room-inner">
                   <p className="mono room-label">EXECUTION / BY THE PROJECT</p>
+                  {/* ORCHESTRATOR-COPY-TODO: room B lead line is worker-
+                      derived from Fish's heads/hands direction - review */}
                   <h3 className="h3">
                     When you need our hands, we take care of the doing.
                   </h3>
@@ -545,6 +549,8 @@ export default function Home() {
                   actually happen, step by step, rather than chasing the big
                   shiny target and never arriving.
                 </p>
+                {/* ORCHESTRATOR-COPY-TODO: AI-band ladder pointer line is
+                    worker-drafted - review/replace */}
                 <p data-fade>
                   That map has a name: <strong>The AI Leverage Ladder</strong>.
                   You can have it.{" "}
@@ -744,6 +750,8 @@ export default function Home() {
             </div>
             <hr className="rule-hr" />
             <div data-fade>
+              {/* ORCHESTRATOR-COPY-TODO: "SAID ABOUT US" label is worker-
+                  drafted (work order only banned "Recommendations") */}
               <p className="mono workedwith-label">SAID ABOUT US</p>
               <div className="flex-quotes">
                 {flexQuotes.map((f) => (
@@ -846,6 +854,10 @@ export default function Home() {
         {/* CLOSING CAPTURE (round 4): the opt-in is the primary CTA;
             book-a-call demoted to a quiet link underneath. */}
         <section className="band cta" id="ladder" aria-labelledby="ladder-h">
+          {/* ORCHESTRATOR-COPY-TODO: closing capture heading + lead +
+              book-a-call demotion line are worker-drafted (the "Book a
+              Marketing Growth Call. 40 minutes. No pitch, no pressure."
+              sentence is verbatim from site-copy-v2) - review/replace */}
           <div className="container cta-inner">
             <h2 className="display cta-head" id="ladder-h">
               Where are you <span className="accent">on the ladder?</span>
