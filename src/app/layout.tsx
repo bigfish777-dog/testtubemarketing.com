@@ -37,12 +37,12 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.testtubemarketing.com"),
   title: "Test Tube Marketing - Your marketing brains, on retainer",
   description:
-    "We're the marketing leadership you keep and the execution team you hire. A retainer buys our heads: planning, judgement, accountability. Projects are quoted when you want our hands.",
+    "We're the marketing leadership you keep and the execution team you hire. You get our heads... and when you need our hands, we can take care of the 'doing' too.",
   openGraph: {
     title: "Test Tube Marketing - Your marketing brains, on retainer",
     description:
-      "We're the marketing leadership you keep and the execution team you hire. A retainer buys our heads: planning, judgement, accountability. Projects are quoted when you want our hands.",
-    images: [{ url: "/assets/v2/og-split.jpg" }],
+      "We're the marketing leadership you keep and the execution team you hire. You get our heads... and when you need our hands, we can take care of the 'doing' too.",
+    images: [{ url: "/assets/founders/two-shot-stage.jpg" }],
   },
 };
 

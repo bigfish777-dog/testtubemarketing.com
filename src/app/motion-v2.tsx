@@ -57,9 +57,12 @@ function splitWords(root: HTMLElement): HTMLElement[] {
 
 /*
  * Scroll-scrubbed text fill (Steady family, byq reference): each word
- * animates color from the AA-compliant faint rest state to its full
- * computed ink, staggered so the fill front moves through the copy,
- * reversible on scroll-back. Color only: no layout properties.
+ * animates color from a barely-there rest state (~12-14% alpha, Fish's
+ * round-4 direction: dramatic, unmistakable) to its full computed ink,
+ * staggered so the fill front moves through the copy, reversible on
+ * scroll-back. Color only: no layout properties. Accessibility gates:
+ * prefers-reduced-motion and no-JS render fully inked (the faint rest
+ * state only ever exists inside an active scrub timeline).
  */
 function buildTextFill(
   selector: string,
@@ -95,29 +98,9 @@ export function MotionV2() {
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    // Texture videos must never run indefinitely: paused outright under
-    // reduced motion, and paused whenever their band leaves the viewport.
-    const textureVideos = Array.from(
-      document.querySelectorAll<HTMLVideoElement>(".texture-video")
-    );
     if (reduced) {
-      textureVideos.forEach((v) => {
-        v.autoplay = false;
-        v.pause();
-      });
       return () => window.removeEventListener("scroll", onScroll);
     }
-    const videoIo = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        const v = entry.target as HTMLVideoElement;
-        if (entry.isIntersecting) {
-          v.play().catch(() => {});
-        } else {
-          v.pause();
-        }
-      });
-    });
-    textureVideos.forEach((v) => videoIo.observe(v));
 
     // Lenis smooth scroll: desktop pointer-fine only (scrub feels welded
     // to the wheel); native scroll everywhere else.
@@ -192,18 +175,6 @@ export function MotionV2() {
         });
       });
 
-      // Hero ink-bloom drift (Steady, GSAP-13): decorative layer only
-      gsap.to("[data-hero-media]", {
-        yPercent: 8,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-
       // Confession marker swipe (Steady, scrubbed draw)
       const swipeWrap = document.querySelector<HTMLElement>(".scrub-swipe-wrap");
       if (swipeWrap) {
@@ -226,12 +197,15 @@ export function MotionV2() {
       }
 
       // Text fills (Steady, scrubbed, reversible): confession body inks
-      // itself in as you read; AI poster statement is the cream variant
-      buildTextFill("[data-fill]", "rgba(32, 29, 26, 0.66)", {
+      // itself in as you read; AI poster statement is the cream variant.
+      // Round 4 rest states: barely visible (~13%) so the fill is
+      // dramatic and unmistakable (Fish's direction; the old AA-safe
+      // rest rule is overridden - reduced-motion/no-JS stay fully inked).
+      buildTextFill("[data-fill]", "rgba(32, 29, 26, 0.13)", {
         start: "top 78%",
         end: "bottom 40%",
       });
-      buildTextFill("[data-fill-night]", "rgba(247, 243, 236, 0.5)", {
+      buildTextFill("[data-fill-night]", "rgba(247, 243, 236, 0.14)", {
         start: "top 75%",
         end: "top 30%",
       });
@@ -341,18 +315,6 @@ export function MotionV2() {
         );
       }
 
-      // AI artifact rise (Steady, GSAP-13)
-      gsap.to("[data-ai-art]", {
-        yPercent: -10,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#ai",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-
       // The Record: sticky rail crossfade as rows pass
       const railIndex = document.querySelector<HTMLElement>("[data-rail-index]");
       const railName = document.querySelector<HTMLElement>("[data-rail-name]");
@@ -417,30 +379,6 @@ export function MotionV2() {
         });
       }
 
-      // Magnetic CTA (GSAP-3, one focal element, pull clamped 0.3)
-      if (pointerFine) {
-        const magnet = document.querySelector<HTMLElement>("[data-magnetic]");
-        if (magnet) {
-          const xTo = gsap.quickTo(magnet, "x", { duration: 0.4, ease: "elastic.out(1,0.4)" });
-          const yTo = gsap.quickTo(magnet, "y", { duration: 0.4, ease: "elastic.out(1,0.4)" });
-          const move = (e: MouseEvent) => {
-            const r = magnet.getBoundingClientRect();
-            xTo((e.clientX - r.left - r.width / 2) * 0.3);
-            yTo((e.clientY - r.top - r.height / 2) * 0.3);
-          };
-          const leave = () => {
-            xTo(0);
-            yTo(0);
-          };
-          const zone = magnet.closest(".magnet-wrap") || magnet;
-          (zone as HTMLElement).addEventListener("mousemove", move);
-          (zone as HTMLElement).addEventListener("mouseleave", leave);
-          return () => {
-            (zone as HTMLElement).removeEventListener("mousemove", move);
-            (zone as HTMLElement).removeEventListener("mouseleave", leave);
-          };
-        }
-      }
     });
 
     // ================= MOBILE (simplified, non-pinned) =================
@@ -476,12 +414,13 @@ export function MotionV2() {
           scrollTrigger: { trigger: right, start: "top 88%", once: true },
         });
       // Text fills, shortened scrub: a paragraph fills within roughly
-      // one viewport of scroll (Steady, reversible)
-      buildTextFill("[data-fill]", "rgba(32, 29, 26, 0.66)", {
+      // one viewport of scroll (Steady, reversible). Round 4 rest states
+      // match desktop: barely visible until the fill front arrives.
+      buildTextFill("[data-fill]", "rgba(32, 29, 26, 0.13)", {
         start: "top 88%",
         end: "top 22%",
       });
-      buildTextFill("[data-fill-night]", "rgba(247, 243, 236, 0.5)", {
+      buildTextFill("[data-fill-night]", "rgba(247, 243, 236, 0.14)", {
         start: "top 85%",
         end: "top 30%",
       });
@@ -555,7 +494,6 @@ export function MotionV2() {
 
     return () => {
       window.removeEventListener("scroll", onScroll);
-      videoIo.disconnect();
       if (raf) gsap.ticker.remove(raf);
       lenis?.destroy();
       mm.revert();

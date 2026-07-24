@@ -1,4 +1,5 @@
 import { MotionV2 } from "./motion-v2";
+import { CaptureForm } from "./capture-form";
 
 /*
  * TWO SPEEDS rebuild (design-direction-v2.md + site-copy-v2.md, 2026-07-23).
@@ -83,16 +84,21 @@ const record = [
 ];
 
 /*
- * Recommendations: PREVIEW-ONLY placeholder rows per Fish's explicit
- * instruction. "[quote coming]" / "[slot reserved]" only. HARD GATE:
- * this stratum cannot ship to production with placeholders in it.
+ * Flex quotes (round 4): short, oversized, almost offhand. The three
+ * real quotes below were supplied VERBATIM by Fish 2026-07-24 - never
+ * edit them. Pending rows keep "[quote coming]" / "[slot reserved]"
+ * placeholders only (PREVIEW-ONLY; cannot ship to production with
+ * placeholders in it). Never invent quote words for real people.
  */
-const recommendations: { name: string; descriptor: string }[] = [
-  { name: "Jay Alderton", descriptor: "Fitness and mindset coach" },
-  { name: "Steve Keane", descriptor: "Kraft Coaching" },
-  { name: "James Sinclair", descriptor: "Founder, Partyman Group" },
+const flexQuotes: { quote: string; name: string; descriptor: string }[] = [
+  { quote: "Seriously, seriously smart", name: "John Parkes", descriptor: "CMO, ClickFunnels" },
+  { quote: "Absolutely fucking genius", name: "James Sinclair", descriptor: "Founder, Partyman Group" },
+  { quote: "In another league", name: "Jay Alderton", descriptor: "Fitness and mindset coach" },
 ];
-const RESERVED_SLOTS = 6;
+const pendingQuotes: { name: string; descriptor: string }[] = [
+  { name: "Steve Keane", descriptor: "Kraft Coaching" },
+];
+const RESERVED_SLOTS = 5;
 
 export default function Home() {
   return (
@@ -115,32 +121,10 @@ export default function Home() {
       </header>
 
       <main id="top">
-        {/* HERO: kinetic masthead over the ink-bloom texture (V1) */}
+        {/* HERO: kinetic masthead, type only (round 4: texture video cut -
+            Fish's tolerance for abstract imagery is proven low) */}
         <section className="hero" id="hero" aria-labelledby="hero-h">
-          <div className="hero-media" data-hero-media aria-hidden="true">
-            <video
-              className="texture-video"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              poster="/assets/v2/ink-bloom-poster.jpg"
-              src="/assets/v2/ink-bloom.mp4"
-            />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className="texture-poster"
-              src="/assets/v2/ink-still.jpg"
-              alt=""
-              width={1800}
-              height={1018}
-            />
-          </div>
           <div className="container hero-inner">
-            <p className="mono hero-eyebrow">
-              {"// TEST TUBE MARKETING  /  BALSALL COMMON, UK"}
-            </p>
             <h1 className="display hero-display" id="hero-h">
               <span className="mask-line">
                 <span>Your marketing brains,</span>
@@ -156,14 +140,22 @@ export default function Home() {
                 We&apos;re the marketing leadership you keep and the execution
                 team you hire.
               </strong>{" "}
-              A retainer buys our heads: planning, judgement, accountability.
-              Projects are quoted when you want our hands.
+              You get our heads... and when you need our hands, we can take
+              care of the &lsquo;doing&rsquo; too.
             </p>
-            <div className="hero-cta-row">
-              <a href={BOOK_URL} className="btn btn-primary">
-                Book a Call <span aria-hidden="true">&rarr;</span>
-              </a>
-              <p className="mono hero-note">{"// FOR ESTABLISHED BUSINESSES"}</p>
+            <div className="hero-capture">
+              <p className="hero-capture-lead">
+                Start with <strong>The AI Leverage Ladder</strong>: where your
+                business actually sits with AI, and what the next rung up
+                looks like. Leave your email and we&apos;ll send it over.
+              </p>
+              <CaptureForm idPrefix="hero" />
+              <p className="mono hero-note">
+                {"// FOR ESTABLISHED BUSINESSES"}{" "}
+                <a className="quiet-link" href={BOOK_URL}>
+                  OR BOOK A CALL <span aria-hidden="true">&rarr;</span>
+                </a>
+              </p>
             </div>
           </div>
           <div className="stat-strip">
@@ -247,10 +239,10 @@ export default function Home() {
               <figure className="insert-photo" data-fade>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/v2/ink-still.jpg"
-                  alt="Magenta ink blooming in clear water against warm cream"
-                  width={1800}
-                  height={1018}
+                  src="/assets/founders/two-shot-stage.jpg"
+                  alt="Fish and Adam on stage together in Test Tube Marketing shirts, mid-talk at a live event"
+                  width={1999}
+                  height={1198}
                   loading="lazy"
                 />
               </figure>
@@ -285,30 +277,11 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            {/* Mobile-only band divider: the concept in one frame */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className="split-divider"
-              src="/assets/v2/split-key-art.jpg"
-              alt=""
-              width={2000}
-              height={1130}
-              loading="lazy"
-            />
             <div className="split-rooms">
               <div className="room room-retainer" data-room-left>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className="room-texture"
-                  src="/assets/v2/paper-plate.jpg"
-                  alt=""
-                  width={1800}
-                  height={1018}
-                  loading="lazy"
-                />
                 <div className="room-inner">
                   <p className="mono room-label">THE RETAINER / ALWAYS ON</p>
-                  <h3 className="h3">What the monthly fee buys: our heads.</h3>
+                  <h3 className="h3">One simple monthly fee. You get our heads.</h3>
                   <ul className="room-list">
                     <li data-retainer-item>
                       <strong>Four in-person planning sessions a year.</strong>{" "}
@@ -335,18 +308,11 @@ export default function Home() {
                 </div>
               </div>
               <div className="room room-exec" data-room-right>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className="room-texture"
-                  src="/assets/v2/light-ribbon.jpg"
-                  alt=""
-                  width={2000}
-                  height={1130}
-                  loading="lazy"
-                />
                 <div className="room-inner">
                   <p className="mono room-label">EXECUTION / BY THE PROJECT</p>
-                  <h3 className="h3">What gets quoted: our hands.</h3>
+                  <h3 className="h3">
+                    When you need our hands, we take care of the doing.
+                  </h3>
                   <ul className="room-list">
                     <li data-exec-item>
                       Ad campaigns. Video shoots. Landing pages. Funnels.
@@ -370,8 +336,8 @@ export default function Home() {
             <div className="container">
               <p data-fade>
                 <strong>
-                  Simple version: the retainer pays for our heads and our
-                  planning. Projects pay for our hands.
+                  Simple version: one simple monthly fee covers our heads and
+                  our planning. Projects pay for our hands.
                 </strong>
               </p>
               <p className="mono" data-fade>
@@ -460,28 +426,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* AI (night band 1) */}
+        {/* AI (night band 1). Round 4: caustic texture video cut with the
+            rest of the abstract imagery; the night surface and the fill
+            choreography carry the band. */}
         <section className="band night" id="ai" aria-labelledby="ai-h">
-          <video
-            className="band-texture texture-video"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster="/assets/v2/caustic-drift-poster.jpg"
-            src="/assets/v2/caustic-drift.mp4"
-            aria-hidden="true"
-          />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className="band-texture texture-poster"
-            src="/assets/v2/caustic-drift-poster.jpg"
-            alt=""
-            width={1280}
-            height={720}
-            loading="lazy"
-          />
           <div className="container" style={{ position: "relative" }}>
             <p className="mono">THE LAB, NOW</p>
             {/* Poster statement carries the cream-fill variant of the
@@ -522,17 +470,14 @@ export default function Home() {
                   actually happen, step by step, rather than chasing the big
                   shiny target and never arriving.
                 </p>
+                <p data-fade>
+                  That map has a name: <strong>The AI Leverage Ladder</strong>.
+                  You can have it.{" "}
+                  <a className="ladder-link" href="#ladder">
+                    Grab it below <span aria-hidden="true">&darr;</span>
+                  </a>
+                </p>
               </div>
-              <figure className="ai-art" data-ai-art>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/assets/v2/prism.jpg"
-                  alt="Light travelling through a clear prism as thin magenta traces"
-                  width={1600}
-                  height={1194}
-                  loading="lazy"
-                />
-              </figure>
             </div>
           </div>
         </section>
@@ -711,25 +656,39 @@ export default function Home() {
               <p className="mono workedwith-label">
                 ON THE RECORD / 7 VERIFIED STATEMENTS
               </p>
+              {/* Round 4: the extracted headline does the lifting at
+                  display scale; attribution + full verbatim quote support */}
               {testimonials.map((t, i) => (
                 <blockquote
                   key={t.name}
                   className={`testimonial ${i % 2 === 0 ? "wide" : "narrow"}`}
                   data-fade
                 >
-                  <span className="mono t-kicker">{t.kicker}</span>
-                  <p className="t-quote">&ldquo;{t.quote}&rdquo;</p>
+                  <p className="t-pull">{t.kicker}</p>
                   <footer className="mono">
                     {t.name} / {t.biz}
                   </footer>
+                  <p className="t-quote">&ldquo;{t.quote}&rdquo;</p>
                 </blockquote>
               ))}
             </div>
             <hr className="rule-hr" />
             <div data-fade>
-              <p className="mono workedwith-label">RECOMMENDATIONS</p>
+              <p className="mono workedwith-label">SAID ABOUT US</p>
+              <div className="flex-quotes">
+                {flexQuotes.map((f) => (
+                  <blockquote key={f.name} className="flex-quote">
+                    <p className="flex-quote-line">
+                      &ldquo;{f.quote}&rdquo;
+                    </p>
+                    <footer className="mono">
+                      {f.name} / {f.descriptor}
+                    </footer>
+                  </blockquote>
+                ))}
+              </div>
               <ul className="rec-rows">
-                {recommendations.map((r) => (
+                {pendingQuotes.map((r) => (
                   <li key={r.name} className="rec-row">
                     <span className="name">{r.name}</span>
                     <span className="body-soft">{r.descriptor}</span>
@@ -752,17 +711,13 @@ export default function Home() {
             lines. Copy verbatim from site-copy-v2.md: every figure line is
             an exact substring of its support sentence, no new claims. */}
         <section className="band night" id="pricing" aria-labelledby="pricing-h">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className="band-texture"
-            src="/assets/v2/caustic-drift-poster.jpg"
-            alt=""
-            width={1280}
-            height={720}
-            loading="lazy"
-          />
           <div className="container" style={{ position: "relative" }}>
-            <h2 className="h2 pricing-head" id="pricing-h">What it costs.</h2>
+            <h2 className="h2 pricing-head" id="pricing-h">The bill.</h2>
+            <p className="pricing-preface">
+              We hate when businesses hide their pricing (and the stats show
+              we&apos;re not alone). So here&apos;s exactly what having us
+              inside your business looks like commercially.
+            </p>
             <ul className="price-ledger" data-burst-rows>
               <li className="price-row">
                 <span className="mono price-room">Standalone session</span>
@@ -818,35 +773,30 @@ export default function Home() {
           </div>
         </div>
 
-        {/* FINAL CTA: asset E backdrop, magnetic pill */}
-        <section className="band cta" id="book" aria-labelledby="book-h">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className="cta-backdrop"
-            src="/assets/v2/light-ribbon.jpg"
-            alt=""
-            width={2000}
-            height={1130}
-            loading="lazy"
-          />
+        {/* CLOSING CAPTURE (round 4): the opt-in is the primary CTA;
+            book-a-call demoted to a quiet link underneath. */}
+        <section className="band cta" id="ladder" aria-labelledby="ladder-h">
           <div className="container cta-inner">
-            <h2 className="display cta-head" id="book-h">
-              Want to be our next{" "}
-              <span className="accent">breakthrough?</span>
+            <h2 className="display cta-head" id="ladder-h">
+              Where are you <span className="accent">on the ladder?</span>
             </h2>
             <p className="cta-lead">
-              Book a Marketing Growth Call. 40 minutes. No pitch, no pressure.
-              Just a conversation about whether what we do would work for your
-              business.
+              <strong>The AI Leverage Ladder</strong> is the map we use with
+              clients: the five rungs from not touching AI to running it the
+              way we do, where most established businesses actually sit, and
+              what one rung up looks like for yours. Leave your email and
+              we&apos;ll send it straight over.
             </p>
-            <span className="magnet-wrap">
-              <a href={BOOK_URL} className="btn btn-primary lg" data-magnetic>
-                Book Your Marketing Growth Call{" "}
-                <span aria-hidden="true">&rarr;</span>
-              </a>
-            </span>
+            <CaptureForm idPrefix="ladder" large />
             <p className="mono cta-note">
-              {"// NO OBLIGATION / FOR ESTABLISHED BUSINESSES"}
+              {"// NO SPAM. UNSUBSCRIBE WHENEVER YOU LIKE."}
+            </p>
+            <p className="cta-book-line">
+              Rather just talk to us? Book a Marketing Growth Call. 40
+              minutes. No pitch, no pressure.{" "}
+              <a className="ladder-link" href={BOOK_URL}>
+                Book a call <span aria-hidden="true">&rarr;</span>
+              </a>
             </p>
           </div>
         </section>
