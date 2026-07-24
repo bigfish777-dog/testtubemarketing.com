@@ -24,23 +24,23 @@ type MarqueeItem =
   | { kind: "word"; label: string; href?: string };
 
 const marqueeRow1: MarqueeItem[] = [
-  { kind: "img", src: "/assets/logos/digitalmarketer.png", label: "DigitalMarketer", ar: 1042 / 367 },
-  { kind: "img", src: "/assets/logos/keap.svg", label: "Keap (formerly Infusionsoft)", ar: 86 / 42, h: 34 },
-  { kind: "img", src: "/assets/logos/young-driver.svg", label: "Young Driver", ar: 100 / 37, h: 34 },
-  { kind: "img", src: "/assets/logos/tess-cope-tta.png", label: "Tess Cope - The Transformation Agency", ar: 2111 / 942, h: 48 },
-  { kind: "img", src: "/assets/logos/expert-empires-white.png", label: "Expert Empires", ar: 1919 / 329, h: 24 },
-  { kind: "img", src: "/assets/logos/thrive-navy.png", label: "Thrive", ar: 1000 / 247 },
-  { kind: "img", src: "/assets/logos/the-avenue.svg", label: "The Avenue", ar: 1000 / 633.6, h: 48 },
+  { kind: "img", src: "/assets/logos/digitalmarketer.png", label: "DigitalMarketer", ar: 1042 / 367, h: 44 },
+  { kind: "img", src: "/assets/logos/keap.svg", label: "Keap (formerly Infusionsoft)", ar: 86 / 42, h: 40 },
+  { kind: "img", src: "/assets/logos/young-driver-ink.svg", label: "Young Driver", ar: 100 / 37, h: 44 },
+  { kind: "img", src: "/assets/logos/tess-cope-tta.png", label: "Tess Cope - The Transformation Agency", ar: 2111 / 942, h: 60 },
+  { kind: "img", src: "/assets/logos/expert-empires-white.png", label: "Expert Empires", ar: 1919 / 329, h: 30 },
+  { kind: "img", src: "/assets/logos/thrive-navy.png", label: "Thrive", ar: 1000 / 247, h: 36 },
+  { kind: "img", src: "/assets/logos/the-avenue.svg", label: "The Avenue", ar: 1000 / 633.6, h: 56 },
 ];
 
 const marqueeRow2: MarqueeItem[] = [
   { kind: "word", label: "Jossiah Gets Leads", href: "https://jossiahgetsleads.com" },
-  { kind: "img", src: "/assets/logos/entrepreneurs-network-white.png", label: "Entrepreneurs Network", ar: 2191 / 597, h: 30 },
+  { kind: "img", src: "/assets/logos/entrepreneurs-network-white.png", label: "Entrepreneurs Network", ar: 2191 / 597, h: 36 },
   { kind: "word", label: "Media Buyer Systems" },
-  { kind: "img", src: "/assets/logos/will-polston.svg", label: "Will Polston", ar: 145.029 / 30, h: 24 },
+  { kind: "img", src: "/assets/logos/will-polston.svg", label: "Will Polston", ar: 145.029 / 30, h: 28 },
   { kind: "word", label: "Fast Funnels" },
-  { kind: "img", src: "/assets/logos/ppp.svg", label: "PPP", ar: 896.01 / 268.6, h: 30 },
-  { kind: "img", src: "/assets/logos/voiceover-cafe.png", label: "Voiceover.Cafe", ar: 535 / 150, h: 32 },
+  { kind: "img", src: "/assets/logos/ppp.svg", label: "PPP", ar: 896.01 / 268.6, h: 34 },
+  { kind: "img", src: "/assets/logos/voiceover-cafe.png", label: "Voiceover.Cafe", ar: 535 / 150, h: 36 },
 ];
 
 function MarqueeHalf({
@@ -851,7 +851,7 @@ export default function Home() {
               Where are you <span className="accent">on the ladder?</span>
             </h2>
             <p className="cta-lead">
-              <strong>The AI Leverage Ladder</strong> is the map we use with
+              <strong>The AI Leverage Ladder</strong>{" "}is the map we use with
               clients: the five rungs from not touching AI to running it the
               way we do, where most established businesses actually sit, and
               what one rung up looks like for yours. Leave your email and
