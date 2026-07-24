@@ -78,7 +78,7 @@ export default function AiLadder() {
         </section>
 
         <section className="ladder-notes">
-          <h2 className="h2">Where you are.</h2>
+          <h2 className="h2">Where you sit.</h2>
           <p>
             Be honest, not aspirational. Most established businesses we speak
             to are on rung two, maybe three. Not because anyone is behind on
@@ -108,12 +108,12 @@ export default function AiLadder() {
           <ul className="climb-list">
             <li>
               <strong>Two to three:</strong> give AI a standing slot in the
-              week. Same tasks, every week, until reaching for it is
+              week. Same tasks, every week, until reaching for it becomes
               automatic.
             </li>
             <li>
               <strong>Three to four:</strong> stop starting from blank. Load
-              your context in once (who you are, who you sell to, how you
+              your context in once (what you do, who you sell to, how you
               sound, your numbers) so every output starts three-quarters
               done.
             </li>
