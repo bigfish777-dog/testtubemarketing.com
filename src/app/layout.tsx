@@ -7,21 +7,28 @@ import "./globals.css";
  * Round 4 font system (Fish's hard swap, work order item 1):
  * Horas carries ALL headlines/display (local woff2, Medium 500 +
  * SemiBold 600; weight restraint keeps everything at 500 on-page).
- * RNS Estero Medium is the body face - the ONLY body weight supplied,
- * and it IS the body weight; globals.css sets font-synthesis: none so
- * nothing ever fake-bolds it. JetBrains Mono stays for data labels.
+ * Body face is Einer Grotesk (round 4e, Fish's pick over Adriatic/
+ * Forgate): Regular carries the 400-500 range the page uses (base +
+ * colour-led emphasis), Bold available for any true bold. globals.css
+ * keeps font-synthesis: none so nothing ever fake-bolds. JetBrains Mono
+ * stays for data labels.
  */
 const display = localFont({
   src: [
     { path: "../fonts/Horas-Medium.woff2", weight: "500", style: "normal" },
     { path: "../fonts/Horas-SemiBold.woff2", weight: "600", style: "normal" },
+    { path: "../fonts/Horas-Bold.woff2", weight: "700", style: "normal" },
+    { path: "../fonts/Horas-ExtraBold.woff2", weight: "800", style: "normal" },
+    { path: "../fonts/Horas-Black.woff2", weight: "900", style: "normal" },
   ],
   variable: "--font-display",
 });
 
 const body = localFont({
-  src: "../fonts/RNSEstero-Medium.woff2",
-  weight: "500",
+  src: [
+    { path: "../fonts/EinerGrotesk-Regular.woff2", weight: "400 500", style: "normal" },
+    { path: "../fonts/EinerGrotesk-Bold.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-body",
 });
 

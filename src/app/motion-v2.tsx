@@ -86,6 +86,37 @@ function buildTextFill(
   });
 }
 
+/*
+ * Scoped, SEQUENTIAL text fill (Fish round-4c fix): every word across ALL
+ * [data-fill] paragraphs inside a scope shares ONE timeline on ONE
+ * scroll-scrubbed trigger, laid end-to-end in DOM order. This guarantees a
+ * paragraph never starts inking until the one above it has finished - the
+ * per-paragraph triggers were overlapping in scroll space and revealing in
+ * parallel. Same faint rest state and ~3-word fill front as buildTextFill.
+ */
+function buildScopedTextFill(
+  scopeSelector: string,
+  rest: string,
+  st: { start: string; end: string }
+) {
+  gsap.utils.toArray<HTMLElement>(scopeSelector).forEach((scope) => {
+    const words: HTMLElement[] = [];
+    scope
+      .querySelectorAll<HTMLElement>("[data-fill]")
+      .forEach((p) => words.push(...splitWords(p)));
+    if (!words.length) return;
+    // Capture each word's final ink BEFORE any faint state is applied
+    const targets = words.map((w) => getComputedStyle(w).color);
+    const tl = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: { trigger: scope, start: st.start, end: st.end, scrub: true },
+    });
+    words.forEach((w, i) => {
+      tl.fromTo(w, { color: rest }, { color: targets[i], duration: 3 }, i);
+    });
+  });
+}
+
 export function MotionV2() {
   useGSAP(() => {
     // Header scroll state (runs regardless of motion preference)
@@ -217,13 +248,38 @@ export function MotionV2() {
       // Round 4 rest states: barely visible (~13%) so the fill is
       // dramatic and unmistakable (Fish's direction; the old AA-safe
       // rest rule is overridden - reduced-motion/no-JS stay fully inked).
-      buildTextFill("[data-fill]", "rgba(32, 29, 26, 0.13)", {
-        start: "top 78%",
-        end: "bottom 40%",
+      // Confession body: sequential fill across all paragraphs in the scope
+      // (each paragraph completes before the next begins - Fish round-4c).
+      buildScopedTextFill("[data-fill-scope]", "rgba(32, 29, 26, 0.13)", {
+        start: "top 75%",
+        end: "bottom 55%",
       });
       buildTextFill("[data-fill-night]", "rgba(247, 243, 236, 0.14)", {
         start: "top 75%",
         end: "top 30%",
+      });
+
+      // Unprompted quotes (round 4d): each grows to full as it reaches centre
+      // and shrinks + fades as it leaves, so one quote leads at a time instead
+      // of a wall of huge text competing. Scrubbed + reversible; no-JS /
+      // reduced-motion (this whole block is skipped) leaves them full.
+      gsap.utils.toArray<HTMLElement>(".flex-quote").forEach((q) => {
+        gsap.fromTo(
+          q,
+          { scale: 0.62, opacity: 0.22 },
+          {
+            scale: 1,
+            opacity: 1,
+            ease: "none",
+            scrollTrigger: { trigger: q, start: "top 82%", end: "center 52%", scrub: true },
+          }
+        );
+        gsap.to(q, {
+          scale: 0.62,
+          opacity: 0.22,
+          ease: "none",
+          scrollTrigger: { trigger: q, start: "center 48%", end: "bottom 16%", scrub: true },
+        });
       });
 
       // Confession collage: the editorial insert drifts against the text

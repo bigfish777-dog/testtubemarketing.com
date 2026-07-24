@@ -1,6 +1,9 @@
 import { MotionV2 } from "./motion-v2";
 import { CaptureForm } from "./capture-form";
-import { BeakerBg } from "./beaker-bg";
+import { HeroGradient } from "./hero-gradient";
+import { BeakerScrub } from "./beaker-scrub";
+import { AwardViewer } from "./award-viewer";
+import { CoffeeTicker } from "./coffee-ticker";
 
 /*
  * TWO SPEEDS rebuild (design-direction-v2.md + site-copy-v2.md, 2026-07-23).
@@ -28,20 +31,42 @@ const marqueeRow1: MarqueeItem[] = [
   { kind: "img", src: "/assets/logos/digitalmarketer.png", label: "DigitalMarketer", ar: 1042 / 367, h: 44 },
   { kind: "img", src: "/assets/logos/keap.svg", label: "Keap (formerly Infusionsoft)", ar: 86 / 42, h: 40 },
   { kind: "img", src: "/assets/logos/young-driver-ink.svg", label: "Young Driver", ar: 100 / 37, h: 44 },
-  { kind: "img", src: "/assets/logos/tess-cope-tta.png", label: "Tess Cope - The Transformation Agency", ar: 2111 / 942, h: 60 },
+  { kind: "img", src: "/assets/logos/lexisnexis.svg", label: "LexisNexis", ar: 1024 / 239, h: 30 },
+  { kind: "img", src: "/assets/logos/tess-cope-tta.png", label: "Tess Cope - The Transformation Agency", ar: 2111 / 942, h: 58 },
+  { kind: "img", src: "/assets/logos/vo2-master.png", label: "VO2 Master", ar: 1223 / 354, h: 34 },
   { kind: "img", src: "/assets/logos/expert-empires-white.png", label: "Expert Empires", ar: 1919 / 329, h: 30 },
+  { kind: "img", src: "/assets/logos/coaches-congress.svg", label: "Coaches Congress", ar: 1000 / 341, h: 38 },
   { kind: "img", src: "/assets/logos/thrive-navy.png", label: "Thrive", ar: 1000 / 247, h: 36 },
-  { kind: "img", src: "/assets/logos/the-avenue.svg", label: "The Avenue", ar: 1000 / 633.6, h: 56 },
+  { kind: "img", src: "/assets/logos/me-and-my-golf.svg", label: "Me and My Golf", ar: 120 / 112, h: 50 },
+  { kind: "img", src: "/assets/logos/biceps-and-banter.png", label: "Biceps & Banter", ar: 1000 / 574, h: 48 },
+  { kind: "img", src: "/assets/logos/the-avenue.svg", label: "The Avenue", ar: 1000 / 633.6, h: 54 },
+  { kind: "img", src: "/assets/logos/halsa.svg", label: "Halsa", ar: 360 / 115, h: 36 },
+  { kind: "img", src: "/assets/logos/retail-fest.png", label: "Retail Fest", ar: 412 / 205, h: 44 },
+  { kind: "img", src: "/assets/logos/corporate-connections.png", label: "Corporate Connections", ar: 218 / 68, h: 34 },
+  { kind: "img", src: "/assets/logos/cp-r.svg", label: "CP+R", ar: 192 / 78, h: 42 },
 ];
 
 const marqueeRow2: MarqueeItem[] = [
-  { kind: "word", label: "Jossiah Gets Leads", href: "https://jossiahgetsleads.com" },
-  { kind: "img", src: "/assets/logos/entrepreneurs-network-white.png", label: "Entrepreneurs Network", ar: 2191 / 597, h: 36 },
-  { kind: "word", label: "Media Buyer Systems" },
-  { kind: "img", src: "/assets/logos/will-polston.svg", label: "Will Polston", ar: 145.029 / 30, h: 28 },
-  { kind: "word", label: "Fast Funnels" },
+  { kind: "img", src: "/assets/logos/jossiah-gets-leads.png", label: "Jossiah Gets Leads", ar: 1088 / 1536, h: 50 },
+  { kind: "img", src: "/assets/logos/entrepreneurs-network-white.png", label: "Entrepreneurs Network", ar: 2191 / 597, h: 34 },
+  { kind: "img", src: "/assets/logos/mbs.png", label: "Media Buyer Systems", ar: 752 / 249, h: 36 },
+  { kind: "img", src: "/assets/logos/inspire-kbb.png", label: "Inspire KBB", ar: 1269 / 318, h: 34 },
+  { kind: "img", src: "/assets/logos/will-polston.svg", label: "Will Polston", ar: 145.029 / 30, h: 26 },
+  { kind: "img", src: "/assets/logos/5ive.png", label: "5ive", ar: 679 / 277, h: 40 },
+  { kind: "img", src: "/assets/logos/team-global.png", label: "Team Global", ar: 3751 / 1012, h: 32 },
   { kind: "img", src: "/assets/logos/ppp.svg", label: "PPP", ar: 896.01 / 268.6, h: 34 },
-  { kind: "img", src: "/assets/logos/voiceover-cafe.png", label: "Voiceover.Cafe", ar: 535 / 150, h: 36 },
+  { kind: "img", src: "/assets/logos/optineck.png", label: "Optineck", ar: 508 / 266, h: 44 },
+  { kind: "img", src: "/assets/logos/ovl.png", label: "OVL", ar: 320 / 151, h: 40 },
+  { kind: "img", src: "/assets/logos/millbank-property.png", label: "Millbank Property", ar: 1024 / 480, h: 40 },
+  { kind: "img", src: "/assets/logos/voiceover-cafe.png", label: "Voiceover.Cafe", ar: 535 / 150, h: 34 },
+  { kind: "img", src: "/assets/logos/wtm-london.png", label: "World Travel Market", ar: 1044 / 374, h: 40 },
+  { kind: "img", src: "/assets/logos/upa-stamp-auctions.png", label: "UPA Stamp Auctions", ar: 1024 / 931, h: 50 },
+  { kind: "img", src: "/assets/logos/exela.png", label: "Exela", ar: 1401 / 596, h: 40 },
+  { kind: "img", src: "/assets/logos/proactive-approaches.png", label: "Proactive Approaches", ar: 810 / 91, h: 22 },
+  { kind: "img", src: "/assets/logos/dc-practice-growth.png", label: "DC Practice Growth", ar: 150 / 47, h: 32 },
+  { kind: "img", src: "/assets/logos/oynb.png", label: "OYNB", ar: 292 / 138, h: 40 },
+  { kind: "img", src: "/assets/logos/tilt-affinity.png", label: "Tilt Affinity", ar: 151 / 60, h: 38 },
+  { kind: "word", label: "Fast Funnels" },
 ];
 
 function MarqueeHalf({
@@ -95,49 +120,49 @@ const testimonials: {
   biz: string;
 }[] = [
   {
-    kicker: "“$6K PER MONTH”",
+    kicker: "“$6k per month”",
     quote:
       "When I heard the guys were starting a marketing agency, I KNEW I wanted to work with them. They’ve not only helped provide me with the strategic insights I was looking for, but helped me launch my membership programme which now generates over $6,000 per month - Thanks Ad and Fish!",
     name: "Mike Maher",
     biz: "Take A Deep Breath",
   },
   {
-    kicker: "“£30K IN RECURRING REVENUE”",
+    kicker: "“£30k in recurring revenue”",
     quote:
       "On my first launch, Fish’s emails performed so well, we not only had to open up more spots, we also had to ‘close doors’ early due to selling out. A few months later, the guys helped me launch my mobile app, and within 30 days, we’d signed up over 1,000 members paying £29.99 each.",
     name: "Steve Keane",
     biz: "Kraft Coaching",
   },
   {
-    kicker: "“WAY MORE ENQUIRIES”",
+    kicker: "“Way more enquiries”",
     quote:
       "I turned to Ad and Fish when my marketing manager took a new role, because I wanted to keep up my regular emails. I was stunned when the first 4 emails they wrote generated more calls and replies than anything we’d done previously! I can’t recommend them enough.",
     name: "Kirsty Darkins",
     biz: "KD Commercial",
   },
   {
-    kicker: "“THEY JUST GET IT”",
+    kicker: "“They just get it”",
     quote:
       "It’s safe to say that our ‘basement pump’ business isn’t the most exciting, and is quite technical in its nature. But the team at TTM have been able to rapidly understand our offering, and craft compelling marketing that makes people take action. In fact, we had more replies to the first couple of emails they sent, than we’d had in all the emails in the entire 2 years prior.",
     name: "Ian Davis",
     biz: "PPS Pumps",
   },
   {
-    kicker: "“6 FIGURES IN REVENUE”",
+    kicker: "“6 figures in revenue”",
     quote:
       "The first launch Ad, Fish and the team worked on with us generated over £30,000 in sales from a 5-Day Facebook Challenge. Better yet, we were able to leverage the assets they created and re-run the challenge multiple times, and generate a total of 6 figures in revenue.",
     name: "Aran Curry",
     biz: "Insight Education",
   },
   {
-    kicker: "“250 CALLS BOOKED!”",
+    kicker: "“250 calls booked!”",
     quote:
       "On the first campaign Fish and Ad ran for us, we’d set a target of booking 50 calls. The first 2 emails they sent exceeded our target, and we had over 250 calls booked in total. Plus we’ve been able to re-run the campaign since, and get even more calls booked!",
     name: "Michelle Clarke",
     biz: "Veblen Directors",
   },
   {
-    kicker: "“A TOTAL JOY TO WORK WITH!”",
+    kicker: "“A total joy to work with!”",
     quote:
       "What an amazing impact the Test Tube Marketing team has had on our business and more importantly on our thinking. Ad, Fish and Grace have been a total joy to work with and we all feel very inspired walking away from a session with these guys. We love their copywriting style and they get our tone of voice absolutely right. We’re only a few months into working together, but we can’t wait to see what the next few years look like with them onboard!",
     name: "Richard Parsons",
@@ -154,27 +179,32 @@ const record = [
   { idx: "05", name: "Mike Maher", biz: "Take A Deep Breath", text: "Membership programme generating $6k per month." },
   { idx: "06", name: "Aran Curry", biz: "Insight Education", text: "6 figures in revenue from a 5-day Facebook challenge." },
   { idx: "07", name: "Michelle Clarke", biz: "Veblen Directors", text: "250 calls booked from a first campaign, target was 50." },
-  { idx: "08", name: "Richard Parsons", biz: "Platinum Commercial Academy", text: "Full marketing rebuild. Went from ad-hoc to systemised." },
-  { idx: "09", name: "Ian Davis", biz: "PPS Pumps", text: "More email replies in 2 days than the previous 2 years combined." },
-  { idx: "10", name: "Steve Hindley", biz: "iNarrator", text: "Massive new contract landed after TTM took over email database." },
 ];
 
 /*
- * Flex quotes (round 4): short, oversized, almost offhand. The three
- * real quotes below were supplied VERBATIM by Fish 2026-07-24 - never
- * edit them. Pending rows keep "[quote coming]" / "[slot reserved]"
- * placeholders only (PREVIEW-ONLY; cannot ship to production with
- * placeholders in it). Never invent quote words for real people.
+ * Flex quotes (round 4d): short, oversized, almost offhand. All supplied
+ * VERBATIM by Fish (2026-07-24) - never edit the words. Placeholders are
+ * gone: every row here is a real, attributed quote.
  */
-const flexQuotes: { quote: string; name: string; descriptor: string }[] = [
+const flexQuotes: {
+  quote: string;
+  name: string;
+  descriptor: string;
+  note?: string;
+}[] = [
   { quote: "Seriously, seriously smart", name: "John Parkes", descriptor: "CMO, ClickFunnels" },
   { quote: "Absolutely fucking genius", name: "James Sinclair", descriptor: "Founder, Partyman Group" },
   { quote: "In another league", name: "Jay Alderton", descriptor: "Fitness and mindset coach" },
+  { quote: "Everyone needs an Ad & Fish", name: "Andy Proudman", descriptor: "Co-Founder, Me and My Golf" },
+  { quote: "Absolutely golden ideas!", name: "Daniel Priestley", descriptor: "Dent" },
+  { quote: "You guys are sick", name: "Frank Kern", descriptor: "Internet Marketer" },
+  { quote: "I wish I’d found them years earlier!", name: "Ian Mulligani", descriptor: "CEO, Young Driver" },
+  { quote: "These guys know marketing", name: "Marcus Murphy", descriptor: "Hot Juice Studios" },
+  { quote: "Ice cold marketers", name: "Wim Hof", descriptor: "The Iceman" },
+  { quote: "Two of the greatest", name: "Ryan Deiss", descriptor: "CEO, Scalable" },
+  { quote: "Marketing maestros", name: "Dan Bradbury", descriptor: "Business Finance Expert" },
+  { quote: "Are you my drivers", name: "Jay Abraham", descriptor: "Business Consultant", note: "In fairness, we were wearing suits." },
 ];
-const pendingQuotes: { name: string; descriptor: string }[] = [
-  { name: "Steve Keane", descriptor: "Kraft Coaching" },
-];
-const RESERVED_SLOTS = 5;
 
 export default function Home() {
   return (
@@ -208,13 +238,15 @@ export default function Home() {
             <div className="hero-bloom bloom-b" data-bloom-b />
             <div className="hero-bloom bloom-c" data-bloom-c />
             <div className="hero-bg-grain" />
-            {/* AMBIENT BEAKER (work order item 16): WebGL glass beaker,
-                three.js, client-only + code-split. Background flourish,
-                reduced-motion-safe, offscreen-paused, disabled <=680px. */}
-            <div className="hero-bg-slot" data-beaker-slot>
-              <BeakerBg />
+            {/* AMBIENT GRADIENT (round 4c): ShaderGradient wash in the TTM
+                palette, held to a super-soft opacity so it whispers behind the
+                headline. Client-only + SSR-safe, reduced-motion-safe,
+                disabled <=680px (CSS mesh gradient carries mobile). */}
+            <div className="hero-bg-slot">
+              <HeroGradient />
             </div>
           </div>
+          <BeakerScrub />
           <div className="container hero-inner">
             <h1 className="display hero-display" id="hero-h">
               <span className="mask-line">
@@ -276,14 +308,20 @@ export default function Home() {
               <span className="mono stat-lbl">Campaigns run since 2014</span>
             </div>
             <div className="stat">
-              <div className="h3 stat-word">In-Person</div>
-              <span className="mono stat-lbl">
-                Four planning sessions a year, in the room
-              </span>
+              <div
+                className="stat-num"
+                data-countup
+                data-target="1000"
+                data-decimals="0"
+                data-suffix="+"
+              >
+                1,000+
+              </div>
+              <span className="mono stat-lbl">Businesses consulted</span>
             </div>
             <div className="stat">
-              <div className="h3 stat-word">Founder-Led</div>
-              <span className="mono stat-lbl">Both of us in every account</span>
+              <CoffeeTicker />
+              <span className="mono stat-lbl">Cups of coffee since 2014</span>
             </div>
           </div>
         </section>
@@ -339,8 +377,11 @@ export default function Home() {
               </figure>
             </div>
             <blockquote className="pullquote" data-fade>
-              &ldquo;They pay a smaller retainer to get our time. Then they pay
-              for the deliverables when they need them.&rdquo;
+              &ldquo;I used to pay an agency the best part of £8k per month and
+              could never really measure the output. Now, Ad and Fish run my
+              marketing, and I only pay for the deliverables I want, when I want
+              them.&rdquo;
+              <cite className="pullquote-cite mono">What clients tell us</cite>
             </blockquote>
             <p className="body-soft" data-fade>
               The part clients say they value most: we don&apos;t need
@@ -430,10 +471,6 @@ export default function Home() {
                   Simple version: one simple monthly fee covers our heads and
                   our planning. Projects pay for our hands.
                 </strong>
-              </p>
-              <p className="mono" data-fade>
-                EXECUTION IS NEVER BUNDLED OR ASSUMED. EVERY PROJECT IS QUOTED
-                FIRST.
               </p>
             </div>
           </div>
@@ -583,10 +620,10 @@ export default function Home() {
             </p>
             <div className="record-grid">
               <div className="record-rail">
-                <p className="mono">10 ENGAGEMENTS / VERIFIED</p>
+                <p className="mono">7 ENGAGEMENTS / VERIFIED</p>
                 <p className="record-rail-index" aria-hidden="true">
                   <span data-rail-index>01</span>
-                  <span className="record-rail-total">{" / 10"}</span>
+                  <span className="record-rail-total">{" / 07"}</span>
                 </p>
                 <span
                   className="mono record-rail-name"
@@ -707,20 +744,16 @@ export default function Home() {
                   MIDLANDS STARTUP AWARDS 2026
                 </span>
               </div>
+              {/* Round 4e: interactive 3D of the physical trophy replaces the
+                  flat stage photo (award-group.jpg kept on disk to revert).
+                  Lazy-loaded, front-facing gentle sway. */}
               <figure className="award-photo">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/assets/proof/award-group.jpg"
-                  alt="The Marketing and Advertising StartUp of the Year trophy held on stage at the Midlands StartUp Awards 2026"
-                  width={900}
-                  height={1106}
-                  loading="lazy"
-                />
+                <AwardViewer />
               </figure>
             </div>
             <hr className="rule-hr" />
             <div data-fade>
-              <p className="mono workedwith-label">WORKED WITH</p>
+              <p className="mono workedwith-label">TRUSTED BY</p>
               <div className="mq" aria-label="Brands we have worked with">
                 <div className="mq-track mq-left">
                   <MarqueeHalf items={marqueeRow1} />
@@ -733,9 +766,6 @@ export default function Home() {
                   <MarqueeHalf items={marqueeRow2} hidden />
                 </div>
               </div>
-              <p className="workedwith-caption">
-                Including Young Driver, whose ads run at approximately 12x ROI.
-              </p>
             </div>
             <hr className="rule-hr" />
             <div>
@@ -766,27 +796,17 @@ export default function Home() {
                   <blockquote key={f.name} className="flex-quote">
                     <p className="flex-quote-line">
                       &ldquo;{f.quote}&rdquo;
+                      {f.note ? <sup className="flex-quote-star">*</sup> : null}
                     </p>
                     <footer className="mono">
                       {f.name} / {f.descriptor}
                     </footer>
+                    {f.note ? (
+                      <p className="flex-quote-note mono">* {f.note}</p>
+                    ) : null}
                   </blockquote>
                 ))}
               </div>
-              <ul className="rec-rows">
-                {pendingQuotes.map((r) => (
-                  <li key={r.name} className="rec-row">
-                    <span className="name">{r.name}</span>
-                    <span className="body-soft">{r.descriptor}</span>
-                    <span className="mono">[quote coming]</span>
-                  </li>
-                ))}
-                {Array.from({ length: RESERVED_SLOTS }).map((_, i) => (
-                  <li key={`reserved-${i}`} className="rec-row reserved">
-                    <span className="mono">[slot reserved]</span>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </section>

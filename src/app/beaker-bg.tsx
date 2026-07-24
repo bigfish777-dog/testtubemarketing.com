@@ -3,18 +3,29 @@
 import { useEffect, useRef } from "react";
 
 /*
- * Ambient 3D glass beaker for the hero background (round 4, item 16).
+ * Ambient 3D beaker for the hero background (round 4b, Fish rework).
  * WebGL via three.js. Runs entirely in a browser effect (SSR-safe: the
  * container renders empty on the server; three.js loads client-side only,
  * code-split via dynamic import so it never touches the initial bundle).
  *
- * Deliberately a background flourish, not a centrepiece: a real glass
- * beaker with a fushia measure of liquid, softly lit, turning slowly.
- * NOT ASCII. NOT scroll-driven (that was the killed foreground gimmick).
- * - prefers-reduced-motion: renders a single still frame, no loop.
- * - Off-screen: the RAF loop pauses (IntersectionObserver) to save power.
+ * Deliberately a background flourish, not a centrepiece. Round 4b changes:
+ * - PIXELATED: rendered into a low-res buffer (1/PIXEL scale) and upscaled
+ *   by the browser with image-rendering:pixelated (see globals.css) so it
+ *   reads as chunky pixels, not clean CGI glass. Paired with a soft CSS
+ *   blur + reduced opacity so it sits back in the background.
+ * - SCROLL-DRIVEN: the vessel turns as the hero scrolls, and the liquid
+ *   lerps from fushia -> amber across that scroll (the reserved --amber
+ *   artwork token). A slow idle drift keeps it breathing at rest.
+ * - prefers-reduced-motion: a single still frame, fushia, no loop/scroll.
+ * - Off-screen / tab hidden: the RAF loop pauses to save power.
  * - <=680px: not initialised at all; the CSS hero gradient carries mobile.
  */
+
+// Chunkiness of the pixelation: internal buffer = display / PIXEL.
+const PIXEL = 7;
+// How many turns the vessel makes across one scroll-progress unit.
+const SCROLL_TURNS = 1.25;
+
 export function BeakerBg() {
   const hostRef = useRef<HTMLDivElement | null>(null);
 
@@ -36,18 +47,18 @@ export function BeakerBg() {
       );
       if (disposed || !hostRef.current) return;
 
-      const width = host.clientWidth || window.innerWidth;
-      const height = host.clientHeight || window.innerHeight;
-
+      // Pixelated look: no AA, pixelRatio 1, and a small drawing buffer that
+      // the browser upscales blocky. antialias off keeps the pixel edges hard.
       const renderer = new THREE.WebGLRenderer({
         alpha: true,
-        antialias: true,
+        antialias: false,
         powerPreference: "high-performance",
       });
-      renderer.setSize(width, height, false);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.02;
+      renderer.setPixelRatio(1);
+      // No tone mapping: ACES desaturates the fushia/amber toward white,
+      // which killed the colour read at background scale. Linear keeps the
+      // liquid vivid enough to survive the blur + pixelation.
+      renderer.toneMapping = THREE.NoToneMapping;
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       renderer.domElement.style.width = "100%";
       renderer.domElement.style.height = "100%";
@@ -61,11 +72,26 @@ export function BeakerBg() {
       const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
       scene.environment = envTex;
 
-      const camera = new THREE.PerspectiveCamera(30, width / height, 0.1, 100);
+      const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
       camera.position.set(0, 2.4, 17);
       camera.lookAt(0, -0.3, 0);
 
-      // Soft key + fill so the fushia liquid reads warm, not muddy.
+      // Drawing buffer sized to the host / PIXEL. Camera aspect uses the
+      // true display aspect so nothing squashes.
+      const setRenderSize = () => {
+        const w = host.clientWidth || window.innerWidth;
+        const h = host.clientHeight || window.innerHeight;
+        renderer.setSize(
+          Math.max(1, Math.round(w / PIXEL)),
+          Math.max(1, Math.round(h / PIXEL)),
+          false
+        );
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      };
+      setRenderSize();
+
+      // Soft key + fill so the liquid reads warm, not muddy.
       const key = new THREE.DirectionalLight(0xffffff, 1.6);
       key.position.set(4, 8, 6);
       scene.add(key);
@@ -75,8 +101,6 @@ export function BeakerBg() {
       scene.add(new THREE.HemisphereLight(0xffffff, 0xe9ddc9, 0.5));
 
       // Group holds the whole beaker so we can float/turn it as one.
-      // Scaled down and floated on the right so the whole vessel reads;
-      // the camera looks down a touch to reveal the rim and liquid line.
       const beaker = new THREE.Group();
       beaker.scale.setScalar(0.64);
       beaker.position.set(3.7, -0.1, 0);
@@ -110,14 +134,15 @@ export function BeakerBg() {
         ior: 1.46,
         clearcoat: 1,
         clearcoatRoughness: 0.08,
-        envMapIntensity: 1.1,
+        envMapIntensity: 0.5,
         transparent: true,
         side: THREE.DoubleSide,
       });
       const glass = new THREE.Mesh(glassGeo, glassMat);
       beaker.add(glass);
 
-      // --- Liquid: fushia, filled a bit under half, softly glowing. ---
+      // --- Liquid: filled a bit under half, softly glowing. Colour is
+      // driven by scroll (fushia -> amber), set each frame in tick(). ---
       const fill = 0.42;
       const liqH = H * fill;
       const liqGeo = new THREE.CylinderGeometry(
@@ -130,11 +155,11 @@ export function BeakerBg() {
       const liqMat = new THREE.MeshPhysicalMaterial({
         color: 0xff0d64,
         roughness: 0.18,
-        transmission: 0.55,
+        transmission: 0.1,
         thickness: 2.2,
         ior: 1.34,
         emissive: 0xc7004a,
-        emissiveIntensity: 0.28,
+        emissiveIntensity: 0.65,
         envMapIntensity: 0.7,
         transparent: true,
         side: THREE.DoubleSide,
@@ -166,30 +191,55 @@ export function BeakerBg() {
         opacity: 0.16,
       });
       [-0.2, 0.7].forEach((yy) => {
-        const tick = new THREE.Mesh(
+        const t = new THREE.Mesh(
           new THREE.TorusGeometry(R - wall + 0.02, 0.012, 8, 96, Math.PI * 0.5),
           tickMat
         );
-        tick.rotation.x = Math.PI / 2;
-        tick.rotation.z = -Math.PI * 0.25;
-        tick.position.y = yy;
-        beaker.add(tick);
+        t.rotation.x = Math.PI / 2;
+        t.rotation.z = -Math.PI * 0.25;
+        t.position.y = yy;
+        beaker.add(t);
       });
 
-      const clock = new THREE.Clock();
-
-      const render = () => {
-        renderer.render(scene, camera);
+      // --- Colour ramp: fushia (rest) -> amber (scrolled). Amber is the
+      // reserved artwork token (--amber #FFA71A); it only ever lives here. ---
+      const C_LIQ = [new THREE.Color(0xff0d64), new THREE.Color(0xffa71a)];
+      const C_LIQ_E = [new THREE.Color(0xc7004a), new THREE.Color(0xc75a00)];
+      const C_SURF = [new THREE.Color(0xff2f7d), new THREE.Color(0xffbb52)];
+      const C_SURF_E = [new THREE.Color(0xff0d64), new THREE.Color(0xffa71a)];
+      const C_RIM = [new THREE.Color(0xff5e9f), new THREE.Color(0xffa24e)];
+      const applyColour = (p: number) => {
+        liqMat.color.lerpColors(C_LIQ[0], C_LIQ[1], p);
+        liqMat.emissive.lerpColors(C_LIQ_E[0], C_LIQ_E[1], p);
+        surfMat.color.lerpColors(C_SURF[0], C_SURF[1], p);
+        surfMat.emissive.lerpColors(C_SURF_E[0], C_SURF_E[1], p);
+        rim.color.lerpColors(C_RIM[0], C_RIM[1], p);
       };
+      applyColour(0);
+
+      // Scroll progress: 0 at the hero's rest, 1 after half a viewport of
+      // scroll. Computed from the host's live position EVERY frame (not off
+      // a scroll event) so it stays correct under Lenis smooth-scroll, which
+      // can swallow native scroll events.
+      let curP = 0;
+      const scrollTarget = () => {
+        const rect = host.getBoundingClientRect();
+        const vh = window.innerHeight || 1;
+        return Math.min(1, Math.max(0, -rect.top / (vh * 0.5)));
+      };
+
+      const clock = new THREE.Clock();
 
       const tick = () => {
         if (disposed) return;
         const t = clock.getElapsedTime();
-        beaker.rotation.y = t * 0.28;
-        beaker.position.y = -0.1 + Math.sin(t * 0.5) * 0.12;
-        beaker.rotation.z = 0.07 + Math.sin(t * 0.33) * 0.015;
-        surfMat.emissiveIntensity = 0.42 + Math.sin(t * 1.1) * 0.1;
-        render();
+        curP += (scrollTarget() - curP) * 0.12;
+        beaker.rotation.y = 0.3 + t * 0.05 + curP * Math.PI * 2 * SCROLL_TURNS;
+        beaker.position.y = -0.1 + Math.sin(t * 0.4) * 0.08;
+        beaker.rotation.z = 0.07 + Math.sin(t * 0.3) * 0.012;
+        applyColour(curP);
+        surfMat.emissiveIntensity = 0.42 + Math.sin(t * 1.0) * 0.08;
+        renderer.render(scene, camera);
         raf = requestAnimationFrame(tick);
       };
 
@@ -207,10 +257,11 @@ export function BeakerBg() {
         clock.stop();
       };
 
-      // Reduced motion: one still frame, hold the fushia glow, no loop.
+      // Reduced motion: one still frame, fushia, no loop, no scroll binding.
       if (reduce) {
         beaker.rotation.y = 0.5;
-        render();
+        applyColour(0);
+        renderer.render(scene, camera);
       } else {
         // Pause the loop when the hero scrolls out of view.
         const io = new IntersectionObserver(
@@ -232,12 +283,8 @@ export function BeakerBg() {
 
       const onResize = () => {
         if (disposed || !hostRef.current) return;
-        const w = host.clientWidth || window.innerWidth;
-        const h = host.clientHeight || window.innerHeight;
-        renderer.setSize(w, h, false);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-        if (reduce) render();
+        setRenderSize();
+        if (reduce) renderer.render(scene, camera);
       };
       window.addEventListener("resize", onResize);
 
