@@ -31,9 +31,11 @@
   --pad: clamp(20px, 4vw, 56px);
   --seam: 55%; /* the two-offer asymmetry, reused wherever both appear */
 
-  /* type scale: 5 sizes, hard cap */
-  --t-display: clamp(48px, 9vw, 128px);
-  --t-h2: clamp(32px, 5vw, 56px);
+  /* type scale: 5 sizes, hard cap. Round 4: retuned for Horas, which
+     runs wider than Bricolage - display max trimmed so the masthead
+     lines still fit, h2 opened slightly for Horas's rounder forms. */
+  --t-display: clamp(44px, 8.4vw, 118px);
+  --t-h2: clamp(30px, 4.8vw, 54px);
   --t-h3: clamp(21px, 2.5vw, 28px);
   --t-body: 17px;
   --t-mono: 12px;
@@ -58,6 +60,9 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  /* RNS Estero ships in one weight (Medium): never fake-bold or
+     fake-italic anything (round 4 item 1) */
+  font-synthesis: none;
 }
 
 /* Paper-grain noise overlay, page-wide, subtle */
@@ -84,33 +89,33 @@ body::before {
   text-transform: uppercase;
   color: var(--ink-mono);
 }
+/* Horas registers (round 4): Medium 500 everywhere - authority through
+   scale, not weight. Tracking eased vs Bricolage (Horas's rounded forms
+   close up faster), line-heights opened a hair. */
 .display {
   font-family: var(--font-display), sans-serif;
-  font-optical-sizing: auto;
   font-size: var(--t-display);
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 0.98;
   margin: 0;
   text-wrap: balance;
 }
 .h2 {
   font-family: var(--font-display), sans-serif;
-  font-optical-sizing: auto;
   font-size: var(--t-h2);
   font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
   margin: 0 0 24px;
   text-wrap: balance;
 }
 .h3 {
   font-family: var(--font-display), sans-serif;
-  font-optical-sizing: auto;
   font-size: var(--t-h3);
   font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  letter-spacing: -0.01em;
+  line-height: 1.22;
   margin: 0 0 16px;
   text-wrap: balance;
 }
@@ -362,8 +367,8 @@ header.site.scrolled { border-bottom-color: var(--rule); }
 .pullquote {
   font-family: var(--font-display), sans-serif;
   font-size: var(--t-h2);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-weight: 500;
+  letter-spacing: -0.015em;
   line-height: 1.1;
   max-width: 28ch;
   margin: clamp(40px, 6vw, 80px) 0;
@@ -701,9 +706,9 @@ a.mq-word:hover { color: var(--fushia-deep); opacity: 1; }
 .flex-quote-line {
   font-family: var(--font-display), sans-serif;
   font-size: var(--t-display);
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 0.98;
   max-width: 14ch;
   margin: 0 0 10px;
   text-wrap: balance;
