@@ -196,13 +196,29 @@ export default function Home() {
       </header>
 
       <main id="top">
-        {/* HERO: kinetic masthead, type only (round 4: texture video cut -
-            Fish's tolerance for abstract imagery is proven low) */}
+        {/* HERO (round 4 items 15/16): kinetic masthead over a rich
+            CSS/SVG background - token mesh gradient, slow-drifting
+            colour blooms (Steady tempo, transform-only), grain overlay.
+            The old ink-bloom video and content stills are gone. */}
         <section className="hero" id="hero" aria-labelledby="hero-h">
+          <div className="hero-bg" aria-hidden="true">
+            <div className="hero-bg-mesh" />
+            <div className="hero-bloom bloom-a" data-bloom-a />
+            <div className="hero-bloom bloom-b" data-bloom-b />
+            <div className="hero-bloom bloom-c" data-bloom-c />
+            <div className="hero-bg-grain" />
+            {/* AMBIENT BEAKER SLOT (work order item 16): reserved,
+                isolated background layer. Fish is deciding the approach
+                (WebGL / Higgsfield video / defer). A <canvas> or <video>
+                drops straight into this div later - position and
+                pointer-events are already handled, no restructuring
+                needed. Deliberately empty until his call. */}
+            <div className="hero-bg-slot" data-beaker-slot />
+          </div>
           <div className="container hero-inner">
             <h1 className="display hero-display" id="hero-h">
               <span className="mask-line">
-                <span>Your marketing brains,</span>
+                <span className="txt-grad">Your marketing brains,</span>
               </span>
               <span className="mask-line">
                 <span>
@@ -566,7 +582,7 @@ export default function Home() {
         {/* THE RECORD */}
         <section className="band" id="record" aria-labelledby="record-h">
           <div className="container">
-            <h2 className="h2" id="record-h">The Record.</h2>
+            <h2 className="h2 txt-grad" id="record-h">The Record.</h2>
             <p className="body-soft">
               Ten engagements from 153+ campaigns since 2014. Real businesses,
               real numbers, real outcomes.
@@ -790,7 +806,9 @@ export default function Home() {
             an exact substring of its support sentence, no new claims. */}
         <section className="band night" id="pricing" aria-labelledby="pricing-h">
           <div className="container" style={{ position: "relative" }}>
-            <h2 className="h2 pricing-head" id="pricing-h">The bill.</h2>
+            <h2 className="h2 pricing-head txt-grad-night" id="pricing-h">
+              The bill.
+            </h2>
             <p className="pricing-preface">
               We hate when businesses hide their pricing (and the stats show
               we&apos;re not alone). So here&apos;s exactly what having us
@@ -859,7 +877,7 @@ export default function Home() {
               Marketing Growth Call. 40 minutes. No pitch, no pressure."
               sentence is verbatim from site-copy-v2) - review/replace */}
           <div className="container cta-inner">
-            <h2 className="display cta-head" id="ladder-h">
+            <h2 className="display cta-head txt-grad" id="ladder-h">
               Where are you <span className="accent">on the ladder?</span>
             </h2>
             <p className="cta-lead">

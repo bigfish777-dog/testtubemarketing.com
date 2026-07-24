@@ -116,6 +116,22 @@ export function MotionV2() {
       gsap.ticker.lagSmoothing(0);
     }
 
+    // ---------- hero background blooms (round 4 item 15): slow ambient
+    // drift, Steady tempo, transform-only, endless yoyo. Never runs
+    // under reduced motion (early-returned above) - static render then.
+    gsap.to("[data-bloom-a]", {
+      xPercent: 7, yPercent: -9, duration: 18,
+      ease: "sine.inOut", repeat: -1, yoyo: true,
+    });
+    gsap.to("[data-bloom-b]", {
+      xPercent: -6, yPercent: 7, duration: 23,
+      ease: "sine.inOut", repeat: -1, yoyo: true,
+    });
+    gsap.to("[data-bloom-c]", {
+      xPercent: 5, yPercent: 6, duration: 27,
+      ease: "sine.inOut", repeat: -1, yoyo: true,
+    });
+
     // ---------- shared: count-ups (Burst, once on first intersection)
     const fmt = (n: number, decimals: number) =>
       decimals > 0 ? n.toFixed(decimals) : Math.round(n).toLocaleString("en-GB");

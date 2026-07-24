@@ -119,6 +119,44 @@ body::before {
   margin: 0 0 16px;
   text-wrap: balance;
 }
+/* Subtle display-text gradients (round 4 item 14): a gradient you
+   half-notice - ink running warm toward a whisper of fushia at the tail
+   (cream variant on night). AA holds: every stop stays within the
+   band's contrast budget. Solid-ink fallback where background-clip:text
+   is unsupported. Accent spans inside a gradient heading re-solidify. */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .txt-grad {
+    background-image: linear-gradient(
+      104deg,
+      var(--ink) 0%,
+      var(--ink) 52%,
+      #4a2030 86%,
+      #75173f 112%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .txt-grad-night {
+    background-image: linear-gradient(
+      104deg,
+      var(--paper) 0%,
+      var(--paper) 48%,
+      #f2dcd9 84%,
+      #f4b8cb 112%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .txt-grad .accent, .txt-grad-night .accent {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-text-fill-color: currentColor;
+  }
+}
+
 p { max-width: 66ch; margin: 0 0 20px; }
 .body-soft { color: var(--ink-soft); }
 p strong, .body-soft strong { color: var(--ink); font-weight: 500; }
@@ -198,9 +236,11 @@ header.site {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--paper) 90%, transparent);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  /* Round 4 critic fix: near-opaque so night-band display text no
+     longer ghosts through behind the logo */
+  background: color-mix(in srgb, var(--paper) 97%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s ease;
 }
@@ -216,13 +256,69 @@ header.site.scrolled { border-bottom-color: var(--rule); }
 .brand { display: flex; align-items: center; text-decoration: none; }
 .brand img { height: 30px; width: auto; display: block; }
 
-/* ---------------- Hero: kinetic masthead, type only (round 4) ---------------- */
+/* ---------------- Hero (round 4 item 15): rich CSS/SVG background ----------------
+   Token mesh gradient + soft pre-blurred colour blooms (radial alpha
+   falloff, no filter cost, no banding thanks to the grain overlay) +
+   feTurbulence grain. Blooms drift slowly (Steady tempo, transform-only,
+   GSAP; static under reduced motion / no-JS). The reserved
+   .hero-bg-slot is the ambient-beaker drop-in point (item 16). */
 .hero {
   position: relative;
   z-index: 2;
   padding: clamp(88px, 11vw, 168px) 0 0;
   overflow: hidden;
 }
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-bg-mesh {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 85% at 88% -5%, rgba(20, 18, 26, 0.11), transparent 62%),
+    radial-gradient(95% 75% at 8% 105%, rgba(255, 13, 100, 0.08), transparent 58%),
+    linear-gradient(162deg, #FBF8F2 0%, var(--paper) 46%, #F2EADC 100%);
+}
+.hero-bloom {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+}
+.bloom-a {
+  width: clamp(320px, 46vw, 720px);
+  height: clamp(320px, 46vw, 720px);
+  left: 56%;
+  top: -16%;
+  background: radial-gradient(closest-side, rgba(255, 13, 100, 0.17), rgba(255, 13, 100, 0) 72%);
+}
+.bloom-b {
+  width: clamp(260px, 38vw, 600px);
+  height: clamp(260px, 38vw, 600px);
+  left: -12%;
+  top: 34%;
+  background: radial-gradient(closest-side, rgba(20, 18, 26, 0.13), rgba(20, 18, 26, 0) 72%);
+}
+.bloom-c {
+  width: clamp(220px, 32vw, 500px);
+  height: clamp(220px, 32vw, 500px);
+  left: 66%;
+  top: 52%;
+  background: radial-gradient(closest-side, rgba(199, 0, 74, 0.10), rgba(199, 0, 74, 0) 72%);
+}
+.hero-bg-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.42;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.13 0 0 0 0 0.11 0 0 0 0 0.10 0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+}
+/* Item 16: reserved ambient-beaker layer - a canvas/video drops in here
+   later with zero restructuring. Empty until Fish picks the approach. */
+.hero-bg-slot { position: absolute; inset: 0; }
 .hero-inner { position: relative; z-index: 1; }
 .hero-display { margin: 0 0 32px; }
 /* Line masks: overflow-hidden wrappers; inner spans slide in via GSAP.
@@ -248,6 +344,7 @@ header.site.scrolled { border-bottom-color: var(--rule); }
   text-decoration: underline;
   text-decoration-color: var(--rule-strong);
   text-underline-offset: 3px;
+  white-space: nowrap;
 }
 .quiet-link:hover { color: var(--fushia-deep); }
 
