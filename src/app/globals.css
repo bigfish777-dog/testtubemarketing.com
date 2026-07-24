@@ -610,21 +610,67 @@ header.site.scrolled { border-bottom-color: var(--rule); }
   display: block;
   border-radius: 16px;
 }
-/* Worked with: one run-on editorial line, fushia interpuncts */
-.workedwith-label { display: block; margin-bottom: 20px; }
-.workedwith {
+/* Worked with: dual logo marquee streams (round 4, item 8).
+   Monochrome ink: every image logo is a CSS-mask silhouette painted in
+   ink, so mixed-quality assets cohere on paper. Row 1 drifts right-to-
+   left, row 2 left-to-right, gentle speed, fade masks at the edges.
+   Transform-only CSS loop (two identical halves, track translates 50%).
+   Reduced motion: static rows. */
+.workedwith-label { display: block; margin-bottom: 24px; }
+.mq {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.mq + .mq { margin-top: clamp(24px, 3vw, 36px); }
+.mq-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+.mq-half {
+  display: flex;
+  align-items: center;
+  gap: clamp(48px, 6vw, 96px);
+  padding-right: clamp(48px, 6vw, 96px);
+}
+.mq-left { animation: mq-scroll 60s linear infinite; }
+.mq-right {
+  animation: mq-scroll 70s linear infinite reverse;
+}
+@keyframes mq-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.mq-logo {
+  flex: none;
+  display: block;
+  background-color: var(--ink);
+  opacity: 0.7;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+.mq-word {
+  flex: none;
   font-family: var(--font-display), sans-serif;
-  font-size: var(--t-h3);
+  font-size: 24px;
   font-weight: 500;
   letter-spacing: -0.01em;
-  line-height: 1.6;
-  max-width: 40em;
-  margin: 0;
+  white-space: nowrap;
+  color: var(--ink);
+  opacity: 0.7;
+  text-decoration: none;
 }
-.workedwith .dot { color: var(--fushia-deep); padding: 0 0.45em; }
-.workedwith a { color: inherit; text-decoration: underline; text-decoration-color: var(--fushia-deep); text-underline-offset: 4px; }
-.workedwith a:hover { color: var(--fushia-deep); }
-.workedwith-caption { color: var(--ink-soft); margin: 20px 0 0; }
+a.mq-word { text-decoration: underline; text-decoration-color: var(--rule-strong); text-underline-offset: 4px; }
+a.mq-word:hover { color: var(--fushia-deep); opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .mq-left, .mq-right { animation: none; }
+}
+.workedwith-caption { color: var(--ink-soft); margin: 24px 0 0; }
 /* Testimonials: editorial pull-quote strata, alternating widths.
    Round 4: the extracted headline does the lifting at display scale
    (Horas); attribution and the full verbatim quote support it. */

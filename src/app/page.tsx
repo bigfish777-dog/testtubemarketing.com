@@ -11,6 +11,81 @@ import { CaptureForm } from "./capture-form";
 
 const BOOK_URL = "https://book.testtubemarketing.com";
 
+/*
+ * Worked-with marquee (round 4, item 8): dual streams, monochrome ink.
+ * Image logos render as CSS-mask silhouettes in ink so mixed-quality
+ * assets cohere; brands with no usable asset get styled-type wordmarks
+ * (manifest: Fast Funnels has no asset anywhere; MBS is a type-only
+ * brand; Jossiah's live site is a type wordmark, truer than the square
+ * mark). ar = intrinsic aspect ratio; h = optical height override.
+ */
+type MarqueeItem =
+  | { kind: "img"; src: string; label: string; ar: number; h?: number }
+  | { kind: "word"; label: string; href?: string };
+
+const marqueeRow1: MarqueeItem[] = [
+  { kind: "img", src: "/assets/logos/digitalmarketer.png", label: "DigitalMarketer", ar: 1042 / 367 },
+  { kind: "img", src: "/assets/logos/keap.svg", label: "Keap (formerly Infusionsoft)", ar: 86 / 42, h: 34 },
+  { kind: "img", src: "/assets/logos/young-driver.svg", label: "Young Driver", ar: 100 / 37, h: 34 },
+  { kind: "img", src: "/assets/logos/tess-cope-tta.png", label: "Tess Cope - The Transformation Agency", ar: 2111 / 942, h: 48 },
+  { kind: "img", src: "/assets/logos/expert-empires-white.png", label: "Expert Empires", ar: 1919 / 329, h: 24 },
+  { kind: "img", src: "/assets/logos/thrive-navy.png", label: "Thrive", ar: 1000 / 247 },
+  { kind: "img", src: "/assets/logos/the-avenue.svg", label: "The Avenue", ar: 1000 / 633.6, h: 48 },
+];
+
+const marqueeRow2: MarqueeItem[] = [
+  { kind: "word", label: "Jossiah Gets Leads", href: "https://jossiahgetsleads.com" },
+  { kind: "img", src: "/assets/logos/entrepreneurs-network-white.png", label: "Entrepreneurs Network", ar: 2191 / 597, h: 30 },
+  { kind: "word", label: "Media Buyer Systems" },
+  { kind: "img", src: "/assets/logos/will-polston.svg", label: "Will Polston", ar: 145.029 / 30, h: 24 },
+  { kind: "word", label: "Fast Funnels" },
+  { kind: "img", src: "/assets/logos/ppp.svg", label: "PPP", ar: 896.01 / 268.6, h: 30 },
+  { kind: "img", src: "/assets/logos/voiceover-cafe.png", label: "Voiceover.Cafe", ar: 535 / 150, h: 32 },
+];
+
+function MarqueeHalf({
+  items,
+  hidden,
+}: {
+  items: MarqueeItem[];
+  hidden?: boolean;
+}) {
+  return (
+    <div className="mq-half" aria-hidden={hidden ? "true" : undefined}>
+      {items.map((item, i) =>
+        item.kind === "img" ? (
+          <span
+            key={i}
+            className="mq-logo"
+            role={hidden ? undefined : "img"}
+            aria-label={hidden ? undefined : item.label}
+            style={{
+              width: `${Math.round((item.h ?? 28) * item.ar)}px`,
+              height: `${item.h ?? 28}px`,
+              WebkitMaskImage: `url(${item.src})`,
+              maskImage: `url(${item.src})`,
+            }}
+          />
+        ) : item.href && !hidden ? (
+          <a
+            key={i}
+            className="mq-word"
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {item.label}
+          </a>
+        ) : (
+          <span key={i} className="mq-word">
+            {item.label}
+          </span>
+        )
+      )}
+    </div>
+  );
+}
+
 // Verbatim testimonials, carried unchanged from branch rebuild-2026-07.
 const testimonials: {
   kicker: string;
@@ -630,23 +705,18 @@ export default function Home() {
             <hr className="rule-hr" />
             <div data-fade>
               <p className="mono workedwith-label">WORKED WITH</p>
-              <p className="workedwith">
-                Tess Cope / The Transformation Agency
-                <span className="dot" aria-hidden="true">&middot;</span>
-                DigitalMarketer
-                <span className="dot" aria-hidden="true">&middot;</span>
-                Keap (formerly Infusionsoft)
-                <span className="dot" aria-hidden="true">&middot;</span>
-                Young Driver
-                <span className="dot" aria-hidden="true">&middot;</span>
-                <a
-                  href="https://jossiahgetsleads.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Jossiah Gets Leads
-                </a>
-              </p>
+              <div className="mq" aria-label="Brands we have worked with">
+                <div className="mq-track mq-left">
+                  <MarqueeHalf items={marqueeRow1} />
+                  <MarqueeHalf items={marqueeRow1} hidden />
+                </div>
+              </div>
+              <div className="mq">
+                <div className="mq-track mq-right">
+                  <MarqueeHalf items={marqueeRow2} />
+                  <MarqueeHalf items={marqueeRow2} hidden />
+                </div>
+              </div>
               <p className="workedwith-caption">
                 Including Young Driver, whose ads run at approximately 12x ROI.
               </p>
