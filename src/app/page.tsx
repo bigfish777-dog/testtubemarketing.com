@@ -1,5 +1,6 @@
 import { MotionV2 } from "./motion-v2";
 import { CaptureForm } from "./capture-form";
+import { BeakerBg } from "./beaker-bg";
 
 /*
  * TWO SPEEDS rebuild (design-direction-v2.md + site-copy-v2.md, 2026-07-23).
@@ -207,13 +208,12 @@ export default function Home() {
             <div className="hero-bloom bloom-b" data-bloom-b />
             <div className="hero-bloom bloom-c" data-bloom-c />
             <div className="hero-bg-grain" />
-            {/* AMBIENT BEAKER SLOT (work order item 16): reserved,
-                isolated background layer. Fish is deciding the approach
-                (WebGL / Higgsfield video / defer). A <canvas> or <video>
-                drops straight into this div later - position and
-                pointer-events are already handled, no restructuring
-                needed. Deliberately empty until his call. */}
-            <div className="hero-bg-slot" data-beaker-slot />
+            {/* AMBIENT BEAKER (work order item 16): WebGL glass beaker,
+                three.js, client-only + code-split. Background flourish,
+                reduced-motion-safe, offscreen-paused, disabled <=680px. */}
+            <div className="hero-bg-slot" data-beaker-slot>
+              <BeakerBg />
+            </div>
           </div>
           <div className="container hero-inner">
             <h1 className="display hero-display" id="hero-h">

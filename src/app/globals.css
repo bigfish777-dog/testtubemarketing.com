@@ -319,6 +319,18 @@ header.site.scrolled { border-bottom-color: var(--rule); }
 /* Item 16: reserved ambient-beaker layer - a canvas/video drops in here
    later with zero restructuring. Empty until Fish picks the approach. */
 .hero-bg-slot { position: absolute; inset: 0; }
+/* WebGL beaker canvas: sits on the right, behind the headline, faded on
+   its left edge so type never fights it. */
+.beaker-canvas {
+  position: absolute;
+  inset: 0;
+  opacity: 0.9;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 34%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 34%, #000 100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .beaker-canvas { opacity: 0.8; }
+}
 .hero-inner { position: relative; z-index: 1; }
 .hero-display { margin: 0 0 32px; }
 /* Line masks: overflow-hidden wrappers; inner spans slide in via GSAP.
