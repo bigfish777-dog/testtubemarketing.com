@@ -8,8 +8,7 @@ import { useState } from "react";
  * on an actual 200 and nothing else; any other response shows a graceful
  * failure with a real fallback (email us).
  *
- * ORCHESTRATOR-COPY-TODO: all microcopy in this component (button label,
- * success line, error line, placeholder) is worker-drafted - review/replace.
+ * Microcopy reviewed and approved by the orchestrator (Fish's voice).
  */
 export function CaptureForm({
   idPrefix,

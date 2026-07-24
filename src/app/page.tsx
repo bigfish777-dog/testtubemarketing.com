@@ -235,8 +235,6 @@ export default function Home() {
               care of the &lsquo;doing&rsquo; too.
             </p>
             <div className="hero-capture">
-              {/* ORCHESTRATOR-COPY-TODO: hero capture lead below is
-                  worker-drafted (not Fish-verbatim) - review/replace */}
               <p className="hero-capture-lead">
                 Start with <strong>The AI Leverage Ladder</strong>: where your
                 business actually sits with AI, and what the next rung up
@@ -403,8 +401,6 @@ export default function Home() {
               <div className="room room-exec" data-room-right>
                 <div className="room-inner">
                   <p className="mono room-label">EXECUTION / BY THE PROJECT</p>
-                  {/* ORCHESTRATOR-COPY-TODO: room B lead line is worker-
-                      derived from Fish's heads/hands direction - review */}
                   <h3 className="h3">
                     When you need our hands, we take care of the doing.
                   </h3>
@@ -556,8 +552,8 @@ export default function Home() {
                 <p data-fade>
                   That&apos;s the real shift. AI made the deliverables cheap.
                   Judgement about which deliverables to make, in what order,
-                  aimed at whom, got more valuable. The retainer buys the
-                  judgement.
+                  aimed at whom, got more valuable. That judgement is what the
+                  retainer keeps on tap.
                 </p>
                 <p data-fade>
                   What we do with clients on this: we map where you&apos;re at
@@ -565,8 +561,6 @@ export default function Home() {
                   actually happen, step by step, rather than chasing the big
                   shiny target and never arriving.
                 </p>
-                {/* ORCHESTRATOR-COPY-TODO: AI-band ladder pointer line is
-                    worker-drafted - review/replace */}
                 <p data-fade>
                   That map has a name: <strong>The AI Leverage Ladder</strong>.
                   You can have it.{" "}
@@ -766,9 +760,7 @@ export default function Home() {
             </div>
             <hr className="rule-hr" />
             <div data-fade>
-              {/* ORCHESTRATOR-COPY-TODO: "SAID ABOUT US" label is worker-
-                  drafted (work order only banned "Recommendations") */}
-              <p className="mono workedwith-label">SAID ABOUT US</p>
+              <p className="mono workedwith-label">{"// UNPROMPTED"}</p>
               <div className="flex-quotes">
                 {flexQuotes.map((f) => (
                   <blockquote key={f.name} className="flex-quote">
@@ -860,22 +852,30 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SPEAKING STRIP */}
-        <div className="speaking">
-          <div className="container">
-            <p className="mono">
-              {"// ALSO: WE SPEAK. CONFERENCES, TEAM DAYS, OFFSITES. ASK US ON THE CALL."}
+        {/* SPEAKING (round 4, orchestrator-written): a demand signal, not
+            a throwaway line. Big-stage credibility plus the £15k anchor,
+            which makes the retainer read as the deal. */}
+        <section className="band speaking" aria-labelledby="speaking-h">
+          <div className="container speaking-inner">
+            <p className="mono speaking-kicker">{"// FROM THE STAGE"}</p>
+            <h2 className="h2 txt-grad" id="speaking-h">
+              We&apos;re more often on someone else&apos;s stage.
+            </h2>
+            <p className="speaking-body">
+              Big rooms, a few different countries, other people&apos;s events.
+              If you want one of us at yours, that starts at &pound;15,000 plus
+              expenses. Most people don&apos;t come to us that way though. They
+              come because they saw us do it, or because someone who did told
+              them to. Put that same thinking to work inside your business and
+              you&apos;re into retainer territory, which is a good deal less
+              than fifteen grand for a morning.
             </p>
           </div>
-        </div>
+        </section>
 
         {/* CLOSING CAPTURE (round 4): the opt-in is the primary CTA;
             book-a-call demoted to a quiet link underneath. */}
         <section className="band cta" id="ladder" aria-labelledby="ladder-h">
-          {/* ORCHESTRATOR-COPY-TODO: closing capture heading + lead +
-              book-a-call demotion line are worker-drafted (the "Book a
-              Marketing Growth Call. 40 minutes. No pitch, no pressure."
-              sentence is verbatim from site-copy-v2) - review/replace */}
           <div className="container cta-inner">
             <h2 className="display cta-head txt-grad" id="ladder-h">
               Where are you <span className="accent">on the ladder?</span>

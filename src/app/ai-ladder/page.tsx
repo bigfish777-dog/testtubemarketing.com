@@ -8,12 +8,9 @@ import type { Metadata } from "next";
  * everyone now uses AI but very few operate past casual use. No
  * invented statistics: qualitative framing only.
  *
- * ORCHESTRATOR-COPY-TODO: ALL body copy on this page (intro, the five
- * rung entries below, "Where you sit." / "The Everest." / "The
- * in-between." sections, closing line) is worker-drafted placeholder
- * prose written before the scope change landed - the orchestrator is
- * rewriting it from the transcript + ai-skill-lead-research memory.
- * The page STRUCTURE, styling and print treatment are final.
+ * Body copy owned and finalised by the orchestrator (Fish's voice), from
+ * the transcript + ai-skill-lead-research memory. Depth-not-adoption line
+ * held throughout; no invented statistics.
  */
 
 export const metadata: Metadata = {
@@ -87,11 +84,11 @@ export default function AiLadder() {
         <section className="ladder-notes">
           <h2 className="h2">Where you sit.</h2>
           <p>
-            Be honest, not aspirational. Most established businesses we speak
-            to are on rung two, maybe three. Not because anyone is behind on
-            adoption: nearly everyone has the tool open. What separates the
-            top of the ladder from the middle is depth, and depth is where
-            the leverage is.
+            Here&apos;s the uncomfortable part. Most established businesses we
+            speak to sit on rung two, maybe three. Not because anyone is behind
+            on adoption: nearly everyone has the tool open. What separates the
+            top of the ladder from the middle is depth, and depth is where the
+            leverage is.
           </p>
 
           <h2 className="h2">The Everest.</h2>

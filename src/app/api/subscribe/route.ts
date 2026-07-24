@@ -7,9 +7,8 @@ import { NextResponse } from "next/server";
  * when unset the route returns a clean 503 so the form can show its
  * graceful failure state (honest states only - no fake success).
  *
- * ORCHESTRATOR-COPY-TODO: the asset-delivery email below (subject +
- * body) is worker-drafted in Fish's register - review/replace before
- * the Resend key goes live.
+ * Email subject + body reviewed and approved by the orchestrator
+ * (Fish's voice), ready for when the Resend key goes live.
  */
 
 const SITE = "https://www.testtubemarketing.com";
