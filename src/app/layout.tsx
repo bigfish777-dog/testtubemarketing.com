@@ -1,23 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { Public_Sans, JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 /*
  * Round 4 font system (Fish's hard swap, work order item 1):
  * Horas carries ALL headlines/display (local woff2, Medium 500 +
  * SemiBold 600; weight restraint keeps everything at 500 on-page).
- * Body is RNS Estero Medium - the file is being supplied by a parallel
- * agent and had NOT landed in src/fonts/ by the end of this build
- * round, so Public Sans remains as the interim body face.
- * TO COMPLETE THE SWAP once src/fonts/RNSEstero-Medium.woff2 exists:
- *   const body = localFont({
- *     src: "../fonts/RNSEstero-Medium.woff2",
- *     weight: "500",
- *     variable: "--font-body",
- *   });
- * (globals.css already disables font-synthesis so the single supplied
- * weight is never fake-bolded.) JetBrains Mono stays for data labels.
+ * RNS Estero Medium is the body face - the ONLY body weight supplied,
+ * and it IS the body weight; globals.css sets font-synthesis: none so
+ * nothing ever fake-bolds it. JetBrains Mono stays for data labels.
  */
 const display = localFont({
   src: [
@@ -27,9 +19,10 @@ const display = localFont({
   variable: "--font-display",
 });
 
-const body = Public_Sans({
+const body = localFont({
+  src: "../fonts/RNSEstero-Medium.woff2",
+  weight: "500",
   variable: "--font-body",
-  subsets: ["latin"],
 });
 
 const mono = JetBrains_Mono({
