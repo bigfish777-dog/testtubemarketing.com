@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { JetBrains_Mono, Newsreader } from "next/font/google";
+import {
+  JetBrains_Mono,
+  IBM_Plex_Sans,
+  IBM_Plex_Mono,
+} from "next/font/google";
 import "./globals.css";
 
 /*
@@ -39,15 +43,22 @@ const mono = JetBrains_Mono({
 });
 
 /*
- * Darkroom direction (2026-07-31): Newsreader carries display on the new
- * intent-router surfaces. Light weights only, nothing above 400 - hierarchy
- * comes from size, never weight. Deliberately not Instrument Serif.
+ * Terminal direction (Fish, 2026-07-31): the site assembles itself in front
+ * of the visitor. IBM Plex Mono carries anything that types itself out plus
+ * the caret, because a fixed-width cell is what makes a terminal read as a
+ * terminal. IBM Plex Sans carries buttons, labels and everything after the
+ * boot. Same family throughout, so it stays one system.
  * Horas stays until the old homepage is retired.
  */
-const serif = Newsreader({
-  variable: "--font-serif",
-  weight: ["200", "300", "400"],
-  style: ["normal", "italic"],
+const plexSans = IBM_Plex_Sans({
+  variable: "--font-plex",
+  weight: ["300", "400", "500"],
+  subsets: ["latin"],
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  weight: ["400", "500"],
   subsets: ["latin"],
 });
 
@@ -79,7 +90,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-GB"
-      className={`${display.variable} ${body.variable} ${mono.variable} ${serif.variable}`}
+      className={`${display.variable} ${body.variable} ${mono.variable} ${plexSans.variable} ${plexMono.variable}`}
     >
       <body>{children}</body>
     </html>

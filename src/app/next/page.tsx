@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Chooser from "./chooser";
+import Terminal from "./terminal";
 
 /*
  * Temporary route. The chooser is built here so the old homepage stays
@@ -13,5 +13,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <Chooser />;
+  return <Terminal />;
 }

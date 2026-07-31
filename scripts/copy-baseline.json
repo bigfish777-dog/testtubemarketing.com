@@ -44,15 +44,27 @@
   "src/app/coffee-ticker.tsx": [],
   "src/app/hero-gradient.tsx": [],
   "src/app/layout.tsx": [],
-  "src/app/motion-v2.tsx": [],
-  "src/app/next/chooser.tsx": [
-    "Back",
-    "Draft copy - Claude&apos;s, not Fish&apos;s",
-    "Test Tube Marketing",
-    "choose"
+  "src/app/marketing-leadership/page.tsx": [
+    "/marketing-leadership"
   ],
+  "src/app/motion-v2.tsx": [],
   "src/app/next/draft-copy.ts": [],
   "src/app/next/page.tsx": [],
+  "src/app/next/terminal.tsx": [
+    "!",
+    "$",
+    "Building",
+    "Draft copy - Claude&apos;s, not Fish&apos;s",
+    "Ready",
+    "Test Tube Marketing",
+    "[..]",
+    "[ok]",
+    "assemble",
+    "assemble",
+    "intro",
+    "name",
+    "name"
+  ],
   "src/app/page.tsx": [
     "&copy; 2026 TEST TUBE MARKETING LTD. ALL RIGHTS RESERVED.",
     "&darr;",
@@ -204,6 +216,12 @@
     "on the ladder?",
     "£36.2m+"
   ],
+  "src/app/path-stub.tsx": [
+    "Back to the terminal",
+    "No name given, which is a fully supported route.",
+    "This is a stub, not a design. The real page appears here once the brand direction for the booted site is settled. Nothing on this screen is a proposal.",
+    "[ok] booted into:"
+  ],
   "src/app/privacy/page.tsx": [
     ".",
     "Advertising and analytics platforms, as described above.",
@@ -232,5 +250,11 @@
     "You can ask us to access, correct, delete, or stop processing your personal data at any time. You also have the right to complain to the Information Commissioner&apos;s Office (ico.org.uk).",
     "Your rights",
     "bigfish@testtubemarketing.com"
+  ],
+  "src/app/speaking/page.tsx": [
+    "/speaking"
+  ],
+  "src/app/track-record/page.tsx": [
+    "/track-record"
   ]
 }
