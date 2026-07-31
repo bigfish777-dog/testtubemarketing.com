@@ -31,6 +31,10 @@ export function CoffeeTicker() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const target = baseCount();
 
+    if (reduce) {
+      return;
+    }
+
     let raf = 0;
     let interval = 0;
     let started = false;
@@ -42,11 +46,6 @@ export function CoffeeTicker() {
     const run = () => {
       if (started) return;
       started = true;
-      if (reduce) {
-        setDisplay(target);
-        startTicking();
-        return;
-      }
       const from = Math.max(0, target - 1200);
       let t0 = 0;
       const step = (now: number) => {

@@ -17,6 +17,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+import { setProgress } from "./field/field-controller";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -121,8 +122,18 @@ export function MotionV2() {
   useGSAP(() => {
     // Header scroll state (runs regardless of motion preference)
     const header = document.getElementById("siteHeader");
-    const onScroll = () =>
+    const hero = document.getElementById("hero");
+    const onScroll = () => {
       header?.classList.toggle("scrolled", window.scrollY > 12);
+      header?.classList.toggle(
+        "over-hero",
+        Boolean(
+          hero &&
+            header &&
+            hero.getBoundingClientRect().bottom > header.offsetHeight
+        )
+      );
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
@@ -207,6 +218,37 @@ export function MotionV2() {
     });
 
     const mm = gsap.matchMedia();
+
+    // The field shares this ScrollTrigger lifecycle and the existing Lenis
+    // bridge. Mutable proxies keep React entirely out of the scrub path.
+    mm.add("(min-width: 681px)", () => {
+      const heroField = { progress: 0 };
+      const vortexField = { progress: 2 };
+
+      gsap.to(heroField, {
+        progress: 2,
+        ease: "none",
+        onUpdate: () => setProgress(heroField.progress),
+        scrollTrigger: {
+          trigger: "#hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.85,
+        },
+      });
+
+      gsap.to(vortexField, {
+        progress: 3,
+        ease: "none",
+        onUpdate: () => setProgress(vortexField.progress),
+        scrollTrigger: {
+          trigger: "#ladder",
+          start: "top bottom",
+          end: "top 35%",
+          scrub: 0.85,
+        },
+      });
+    });
 
     // ================= DESKTOP =================
     mm.add("(min-width: 900px)", () => {

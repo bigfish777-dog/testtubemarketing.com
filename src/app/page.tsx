@@ -1,9 +1,13 @@
 import { MotionV2 } from "./motion-v2";
 import { CaptureForm } from "./capture-form";
-import { HeroGradient } from "./hero-gradient";
 import { BeakerScrub } from "./beaker-scrub";
 import { AwardViewer } from "./award-viewer";
 import { CoffeeTicker } from "./coffee-ticker";
+import FieldLoader from "./field/field-loader";
+import HomepageFieldRegions from "./field/hero-field-region";
+
+// Fish can flip this to true to restore the pouring beaker.
+const SHOW_HERO_BEAKER = false;
 
 /*
  * TWO SPEEDS rebuild (design-direction-v2.md + site-copy-v2.md, 2026-07-23).
@@ -210,11 +214,13 @@ export default function Home() {
   return (
     <>
       <MotionV2 />
+      <FieldLoader />
+      <HomepageFieldRegions />
 
       <a href="#top" className="skip-link">Skip to content</a>
 
       {/* HEADER */}
-      <header className="site" id="siteHeader">
+      <header className="site over-hero" id="siteHeader">
         <div className="container nav">
           <a href="#top" className="brand" aria-label="Test Tube Marketing">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -227,30 +233,15 @@ export default function Home() {
       </header>
 
       <main id="top">
-        {/* HERO (round 4 items 15/16): kinetic masthead over a rich
-            CSS/SVG background - token mesh gradient, slow-drifting
-            colour blooms (Steady tempo, transform-only), grain overlay.
-            The old ink-bloom video and content stills are gone. */}
-        <section className="hero" id="hero" aria-labelledby="hero-h">
-          <div className="hero-bg" aria-hidden="true">
-            <div className="hero-bg-mesh" />
-            <div className="hero-bloom bloom-a" data-bloom-a />
-            <div className="hero-bloom bloom-b" data-bloom-b />
-            <div className="hero-bloom bloom-c" data-bloom-c />
-            <div className="hero-bg-grain" />
-            {/* AMBIENT GRADIENT (round 4c): ShaderGradient wash in the TTM
-                palette, held to a super-soft opacity so it whispers behind the
-                headline. Client-only + SSR-safe, reduced-motion-safe,
-                disabled <=680px (CSS mesh gradient carries mobile). */}
-            <div className="hero-bg-slot">
-              <HeroGradient />
-            </div>
-          </div>
-          <BeakerScrub />
+        {/* HERO */}
+        <section className="hero night" id="hero" aria-labelledby="hero-h">
+          <div className="hero-scrim" aria-hidden="true" />
+          <div className="hero-copy-wash" aria-hidden="true" />
+          {SHOW_HERO_BEAKER && <BeakerScrub />}
           <div className="container hero-inner">
             <h1 className="display hero-display" id="hero-h">
               <span className="mask-line">
-                <span className="txt-grad">Your marketing brains,</span>
+                <span className="txt-grad-night">Your marketing brains,</span>
               </span>
               <span className="mask-line">
                 <span>
@@ -895,9 +886,11 @@ export default function Home() {
 
         {/* CLOSING CAPTURE (round 4): the opt-in is the primary CTA;
             book-a-call demoted to a quiet link underneath. */}
-        <section className="band cta" id="ladder" aria-labelledby="ladder-h">
+        <section className="band cta night" id="ladder" aria-labelledby="ladder-h">
+          <div className="cta-field-scrim" aria-hidden="true" />
+          <div className="cta-copy-wash" aria-hidden="true" />
           <div className="container cta-inner">
-            <h2 className="display cta-head txt-grad" id="ladder-h">
+            <h2 className="display cta-head txt-grad-night" id="ladder-h">
               Where are you <span className="accent">on the ladder?</span>
             </h2>
             <p className="cta-lead">
