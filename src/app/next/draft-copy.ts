@@ -51,6 +51,14 @@ export const DRAFT = {
     "assembling your page",
   ],
 
+  // Bars and panel tabs, mirroring the reference's chrome.
+  topRight: "Main menu",
+  panelIntro: "Why are you here?",
+  panelName: "Details",
+  panelBoot: "Building your page",
+  hint: "Type a number, or use arrows, then press Return",
+  hintQuiet: "Press Return to continue",
+
   footLeft: "Fractional marketing leadership",
   footRight: "Book a call",
 } as const;

@@ -1,21 +1,20 @@
 /*
- * The terminal. Fish's direction, 2026-07-31: the site assembles itself in
- * front of the visitor. Phosphor green on a green-biased near-black, faint
- * glow, slow flicker, options as unmistakable rectangular buttons.
+ * The terminal. Fish's direction 2026-07-31, second pass against his
+ * AppleWorks main-menu reference (~/Desktop/Screenshots 17.02.36):
+ * bordered panel with a tab label, numbered items, selection as an inverted
+ * block behind the label text only, top bar, bottom instruction line,
+ * monospace throughout, glow dialled right down, vintage flicker and grain.
  *
- * Scoped deliberately: this route inherits nothing from globals.css, which
- * still serves the old homepage, /ai-ladder and /privacy.
+ * Scoped: inherits nothing from globals.css, which still serves the old
+ * homepage, /ai-ladder and /privacy.
  */
 
 .screen {
-  --canvas: #060b08;
-  --canvas-lift: #0c130e;
-  --phosphor: #2bff6e;
-  --phosphor-bright: #b6ffcd;
-  /* Dim is decorative only. Anything meaningful uses --phosphor-read. */
-  --phosphor-dim: #17532c;
-  --phosphor-read: #5cd98a;
-  --edge: rgba(43, 255, 110, 0.34);
+  --canvas: #050906;
+  --phosphor: #35e06a;
+  --phosphor-bright: #9dffbd;
+  --phosphor-read: #2fb457;
+  --edge: rgba(53, 224, 106, 0.5);
 
   position: relative;
   min-height: 100vh;
@@ -23,139 +22,156 @@
   width: 100%;
   background: var(--canvas);
   color: var(--phosphor);
-  font-family: var(--font-plex), system-ui, sans-serif;
+  /* One face everywhere. */
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-weight: 400;
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
 
   display: grid;
   grid-template-rows: auto 1fr auto;
-  padding: clamp(1rem, 3vh, 2.4rem) clamp(1.15rem, 4.5vw, 4rem);
-  gap: clamp(0.9rem, 3vh, 2.2rem);
+  padding: clamp(0.8rem, 2.4vh, 1.6rem) clamp(0.9rem, 3vw, 2.2rem);
+  gap: clamp(0.7rem, 2.2vh, 1.4rem);
   overflow-x: hidden;
 }
 
-/* Phosphor bloom off the tube, plus scanlines. Both very low amplitude. */
+/*
+ * Layer 1: grain + scanlines + a much weaker bloom than the first pass.
+ * The grain is a tiny inline feTurbulence tile, so no asset and no request.
+ */
 .screen::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    radial-gradient(
-      100vw 80vh at 50% 42%,
-      rgba(43, 255, 110, 0.055),
-      rgba(43, 255, 110, 0) 70%
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0) 0px,
-      rgba(0, 0, 0, 0) 2px,
-      rgba(0, 0, 0, 0.22) 3px
-    );
-  animation: flicker 5.5s steps(1, end) infinite;
+  z-index: 2;
+  /* Normal blend, not overlay: on a near-black canvas an overlay blend is
+     mathematically invisible, which is why the first attempt showed nothing. */
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
 }
 
-/* Corner falloff, so it reads as a tube rather than a flat panel. */
+/* Scanlines kept separate so the grain opacity does not drag them down. */
+.screen > .lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.24) 3px
+  );
+}
+
+/* Layer 2: the tube. Faint bloom plus corner falloff, and the flicker. */
 .screen::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(
-    120% 120% at 50% 50%,
-    rgba(0, 0, 0, 0) 58%,
-    rgba(0, 0, 0, 0.5) 100%
-  );
+  z-index: 1;
+  background:
+    radial-gradient(
+      110vw 85vh at 50% 45%,
+      rgba(53, 224, 106, 0.03),
+      rgba(53, 224, 106, 0) 72%
+    ),
+    radial-gradient(
+      125% 125% at 50% 50%,
+      rgba(0, 0, 0, 0) 55%,
+      rgba(0, 0, 0, 0.62) 100%
+    );
+  animation: crt 7s steps(1, end) infinite;
 }
 
-@keyframes flicker {
-  0%, 42%, 44%, 79%, 81%, 100% { opacity: 1; }
-  43% { opacity: 0.82; }
-  80% { opacity: 0.9; }
+/*
+ * Vintage flicker: mostly steady with small irregular dips, plus two brief
+ * deeper ones. Amplitude is low on purpose; a strobing page is unusable.
+ */
+@keyframes crt {
+  0%, 6%, 8%, 21%, 23%, 47%, 49%, 51%, 63%, 65%, 88%, 90%, 100% {
+    opacity: 1;
+  }
+  7% { opacity: 0.965; }
+  22% { opacity: 0.985; }
+  48% { opacity: 0.94; }
+  50% { opacity: 0.99; }
+  64% { opacity: 0.972; }
+  89% { opacity: 0.95; }
 }
 
 .screen > * {
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 
-/* ---------- masthead ---------- */
+/* ---------- bars ---------- */
 
-.masthead {
+.topbar,
+.statusbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  font-size: clamp(9px, 1.55vh, 12px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--phosphor);
 }
 
-/*
- * PROPOSAL, easily reverted: the logo is rendered in phosphor green for the
- * terminal layer only. The full-colour mark returns the moment the site boots
- * into the branded page. Left as-is, the pink and cyan flasks fight the green
- * screen. Delete the filter to restore.
- */
 .logo {
-  height: clamp(18px, 3.2vh, 28px);
+  height: clamp(15px, 2.6vh, 22px);
   width: auto;
   display: block;
-  filter: grayscale(1) brightness(1.6) sepia(1) hue-rotate(72deg)
-    saturate(5.5);
 }
 
-.status {
-  font-family: var(--font-plex-mono), ui-monospace, monospace;
-  font-size: clamp(9px, 1.5vh, 11px);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.topbarRight {
   color: var(--phosphor-read);
 }
 
-/* ---------- the console ---------- */
+.statusbar {
+  color: var(--phosphor-read);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
 
-/*
- * Top-aligned, not centred. A terminal fills from the top, and centring left
- * the content floating in dead space. Capped width so the buttons do not
- * stretch to 1440px against three short sentences.
- */
-.console {
+.statusLink {
+  color: var(--phosphor-read);
+  text-decoration: none;
+  border-bottom: 1px solid var(--edge);
+}
+.statusLink:hover,
+.statusLink:focus-visible {
+  color: var(--phosphor);
+}
+
+/* ---------- the panel ---------- */
+
+.stage {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding-top: clamp(0.5rem, 6vh, 4.5rem);
+  justify-content: center;
   min-height: 0;
-  width: 100%;
-  max-width: 62rem;
 }
 
 .stream {
-  font-family: var(--font-plex-mono), ui-monospace, monospace;
-  font-size: clamp(0.82rem, min(1.55vw, 2.5vh), 1.06rem);
-  line-height: 1.75;
-  margin: 0 0 clamp(1rem, 3.4vh, 2.2rem);
-  color: var(--phosphor);
-  text-shadow: 0 0 12px rgba(43, 255, 110, 0.4);
-}
-
-.streamLine {
-  display: block;
+  font-size: clamp(0.75rem, min(1.35vw, 2.2vh), 0.95rem);
+  line-height: 1.7;
+  margin: 0 0 clamp(1.1rem, 3.4vh, 2.1rem);
   white-space: pre-wrap;
 }
 
-.streamLine::before {
-  content: "> ";
-  color: var(--phosphor-read);
-}
-
-/* The caret. A solid cell, not a hairline, so it reads as a terminal block. */
 .caret {
   display: inline-block;
-  width: 0.58em;
-  height: 1.05em;
+  width: 0.6em;
+  height: 1em;
   background: var(--phosphor);
-  vertical-align: -0.16em;
-  margin-left: 0.12em;
-  animation: blink 1.05s steps(1, end) infinite;
-  box-shadow: 0 0 10px rgba(43, 255, 110, 0.7);
+  vertical-align: -0.13em;
+  margin-left: 0.1em;
+  animation: blink 1.15s steps(1, end) infinite;
 }
 
 @keyframes blink {
@@ -163,91 +179,91 @@
   50%, 100% { opacity: 0; }
 }
 
-/* ---------- options as unmistakable buttons ---------- */
+/* Single hairline frame with a tab label sitting on the top edge. */
+.panel {
+  position: relative;
+  border: 1px solid var(--edge);
+  padding: clamp(1rem, 3.2vh, 1.9rem) clamp(0.9rem, 2.4vw, 1.7rem)
+    clamp(0.9rem, 2.8vh, 1.6rem);
+  width: 100%;
+  max-width: 46rem;
+}
 
-.options {
+.tab {
+  position: absolute;
+  top: 0;
+  left: clamp(0.9rem, 2.4vw, 1.7rem);
+  transform: translateY(-50%);
+  background: var(--canvas);
+  padding: 0 0.6em;
+  font-size: clamp(9px, 1.55vh, 12px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--phosphor);
+}
+
+/* ---------- the menu ---------- */
+
+.menu {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(0.5rem, 1.6vh, 0.85rem);
 }
 
-.optionBtn {
+.row {
   display: flex;
-  align-items: center;
-  gap: clamp(0.6rem, 1.6vw, 1rem);
+  align-items: baseline;
+  gap: 0.75ch;
+}
+
+.item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75ch;
   width: 100%;
+  background: none;
+  border: 0;
+  padding: clamp(0.34rem, 1.35vh, 0.6rem) 0;
   text-align: left;
   text-decoration: none;
   cursor: pointer;
-  background: var(--canvas-lift);
-  border: 1px solid var(--edge);
-  border-radius: 2px;
   color: var(--phosphor);
-  font-family: var(--font-plex), system-ui, sans-serif;
-  font-weight: 400;
-  font-size: clamp(0.95rem, min(1.85vw, 2.9vh), 1.3rem);
-  line-height: 1.25;
-  padding: clamp(0.7rem, 2.1vh, 1.15rem) clamp(0.85rem, 2vw, 1.35rem);
+  font-family: inherit;
+  font-size: clamp(0.85rem, min(1.6vw, 2.6vh), 1.15rem);
+  line-height: 1.35;
   min-height: 44px;
-  transition: background 0.14s linear, border-color 0.14s linear,
-    color 0.14s linear, box-shadow 0.14s linear;
+  box-sizing: border-box;
 }
 
-/* Selection reads as the terminal highlighting a row: inverted block. */
-.optionBtn:hover,
-.optionBtn:focus-visible {
-  background: var(--phosphor);
-  border-color: var(--phosphor);
-  color: var(--canvas);
-  box-shadow: 0 0 26px rgba(43, 255, 110, 0.32);
-}
-
-.optionBtn:focus-visible {
-  outline: 2px solid var(--phosphor-bright);
-  outline-offset: 3px;
-}
-
-.key {
-  font-family: var(--font-plex-mono), ui-monospace, monospace;
-  font-size: 0.78em;
-  border: 1px solid var(--edge);
-  border-radius: 2px;
-  padding: 0.1em 0.42em;
-  color: var(--phosphor-read);
+.num {
   flex: none;
+  color: var(--phosphor);
 }
-.optionBtn:hover .key,
-.optionBtn:focus-visible .key {
-  border-color: var(--canvas);
+
+/*
+ * Selection is an inverted block behind the LABEL only, not the whole row,
+ * which is how the reference does it.
+ */
+.label {
+  display: inline;
+  padding: 0.1em 0.45ch;
+  margin-left: -0.45ch;
+}
+
+.item[data-on="true"] .label {
+  background: var(--phosphor);
   color: var(--canvas);
+}
+
+.item:focus-visible {
+  outline: 1px solid var(--phosphor-bright);
+  outline-offset: 2px;
 }
 
 /* ---------- the gag ---------- */
 
-.gagRow {
-  margin-top: clamp(0.5rem, 1.6vh, 0.85rem);
-  min-height: 46px;
-  display: flex;
-  align-items: center;
-}
-
 .gag {
-  display: flex;
-  align-items: center;
-  gap: clamp(0.6rem, 1.6vw, 1rem);
-  text-align: left;
-  cursor: pointer;
-  background: none;
-  border: 1px dashed var(--phosphor-dim);
-  border-radius: 2px;
-  color: var(--phosphor-read);
-  font-family: var(--font-plex), system-ui, sans-serif;
-  font-size: clamp(0.85rem, min(1.5vw, 2.3vh), 1rem);
-  padding: clamp(0.55rem, 1.7vh, 0.9rem) clamp(0.85rem, 2vw, 1.35rem);
-  transition: transform 0.13s ease-out, opacity 0.3s linear;
+  transition: transform 0.14s ease-out, opacity 0.32s linear;
 }
 
 .gagPuffed {
@@ -257,10 +273,11 @@
 }
 
 .punchline {
-  font-family: var(--font-plex-mono), ui-monospace, monospace;
-  font-size: clamp(0.85rem, min(1.5vw, 2.3vh), 1rem);
+  font-size: clamp(0.85rem, min(1.6vw, 2.6vh), 1.15rem);
   color: var(--phosphor-read);
   margin: 0;
+  padding: clamp(0.34rem, 1.35vh, 0.6rem) 0;
+  min-height: 44px;
 }
 
 /* ---------- name capture ---------- */
@@ -268,25 +285,16 @@
 .answerRow {
   display: flex;
   align-items: baseline;
-  gap: 0.5ch;
-  font-family: var(--font-plex-mono), ui-monospace, monospace;
-  font-size: clamp(0.9rem, min(1.7vw, 2.7vh), 1.15rem);
-  margin-top: 0.2rem;
+  gap: 0.75ch;
+  font-size: clamp(0.85rem, min(1.6vw, 2.6vh), 1.15rem);
 }
 
-.chevron {
-  color: var(--phosphor-read);
-  flex: none;
-}
-
-/* The input IS the command line: no box, no chrome, just the typed answer. */
 .entry {
   flex: 1 1 auto;
   min-width: 0;
   background: none;
   border: 0;
-  border-radius: 0;
-  padding: 0.35rem 0;
+  padding: 0.3rem 0;
   color: var(--phosphor-bright);
   font-family: inherit;
   font-size: inherit;
@@ -296,10 +304,6 @@
 .entry:focus {
   outline: none;
 }
-.entry::placeholder {
-  color: var(--phosphor-dim);
-}
-/* Focus is shown on the row, since the field itself has no edges. */
 .answerRow:focus-within {
   box-shadow: inset 0 -1px 0 0 var(--phosphor);
 }
@@ -307,55 +311,42 @@
 .actions {
   display: flex;
   align-items: center;
-  gap: clamp(0.8rem, 2.5vw, 1.5rem);
+  gap: clamp(0.8rem, 2.4vw, 1.4rem);
   flex-wrap: wrap;
-  margin-top: clamp(1rem, 3.2vh, 2rem);
+  margin-top: clamp(0.7rem, 2.4vh, 1.4rem);
 }
 
+.go,
+.skip {
+  font-family: inherit;
+  font-size: clamp(0.8rem, 1.9vh, 0.95rem);
+  cursor: pointer;
+  min-height: 44px;
+  padding: 0.5rem 1.1rem;
+  background: none;
+  border: 1px solid var(--edge);
+  color: var(--phosphor);
+}
 .go {
   background: var(--phosphor);
   color: var(--canvas);
-  border: 1px solid var(--phosphor);
-  border-radius: 2px;
-  font-family: var(--font-plex), system-ui, sans-serif;
-  font-weight: 500;
-  font-size: clamp(0.9rem, 2vh, 1rem);
-  padding: 0.7rem 1.6rem;
-  min-height: 44px;
-  cursor: pointer;
+  border-color: var(--phosphor);
 }
-.go:hover {
-  background: var(--phosphor-bright);
-  border-color: var(--phosphor-bright);
-}
-.go:focus-visible {
-  outline: 2px solid var(--phosphor-bright);
-  outline-offset: 3px;
-}
-
-.skip {
-  background: none;
-  border: 0;
-  border-bottom: 1px solid var(--edge);
-  padding: 0 0 2px;
-  cursor: pointer;
-  color: var(--phosphor-read);
-  font-family: var(--font-plex), system-ui, sans-serif;
-  font-size: clamp(0.88rem, 1.9vh, 0.98rem);
-}
+.go:hover,
 .skip:hover,
+.go:focus-visible,
 .skip:focus-visible {
-  color: var(--phosphor);
-  border-bottom-color: var(--phosphor);
+  outline: 1px solid var(--phosphor-bright);
+  outline-offset: 2px;
 }
 
 .reassure {
   flex-basis: 100%;
-  font-family: var(--font-plex), system-ui, sans-serif;
-  font-size: clamp(11px, 1.7vh, 13px);
+  font-size: clamp(10px, 1.6vh, 12px);
   color: var(--phosphor-read);
   margin: 0;
-  max-width: 46ch;
+  max-width: 54ch;
+  line-height: 1.6;
 }
 
 /* ---------- boot ---------- */
@@ -363,40 +354,10 @@
 .bootLine {
   display: flex;
   align-items: baseline;
-  gap: 0.8ch;
-  font-family: var(--font-plex-mono), ui-monospace, monospace;
-  font-size: clamp(0.82rem, min(1.55vw, 2.5vh), 1.06rem);
+  gap: 1ch;
+  font-size: clamp(0.8rem, min(1.5vw, 2.4vh), 1.05rem);
   line-height: 1.9;
-  color: var(--phosphor);
-}
-
-.tick {
-  color: var(--phosphor-bright);
-}
-
-/* ---------- foot ---------- */
-
-.foot {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  font-family: var(--font-plex-mono), ui-monospace, monospace;
-  font-size: clamp(9px, 1.5vh, 11px);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--phosphor-read);
-}
-
-.footLink {
-  color: var(--phosphor-read);
-  text-decoration: none;
-  border-bottom: 1px solid var(--edge);
-  padding-bottom: 2px;
-}
-.footLink:hover,
-.footLink:focus-visible {
-  color: var(--phosphor);
+  margin: 0;
 }
 
 .srOnly {
@@ -412,71 +373,58 @@
 }
 
 .draftFlag {
-  font-family: var(--font-plex-mono), ui-monospace, monospace;
   font-size: 10px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--canvas);
   background: var(--phosphor);
-  padding: 3px 7px;
+  padding: 2px 6px;
   position: fixed;
-  right: 8px;
-  bottom: 8px;
-  z-index: 5;
+  right: 6px;
+  bottom: 6px;
+  z-index: 6;
 }
 
 @media (max-width: 680px) {
-  .status {
+  .topbarRight,
+  .statusRight {
     display: none;
   }
 }
 
-/*
- * Short viewports: a landscape phone or a laptop with toolbars showing can
- * leave ~390px of usable height, where the full layout measured 422px and
- * broke the zero-scroll rule. Everything below buys height WITHOUT dropping
- * the 44px touch targets, which stay untouched.
- */
-@media (max-height: 460px) {
+/* Short viewports (landscape phone, laptop with toolbars): buy height back
+   without shrinking any 44px touch target. */
+@media (max-height: 470px) {
   .screen {
-    padding-top: 0.55rem;
-    padding-bottom: 0.55rem;
-    gap: 0.5rem;
-  }
-  .console {
-    padding-top: 0;
-  }
-  .stream {
-    line-height: 1.35;
-    margin-bottom: 0.6rem;
-  }
-  .foot {
-    display: none;
-  }
-  .gagRow {
-    margin-top: 0.35rem;
-    min-height: 40px;
-  }
-  .gag {
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
+    gap: 0.4rem;
+  }
+  .stream {
+    line-height: 1.3;
+    margin-bottom: 0.45rem;
+  }
+  .panel {
+    padding-top: 0.8rem;
+    padding-bottom: 0.5rem;
+  }
+  .statusbar {
+    display: none;
+  }
+  .item,
+  .punchline {
+    min-height: 38px;
+    padding-top: 0.15rem;
+    padding-bottom: 0.15rem;
   }
 }
 
-/*
- * Reduced motion: same content, nothing moving. No flicker, no blink, no
- * bloom pulse. The typing resolves instantly (handled in the component).
- */
+/* Same content, nothing moving. */
 @media (prefers-reduced-motion: reduce) {
-  .screen::before {
+  .screen::after,
+  .caret,
+  .gag {
     animation: none;
-  }
-  .caret {
-    animation: none;
-  }
-  .optionBtn,
-  .gag,
-  .go {
     transition: none;
   }
 }
