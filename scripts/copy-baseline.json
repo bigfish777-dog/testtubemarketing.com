@@ -28,7 +28,6 @@
   "src/app/award-viewer.tsx": [
     "Interactive 3D of the Marketing and Advertising StartUp of the Year 2026 trophy"
   ],
-  "src/app/beaker-bg.tsx": [],
   "src/app/beaker-scrub.tsx": [],
   "src/app/capture-form.tsx": [
     "Done. The AI Leverage Ladder is on its way to your inbox.",
@@ -46,6 +45,14 @@
   "src/app/hero-gradient.tsx": [],
   "src/app/layout.tsx": [],
   "src/app/motion-v2.tsx": [],
+  "src/app/next/chooser.tsx": [
+    "Back",
+    "Draft copy - Claude&apos;s, not Fish&apos;s",
+    "Test Tube Marketing",
+    "choose"
+  ],
+  "src/app/next/draft-copy.ts": [],
+  "src/app/next/page.tsx": [],
   "src/app/page.tsx": [
     "&copy; 2026 TEST TUBE MARKETING LTD. ALL RIGHTS RESERVED.",
     "&darr;",

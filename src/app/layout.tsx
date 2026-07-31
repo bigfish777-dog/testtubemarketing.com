@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 
 /*
@@ -38,8 +38,24 @@ const mono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+/*
+ * Darkroom direction (2026-07-31): Newsreader carries display on the new
+ * intent-router surfaces. Light weights only, nothing above 400 - hierarchy
+ * comes from size, never weight. Deliberately not Instrument Serif.
+ * Horas stays until the old homepage is retired.
+ */
+const serif = Newsreader({
+  variable: "--font-serif",
+  weight: ["200", "300", "400"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+});
+
 export const viewport: Viewport = {
   themeColor: "#F7F3EC",
+  // The name step takes focus on mobile; reflow rather than hide the field
+  // behind the keyboard on the zero-scroll chooser.
+  interactiveWidget: "resizes-content",
 };
 
 export const metadata: Metadata = {
@@ -63,7 +79,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-GB"
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      className={`${display.variable} ${body.variable} ${mono.variable} ${serif.variable}`}
     >
       <body>{children}</body>
     </html>
