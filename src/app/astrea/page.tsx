@@ -41,14 +41,14 @@ const levels = [
   {
     lv: "Three",
     nm: "Consider",
-    now: "Almost nothing. No reviews or customer proof anywhere on the site. No financing option. No warranty stated. Returns at 14 days.",
+    now: "Almost nothing. No reviews, ratings or customer proof anywhere on the site. No warranty stated. Returns at 14 days. No staged payment terms of any kind.",
     cost: "This is the level where a five thousand pound purchase is actually won, and a buyer who wants the piece is given no permission to act.",
   },
   {
     lv: "Four",
     nm: "Convert",
-    now: "The appointment page is a standard Shopify form. No calendar, no availability, no confirmation.",
-    cost: "So there is no booked appointment event for either platform to optimise toward. That single gap is why neither account can learn, whatever is spent.",
+    now: "Nothing is optimised to a purchase. The appointment page is a plain contact form, so it fires no event either.",
+    cost: "Neither platform has ever been given a purchase to learn from. Until it is, spend cannot compound, and no amount of budget changes that.",
   },
   {
     lv: "Five",
@@ -62,32 +62,32 @@ const findings = [
   {
     i: "01",
     t: "There is no customer proof anywhere on the site.",
-    n: "No reviews, no ratings, no testimonials, on a catalogue with a median price above five thousand pounds. Every competitor we looked at leads with review counts and guarantees.",
+    n: "No reviews, no ratings, no testimonials, and no review platform installed, on a catalogue with a median price above five thousand pounds. There is no Trustpilot profile to point at either, so there is nothing to borrow. Every competitor we looked at leads with review counts and guarantees.",
   },
   {
     i: "02",
-    t: "There is no financing.",
-    n: "No Klarna, no Clearpay, no instalments. Brands selling at a fifth of your price all offer it. At your price point it's often the difference between a considered yes and an indefinite maybe.",
+    t: "A buyer who wants the piece is given no way to stage the payment.",
+    n: "Not a checkout finance widget. At this level that reads cheap and we would not put one on the site. What is missing is the private client version: staged payment on a commission, arranged by a person, mentioned once at the right moment. Handled that way it removes the objection without ever touching the positioning.",
   },
   {
     i: "03",
-    t: "Booking an appointment is not a booking flow.",
-    n: "It's a contact form. For a purchase of this size the appointment is the real conversion, and right now it cannot be measured, confirmed or optimised toward.",
+    t: "The appointment page is a contact form, so no appointment is ever recorded.",
+    n: "There is no calendar, no availability and no confirmation, and nothing fires when someone submits it. Neither ad platform has ever received a single appointment signal, and internally there is no record to follow up against.",
   },
   {
     i: "04",
-    t: "Three products are priced at zero.",
-    n: "Including The French Riviera and The Heart Of The City Diamond Ring. Products at zero will break a Shopping feed and a catalogue campaign as soon as either is scaled.",
+    t: "Products shown as Enquire now carry a price of zero in the data.",
+    n: "The page does the right thing and shows no price. Underneath, the product data says 0.00, and Merchant Centre and the Meta catalogue read the data, not the button. Those pieces will be rejected or served wrongly the moment either feed is scaled.",
   },
   {
     i: "05",
-    t: "The store locator in your own footer returns a 404.",
-    n: "And the boutique list, the appointment form and your press coverage each name a different set of locations.",
+    t: "Your story film is hosted on Google Drive.",
+    n: "The video on the Our Story page links out to a Drive file, so a visitor lands on a Google sign-in screen rather than your site. It cannot be tracked, retargeted against, or used as an ad asset, and it is the single best piece of brand film you have.",
   },
   {
     i: "06",
-    t: "The engagement ring collections do not filter.",
-    n: "Around two hundred generated collection pages all return the same 168 products. That costs you search visibility, and it makes proper feed segmentation impossible.",
+    t: "The collections filter well, but not by price.",
+    n: "Metal, band, shape and style are all there and they work properly. Price is the one a buyer at this level actually needs, on a catalogue running from seven hundred and fifty pounds to five figures, and it is also the split the campaigns need in order to separate an entry buyer from a high value one.",
   },
 ];
 
@@ -126,8 +126,8 @@ const steps = [
   },
   {
     ph: "Second",
-    t: "Decide the purchase mechanism, per price band",
-    d: "Entry pieces are genuine e-commerce and should be optimised to purchase. Above roughly three thousand pounds the conversion event is a booked consultation, and a person closes it. These are two different businesses and right now they are advertised as one.",
+    t: "Put three campaigns live and optimise for volume",
+    d: "Awareness that is not asked to sell, a broad purchase campaign, and a second purchase campaign modelled off your own buyer data. Optimised for volume, not value, until there are enough purchases to teach it anything. This is the step that gives both platforms their first real conversion signal.",
   },
   {
     ph: "Third",
@@ -141,8 +141,8 @@ const steps = [
   },
   {
     ph: "Fifth",
-    t: "Then, and only then, restore the budget",
-    d: "With working measurement, a defined mechanism and a funded top of funnel, the approved four thousand a month has something to prove. A rebuilt account needs six to eight weeks at a real budget before its performance means anything.",
+    t: "Switch to value, then restore the budget",
+    d: "Once there is enough purchase history, split high value from entry, move to value optimisation and set a target cost per sale so the platform chases the pieces worth chasing. That is also the point at which the booked consultation becomes worth building properly, and the approved four thousand a month finally has something to prove.",
   },
 ];
 
@@ -165,15 +165,15 @@ export default function AstreaBrief() {
 
             <p className="as-eyebrow">Pre-meeting brief</p>
             <h1>
-              What we have
+              What &pound;44,475 bought,
               <br />
-              understood so far.
+              and what it didn&rsquo;t.
             </h1>
             <p className="as-lede">
-              Written before we meet, so the call can be spent on the decisions
-              rather than on background. Everything here comes from your own
-              data and your own website. Where we're unsure, we've said so
-              and turned it into a question.
+              Written before we meet, so the call can be spent on decisions
+              rather than background. Everything here comes from your own data
+              and your own website. Where we&rsquo;re unsure, we&rsquo;ve turned
+              it into a question rather than a claim.
             </p>
 
             <div className="as-cover-meta">
@@ -239,42 +239,41 @@ export default function AstreaBrief() {
 
             <div style={{ marginTop: "clamp(30px, 4vw, 48px)" }}>
               <p>
-                Those four numbers are usually presented as a failure of
-                advertising. We read them differently, and we think the
-                difference matters.
+                Those numbers are usually presented as a failure of advertising.
+                We read them differently, and the difference decides what we
+                would do next.
               </p>
               <p>
-                The first thing worth saying plainly is that for nineteen
-                consecutive months the platforms were not measuring purchases at
-                all. £22,227 was spent in that window against tracking that had
-                stopped working. That is not poor performance being reported
-                accurately. It's no performance data existing in the first
-                place, which means nobody could have optimised anything, however
-                good they were.
-              </p>
-              <p>
-                The second is that your revenue has never tracked ad spend. It
-                tracks brand moments. April this year was your best month at
-                £20,793, from four orders, every one of them attributed to
-                direct traffic during a week when the site was doing roughly
-                seven times its normal volume off the back of press.
+                Your revenue has never tracked ad spend. It tracks brand
+                moments. April was your best month at £20,793 from four orders,
+                every one attributed to direct traffic, during a week the site
+                ran at roughly seven times its normal volume off the back of
+                press.
               </p>
             </div>
 
             <div className="as-pull">
               <p>
-                Online is roughly five per cent of your business. The advertising
-                has been judged as though it were all of it.
+                Almost everything you sell closes somewhere the ad platforms
+                cannot see. So they have never been shown what one of your
+                buyers looks like.
               </p>
             </div>
 
             <p>
-              £1.5m in six months against £71,668 of lifetime online revenue says
-              the overwhelming majority of what you sell closes somewhere a
-              pixel cannot see. In a boutique, through the network, after a
-              conversation, after a press moment. That is not a problem to be
-              fixed. It's the shape of a considered luxury business, and it
-              should be the starting point rather than an afterthought.
+              £1.5m in six months against £71,668 of lifetime online revenue
+              says the overwhelming majority of what you sell closes in a
+              boutique, through the network, or after a conversation. That is
+              the shape of a considered luxury business, not a fault. But it
+              does mean the platforms have been optimising against roughly five
+              per cent of the picture, and doing it with no purchase data at
+              all.
+            </p>
+            <p>
+              So the first job is not more budget. It is to make the part that
+              does happen online measurable, and to feed the platforms real
+              purchases until they can recognise a buyer. Everything below
+              follows from that.
             </p>
           </div>
         </section>
@@ -336,10 +335,89 @@ export default function AstreaBrief() {
           </div>
         </section>
 
-        {/* THE SITE */}
+        {/* HOW WE WOULD BUILD IT */}
         <section className="as-band">
           <div className="as-wrap">
-            <p className="as-eyebrow">Three / What we found on the site</p>
+            <p className="as-eyebrow">Three / How we would build it</p>
+            <h2>Three campaigns, not one.</h2>
+            <p className="as-lede">
+              This is the shape we would open with. It is deliberately
+              unsophisticated at the start, because an account with no purchase
+              history has nothing to be sophisticated about yet.
+            </p>
+
+            <div className="as-build">
+              <article>
+                <div className="k">Campaign one</div>
+                <h3>Awareness, and it is not asked to sell</h3>
+                <p>
+                  Video led, mostly the real thing rather than studio work, and
+                  the Sarah Jessica Parker story does the lifting. Broad, held
+                  deliberately small, and pointed at your website rather than
+                  your Instagram profile. Its job is to put the argument in
+                  front of people and hand warm traffic to the campaigns below
+                  it. Judged on reach and depth of engagement, never on sales.
+                </p>
+              </article>
+              <article>
+                <div className="k">Campaign two</div>
+                <h3>Purchase, broad</h3>
+                <p>
+                  Meta finds the buyers, because on a cold account it is better
+                  at it than we are. Age and location only, split by the markets
+                  your own customer list says you already sell in rather than
+                  everywhere at once. No interests, no stacked audiences. Every
+                  extra signal at this stage narrows the pool before the
+                  platform has learned anything.
+                </p>
+              </article>
+              <article>
+                <div className="k">Campaign three</div>
+                <h3>Purchase, modelled on your own buyers</h3>
+                <p>
+                  This is where Klaviyo earns its place. Lookalikes built off
+                  people who have actually bought, plus your browsers and your
+                  abandoned baskets, split into warm and hot so the two are
+                  never judged against each other. Warm is a page view. Hot is
+                  someone who got as far as the basket, and it is also where
+                  repeat buyers sit.
+                </p>
+              </article>
+            </div>
+
+            <div className="as-pull" style={{ marginTop: 40 }}>
+              <p>
+                Volume first, value second. You cannot ask a platform to find
+                you high value buyers before it has been shown a single one.
+              </p>
+            </div>
+
+            <p>
+              Both purchase campaigns open optimised for volume. Once there is
+              enough history, we split entry pieces from high value, move to
+              value optimisation, and give the platform a target cost per sale
+              so it stops chasing the cheap end of your catalogue.
+            </p>
+            <p>
+              On budget, we would work backwards rather than pick a number.
+              Awareness stays small on purpose. Purchase budget comes from what
+              one sale costs and how many a day you want, and it goes up
+              gradually so the campaign never falls back into learning.{" "}
+              <b>
+                Below four times return on Meta we would tell you it is not
+                working.
+              </b>{" "}
+              Above that, the number we should actually be aiming at depends on
+              your margin as much as your average order value, which is
+              something we would need from you rather than guess.
+            </p>
+          </div>
+        </section>
+
+        {/* THE SITE */}
+        <section className="as-band tint">
+          <div className="as-wrap">
+            <p className="as-eyebrow">Four / What we found on the site</p>
             <h2>The advertising is not the only thing holding this back.</h2>
             <p className="as-lede">
               We reviewed astrealondon.com on 4 August. These are the things we
@@ -386,9 +464,9 @@ export default function AstreaBrief() {
         </section>
 
         {/* QUESTIONS */}
-        <section className="as-band tint">
+        <section className="as-band">
           <div className="as-wrap">
-            <p className="as-eyebrow">Four / What we would like to understand</p>
+            <p className="as-eyebrow">Five / What we would like to understand</p>
             <h2>The things we cannot learn from the data.</h2>
             <p className="as-lede">
               These are the questions we would most like answered on the call.
@@ -408,9 +486,9 @@ export default function AstreaBrief() {
         </section>
 
         {/* SEQUENCE */}
-        <section className="as-band">
+        <section className="as-band tint">
           <div className="as-wrap">
-            <p className="as-eyebrow">Five / How we would sequence it</p>
+            <p className="as-eyebrow">Six / How we would sequence it</p>
             <h2>Order matters more than budget.</h2>
             <p className="as-lede">
               Deliberately without costs attached. We would rather agree the
