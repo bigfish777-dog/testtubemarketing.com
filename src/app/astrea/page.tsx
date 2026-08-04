@@ -18,6 +18,10 @@ const raleway = Raleway({
 
 export const metadata: Metadata = {
   title: "Astrea London | Pre-meeting brief",
+  // Set explicitly so this page does not inherit the site-wide description,
+  // which is TTM homepage copy and carries an em dash.
+  description:
+    "Prepared for Astrea London ahead of the meeting on 5 August 2026. Confidential.",
   robots: { index: false, follow: false, nocache: true },
 };
 
