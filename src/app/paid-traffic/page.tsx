@@ -3,6 +3,10 @@ import { PaidTrafficEffects } from "./effects";
 import "./paid-traffic.css";
 
 export const metadata: Metadata = {
+  // Set here rather than in the shared root layout: this project serves the
+  // paidtraffic subdomain, and without it the OG image URL resolves to
+  // localhost when the link is shared.
+  metadataBase: new URL("https://paidtraffic.testtubemarketing.com"),
   title: "Paid Traffic | Test Tube Marketing",
   description:
     "We take care of paid traffic end to end. Strategy, creative, pages, tracking, reporting. You get on with running the business, and you see the numbers every day.",
@@ -69,18 +73,15 @@ const records = [
     what: "Driving lessons for 9 to 17 year olds, from £54.99 to £99.99, across 69 UK venues. Bought by parents and grandparents, usually as a gift.",
     did: "We took the account off the previous agency and rebuilt the funnel onto our own stack, with its own checkout, so every sale ties back to the ad that made it. We wrote the A/B decision rule before the test ran rather than after it. Five creative angle sets, one per buyer we could actually name. Reporting to the client from day one.",
     figures: [
+      { n: "11.85x", l: "Return on ad spend" },
       {
         n: "83% lower",
         l: "Cost per sale, against what the account was doing under the previous agency",
-      },
-      {
-        n: "Just under 6x",
-        l: "The same number the other way round",
         sub: true,
       },
     ],
     source:
-      "Meta, previous agency baseline against the current 7 day average",
+      "Meta, current account performance against the previous agency baseline",
     quote: {
       text: "I wish I'd found them years earlier!",
       cite: "Ian Mulligani, Founder and MD, Young Driver",
@@ -90,19 +91,15 @@ const records = [
     code: "REC-02",
     logo: null,
     anon: "Details protected under NDA",
-    name: "A certification programme with a £497 deposit",
-    what: "A certification business selling to women aged 35 to 64. A free three day training, running into an offer taken with a £497 deposit.",
-    did: "Full launch architecture: cold prospecting segmented by niche across the UK and Europe, a lookalike ladder, and structured retargeting. We built a server-side bridge from their CRM into Meta so a registration was counted once and only once, and backfilled the registrations the old setup had been dropping.",
+    name: "A premium certification programme",
+    what: "A £5,000 certification, sold to women aged 35 to 64 off the back of a free three day training.",
+    did: "Full launch architecture: cold prospecting segmented by niche across the UK and Europe, a lookalike ladder, and structured retargeting. We built a server-side bridge from the CRM into Meta, so every sale was counted once and counted properly.",
     figures: [
-      { n: "1,672", l: "Registrations at £15.11 each" },
-      { n: "11.9%", l: "Click to registration, from £25,265 spend", sub: true },
-      {
-        n: "86% women 35-64",
-        l: "Men were effectively zero. Cheapest segment was women 55-64 at £13.72",
-        sub: true,
-      },
+      { n: "5.73x", l: "Return on ad spend" },
+      { n: "£146,798", l: "Revenue generated", sub: true },
+      { n: "£25,625", l: "Ad spend", sub: true },
     ],
-    source: "Meta, 1 to 25 June 2026, reconciled against the CRM",
+    source: "Meta, reconciled against the CRM",
     quote: null,
   },
   {
@@ -111,18 +108,18 @@ const records = [
     anon: null,
     name: "OptiNeck",
     what: "A £55 patented neck wedge, designed by a chartered physiotherapist with 25+ years in clinic. Made in Britain.",
-    did: "We produced the whole campaign in-house. Creative built from his product shots through three approved rounds and cut to every placement size, copy written against a documented claims ceiling, then a 26 ad, 7 ad set build out run entirely from scripted API calls, with a dated snapshot before every push and a paste-ready rollback on every script that changed live objects. Pixel and conversions API across two separate storefronts, deduplicated on event ID. We built him his own ad review app, so every ad went through his review and nothing ran that he had not signed off.",
+    did: "We built him the whole campaign. We wrote the copy and produced the creative ourselves, working from his product shots, and we built out real variation rather than one idea in three sizes, so there was something genuine to test from day one. Every ad cut to every placement it would run in. He got his own review app, so he saw and approved each one before it went live. Written, built and shipped in weeks.",
     figures: [
       {
         n: "26 ads",
-        l: "Across 7 ad sets, creative produced in-house and cut to every placement size",
+        l: "Written, designed and built in-house, across 7 ad sets",
       },
       {
-        n: "2 storefronts",
-        l: "Pixel and conversions API across both, deduplicated on event ID",
+        n: "Every placement",
+        l: "Each ad cut to the sizes its placement actually needs",
         sub: true,
       },
-      { n: "Zero", l: "Unreviewed ads. Zero unevidenced claims.", sub: true },
+      { n: "Zero", l: "Ads that ran without his sign off", sub: true },
     ],
     source: "Build record, July to August 2026",
     quote: null,
@@ -131,26 +128,17 @@ const records = [
     logo: "/assets/logos/thrive-navy.png",
     anon: null,
     name: "Thrive Business Coaching",
-    what: "Coaching for clinic and studio owners. A £3.95 book funnel that had been running since April 2025, and a £997 + VAT course.",
-    did: "We were brought in to rebuild it, and the audit came first. The account was reporting £4.39 a purchase, and we showed the client why that number could not be trusted. Then we rebuilt the funnel onto our stack with its own checkout and a server-side webhook as the single source of truth. In the process we found a broken fulfilment chain where buyers coming through the new checkout were receiving nothing at all, and fixed it. Then cart abandon capture, and a reconciliation script that puts all four layers side by side.",
+    what: "Coaching for clinic and studio owners, sold through a £3.95 book funnel into a £997 + VAT course.",
+    did: "We rebuilt the funnel onto our own stack with its own checkout, so every sale ties back to the ad that made it. The front end pays for itself: the book funds the traffic that sells it, which means the advertising isn't waiting on the back end to justify itself. The real money is made after the book, and that's where it's been made.",
     figures: [
+      { n: "1,000+ books", l: "Sold through a self liquidating funnel" },
       {
-        n: "£4.39",
-        l: "What the account was reporting per purchase when we inherited it",
-      },
-      {
-        n: "1,336 purchases",
-        l: "Lifetime from April 2025, before our rebuild",
-        sub: true,
-      },
-      {
-        n: "Rebuilt",
-        l: "Own checkout, server-side source of truth, fulfilment chain fixed",
+        n: "£100,000+",
+        l: "Back end revenue generated off the back of them",
         sub: true,
       },
     ],
-    source:
-      "Audit and rebuild, July 2026. Inherited account figures as reported by Meta",
+    source: "Funnel performance to date",
     quote: {
       text: "There was no real strategy, no real project plan, no bigger picture thinking. It was just, okay, we'll try a few Facebook ads or a few emails.",
       cite: "Katie Bell, Thrive Business Coaching, on life before TTM",
@@ -206,14 +194,14 @@ const founders = [
     role: "CO-FOUNDER / SYSTEMS & STRATEGY",
     photo: "/assets/founders/nick-fisher.jpg",
     alt: "Nick Fisher, co-founder of Test Tube Marketing, mid-sentence with a microphone in hand, gesturing, against a dark grey wall",
-    bio: "Fish is a marketer by accident. He dropped out of uni, fell into the nearest job going, and realised he was good at it. Direct response is his lane: emails, offers, funnels, the words that make people buy. He spent years as the behind-the-scenes strategist and copywriter on big launches, the name you never saw on the sales page. Here in the lab he runs systems and strategy, the engine behind every client account. He's also dad to two kids, which he'll tell you is the harder of the two jobs.",
+    bio: "Fish is a marketer by accident. He dropped out of uni, fell into the nearest job going, and realised he was good at it. Direct response is his lane: emails, offers, funnels, the words that make people buy. He spent years as the behind-the-scenes strategist and copywriter on big launches, the name you never saw on the sales page. Here in the lab he runs systems and strategy, the engine behind every client account. He's also dad to two girls, which he'll tell you is the harder of the two jobs.",
   },
   {
     name: "Adam Ashburn",
     role: "CO-FOUNDER / CHIEF EXPERIMENTER",
     photo: "/assets/founders/adam-ashburn.jpg",
     alt: "Adam Ashburn, co-founder of Test Tube Marketing, seated relaxed in a navy polo shirt against a blue stage curtain",
-    bio: "Adam was meant to be a golf pro. Then he got run over, and marketing got him instead. He spent years as Head of Marketing at Expert Empires, the events business that put names like Gary Vaynerchuk and Grant Cardone on UK stages. Around the office he was known as the founder's no.2, steering marketing across the group's businesses, including Elite Closing Academy, as they grew. Strategy is where he's strongest: positioning, offers, and the plan that decides what's worth doing before anyone touches an ad account. Here in the lab he's our Chief Experimenter, testing ideas with our own money before they go anywhere near yours. Two kids at home, and yes, he still plays golf.",
+    bio: "Adam was meant to be a golf pro. Then he got run over, and marketing got him instead. He spent years as Head of Marketing at Expert Empires, the events business that put names like Gary Vaynerchuk and Grant Cardone on UK stages. Around the office he was known as the founder's no.2, steering marketing across the group's businesses, including Elite Closing Academy, as they grew. Strategy is where he's strongest: positioning, offers, and the plan that decides what's worth doing before anyone touches an ad account. Here in the lab he's our Chief Experimenter, testing ideas with our own money before they go anywhere near yours. Two young boys at home, and yes, he still plays golf.",
   },
 ];
 
@@ -419,7 +407,7 @@ export default function PaidTraffic() {
                 <p>
                   <strong>Run an ad, get a customer.</strong> That works when
                   the thing you sell is cheap, familiar and impulsive. One good
-                  ad, a working checkout, done. We have run exactly that, and it
+                  ad, a working checkout, done. We&rsquo;ve run exactly that, and it
                   did 8x.
                 </p>
                 <p>
@@ -429,7 +417,7 @@ export default function PaidTraffic() {
                   apart, needing five different things.
                 </p>
                 <p>
-                  Advertise at one of those stages and three things happen, in
+                  Advertise at just one of those stages and three things happen, in
                   this order.
                 </p>
 
@@ -726,18 +714,6 @@ export default function PaidTraffic() {
                     what actually got paid for. Spend comes from the platform.
                     Split by channel, so paid never takes the credit for
                     something another channel did.
-                  </p>
-                </div>
-                <div className="pt-note">
-                  <h3>Built to fail honestly</h3>
-                  <p>
-                    The screen and the email count off the same code, so neither
-                    can invent a number the other doesn&rsquo;t have. If a data
-                    source goes down, the email
-                    still sends with a warning on it rather than silently going
-                    missing, and any figure the screen can&rsquo;t confirm shows as a
-                    dash, never a zero. We get the alert. You still get the
-                    number.
                   </p>
                 </div>
                 <div className="pt-note flag">

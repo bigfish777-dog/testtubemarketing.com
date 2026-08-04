@@ -17,6 +17,9 @@ const raleway = Raleway({
 });
 
 export const metadata: Metadata = {
+  // Needed for the OG image to resolve to an absolute URL when the link is
+  // shared, rather than to localhost.
+  metadataBase: new URL("https://paidtraffic.testtubemarketing.com"),
   title: "Astrea London | Pre-meeting brief",
   // Set explicitly so this page does not inherit the site-wide description,
   // which is TTM homepage copy and carries an em dash.
