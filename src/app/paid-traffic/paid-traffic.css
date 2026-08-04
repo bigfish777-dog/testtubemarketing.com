@@ -1,0 +1,1096 @@
+/* ==========================================================================
+   PAID TRAFFIC  /  paidtraffic.testtubemarketing.com
+   --------------------------------------------------------------------------
+   Scoped to .pt so it cannot leak into the main site.
+
+   RE-SKIN NOTE
+   Every colour, type and metric decision below reads from the .pt token block
+   and nothing else. To move this page onto the rebuild-2026-07 language, edit
+   ONLY that block. The mapping is written out under it. Nothing else in this
+   file references a site-level variable directly.
+   ========================================================================== */
+
+.pt {
+  /* --- surfaces --- */
+  --pt-canvas: var(--cream);
+  --pt-canvas-2: var(--cream-2);
+  --pt-canvas-3: var(--cream-3);
+  --pt-night: #16212f;
+
+  /* --- ink --- */
+  --pt-ink: var(--ink);
+  --pt-ink-soft: var(--ink-soft);
+  --pt-ink-faint: var(--ink-faint);
+  --pt-on-night: #f1ede6;
+  --pt-on-night-soft: rgba(241, 237, 230, 0.66);
+  --pt-on-night-faint: rgba(241, 237, 230, 0.4);
+
+  /* --- rules --- */
+  --pt-rule: var(--rule);
+  --pt-rule-strong: var(--rule-strong);
+  --pt-rule-night: rgba(241, 237, 230, 0.18);
+
+  /* --- accent: rationed, one job --- */
+  --pt-accent: var(--pink);
+  --pt-accent-deep: var(--pink-deep);
+  --pt-signal: var(--amber);
+
+  /* Not a brand colour. This is the real header colour of the automated daily
+     email (ttm-staging/src/lib/digest.ts:380), reproduced so the artifact stays
+     faithful to the thing it depicts. Named so the re-skin contract holds. */
+  --pt-email-brand: #6b4fbb;
+
+  /* --- evidence type: quiet, but never below AA --- */
+  --pt-evidence: rgba(27, 42, 61, 0.62);
+
+  /* --- form --- */
+  --pt-radius: 2px;
+  --pt-radius-lg: 4px;
+  --pt-display-weight: 800;
+  --pt-band: clamp(88px, 11vw, 156px);
+  --pt-band-tight: clamp(56px, 7vw, 96px);
+}
+
+/*  REBUILD MAPPING (rebuild-2026-07). Swap the block above for this one:
+      --pt-canvas: #f7f3ec;  --pt-canvas-2: #efe9de;  --pt-night: #14121a;
+      --pt-ink: #201d1a;     --pt-ink-soft: rgba(32,29,26,.72);
+      --pt-rule: rgba(32,29,26,.14);
+      --pt-accent: #ff0d64;  --pt-accent-deep: #c7004a;  --pt-signal: #ffa71a;
+      --pt-radius: 0;        --pt-display-weight: 700;
+    and set the display font-family to var(--font-display) in .pt .display.
+    No other edit is required.                                              */
+
+/* ==========================================================================
+   REVEAL
+   Gated on html.pt-js, which an inline script adds before first paint.
+   Without JavaScript the class never lands and every element stays visible,
+   so the page degrades to a plain readable document instead of a blank one.
+   ========================================================================== */
+
+html.pt-js .pt .pt-rv {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.85s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.85s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+html.pt-js .pt .pt-rv.in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.pt-js .pt .pt-rv {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+/* ?still=1 settles every animation immediately, so the page can be
+   screenshotted in a known-good state rather than mid-transition. */
+html.pt-still .pt .pt-rv,
+html.pt-still .pt .pt-level::before {
+  transition: none;
+}
+
+/* ==========================================================================
+   SHARED
+   ========================================================================== */
+
+.pt section.pt-band {
+  padding: var(--pt-band) 0;
+  position: relative;
+}
+.pt section.pt-band.tight {
+  padding: var(--pt-band-tight) 0;
+}
+
+.pt .pt-night-band {
+  background: var(--pt-night);
+  color: var(--pt-on-night);
+}
+.pt .pt-night-band .display,
+.pt .pt-night-band h2,
+.pt .pt-night-band h3 {
+  color: var(--pt-on-night);
+}
+.pt .pt-night-band .mono,
+.pt .pt-night-band .mono-tag {
+  color: var(--pt-on-night-soft);
+}
+.pt .pt-night-band .mono-tag::before {
+  background: var(--pt-rule-night);
+}
+
+.pt .pt-lede {
+  font-size: clamp(17px, 1.3vw, 20px);
+  line-height: 1.5;
+  max-width: 58ch;
+  margin: 0;
+  font-weight: 400;
+  text-wrap: pretty;
+}
+
+.pt .pt-head {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+.pt .pt-head .display {
+  margin: 0;
+}
+
+/* ==========================================================================
+   1. HERO
+   ========================================================================== */
+
+.pt .pt-hero {
+  padding: 148px 0 clamp(56px, 7vw, 96px);
+  position: relative;
+}
+.pt .pt-hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(32px, 5.5vw, 80px);
+  align-items: center;
+}
+.pt .pt-hero h1 {
+  margin: 18px 0 26px;
+}
+.pt .pt-hero .pt-sub {
+  font-size: clamp(18px, 1.4vw, 22px);
+  line-height: 1.45;
+  max-width: 34ch;
+  margin: 0 0 34px;
+  font-weight: 400;
+  text-wrap: pretty;
+}
+.pt .pt-hero .pt-sub b {
+  font-weight: 600;
+}
+.pt .pt-hero-trust {
+  margin-top: 26px;
+  max-width: 46ch;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   2. THE READOUT ARTIFACT
+   A faithful rendering of the desk instrument: bezel, reflective panel,
+   the four-page rotation, mono numerals. Shown as a floating artifact
+   rather than inside a dashboard shell (ref: Steep).
+   ========================================================================== */
+
+/* Wrapper exists to carry the contact shadow, so the unit reads as an object
+   resting on a surface rather than a panel floating on the page. */
+.pt .pt-device-mount {
+  position: relative;
+}
+.pt .pt-device-mount::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -18px;
+  height: 26px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(27, 42, 61, 0.3),
+    rgba(27, 42, 61, 0) 70%
+  );
+  pointer-events: none;
+}
+.pt .pt-device {
+  position: relative;
+  background: linear-gradient(168deg, #2b3546, #1b2330 62%, #232c3b);
+  border-radius: 10px;
+  padding: 16px;
+  /* the last inset pair gives the casing a visible thickness at its lower edge */
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.09) inset,
+    0 -2px 0 rgba(0, 0, 0, 0.28) inset,
+    0 2px 0 rgba(255, 255, 255, 0.05) inset,
+    0 26px 44px -30px rgba(27, 42, 61, 0.55);
+}
+.pt .pt-device::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  pointer-events: none;
+  background: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 0.11),
+    rgba(255, 255, 255, 0) 42%
+  );
+}
+.pt .pt-device-screen {
+  background: #d9d8d0;
+  border-radius: 3px;
+  padding: 22px 22px 16px;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  flex-direction: column;
+  color: #1d2530;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35) inset;
+}
+/* reflective panel texture: paper-like, never a glow */
+.pt .pt-device-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.14 0 0 0 0 0.19 0 0 0 0.09 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+.pt .pt-device-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(29, 37, 48, 0.62);
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(29, 37, 48, 0.22);
+}
+.pt .pt-device-main {
+  padding: clamp(14px, 3vw, 26px) 0 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pt .pt-device-main .k {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(29, 37, 48, 0.62);
+  margin-bottom: 6px;
+}
+.pt .pt-device-main .v {
+  font-size: clamp(40px, 6.4vw, 68px);
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.pt .pt-device-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding-top: 16px;
+  margin-top: auto;
+  border-top: 1px solid rgba(29, 37, 48, 0.22);
+}
+.pt .pt-device-row .c .k {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(29, 37, 48, 0.62);
+  margin-bottom: 3px;
+}
+.pt .pt-device-row .c .n {
+  font-size: clamp(15px, 1.6vw, 19px);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.pt .pt-device-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(29, 37, 48, 0.55);
+  padding-top: 12px;
+}
+.pt .pt-device-foot .live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.pt .pt-device-foot .live::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pt-accent);
+}
+.pt .pt-device-cap {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pt-ink-soft);
+}
+.pt .pt-device-cap .r {
+  color: var(--pt-ink-faint);
+}
+
+/* Alternate surface: breaks the long cream run through the middle of the page. */
+.pt .pt-alt {
+  background: var(--pt-canvas-2);
+}
+
+/* Visually hidden, still announced. The logo wall renders as CSS masks, so the
+   client names would otherwise be unreachable to a screen reader. */
+.pt .pt-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   3. LOGO WALL
+   Mask silhouettes in ink so mixed-quality client assets cohere.
+   ========================================================================== */
+
+.pt .pt-logos {
+  border-top: 1px solid var(--pt-rule);
+  border-bottom: 1px solid var(--pt-rule);
+  padding: 30px 0;
+  overflow: hidden;
+}
+.pt .pt-logos-inner {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+  overflow: hidden;
+}
+.pt .pt-logo-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(38px, 5vw, 68px);
+  width: max-content;
+  animation: pt-marquee 78s linear infinite;
+}
+.pt .pt-logos:hover .pt-logo-track {
+  animation-play-state: paused;
+}
+@keyframes pt-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.pt .pt-logo {
+  flex: 0 0 auto;
+  width: clamp(78px, 8vw, 104px);
+  height: 30px;
+  background-color: var(--pt-ink);
+  opacity: 0.42;
+  -webkit-mask-image: var(--src);
+  mask-image: var(--src);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  transition: opacity 0.25s ease;
+}
+.pt .pt-logos:hover .pt-logo {
+  opacity: 0.3;
+}
+.pt .pt-logo:hover {
+  opacity: 0.85;
+}
+
+/* ==========================================================================
+   4. THE ARGUMENT
+   ========================================================================== */
+
+.pt .pt-arg-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(36px, 6vw, 92px);
+  align-items: start;
+}
+/* The headline tracks the argument rather than leaving a well of dead space
+   beside it. Drops to static below the two-column breakpoint. */
+.pt .pt-arg-head {
+  position: sticky;
+  top: 116px;
+}
+.pt .pt-arg-body p {
+  font-size: 17.5px;
+  line-height: 1.65;
+  max-width: 58ch;
+  margin: 0 0 22px;
+  font-weight: 400;
+  text-wrap: pretty;
+}
+.pt .pt-arg-body p:last-child {
+  margin-bottom: 0;
+}
+.pt .pt-arg-body p strong {
+  font-weight: 700;
+}
+.pt .pt-arg-body p.pt-kicker {
+  font-size: clamp(19px, 1.7vw, 25px);
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: -0.014em;
+  padding-top: 22px;
+  margin-top: 26px;
+  border-top: 1px solid var(--pt-rule);
+  max-width: 34ch;
+}
+
+/* the three consequences, as a numbered ledger */
+.pt .pt-consequences {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--pt-rule);
+}
+.pt .pt-consequence {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 18px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--pt-rule);
+  align-items: start;
+}
+.pt .pt-consequence .n {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--pt-ink-faint);
+  padding-top: 4px;
+}
+.pt .pt-consequence p {
+  margin: 0;
+  font-size: 16.5px;
+  line-height: 1.55;
+  max-width: 46ch;
+}
+
+/* ==========================================================================
+   5. THE RIG  (signature element)
+   Five levels as a laboratory rig. Hairline spine, mono level codes,
+   progressive ink-in on scroll.
+   ========================================================================== */
+
+.pt .pt-rig {
+  position: relative;
+  margin-top: clamp(24px, 4vw, 48px);
+}
+.pt .pt-level {
+  display: grid;
+  grid-template-columns: 132px 1.15fr 1fr 0.85fr;
+  gap: clamp(18px, 2.6vw, 40px);
+  padding: clamp(28px, 3.4vw, 44px) 0;
+  border-top: 1px solid var(--pt-rule-night);
+  position: relative;
+  align-items: start;
+}
+.pt .pt-level:last-of-type {
+  border-bottom: 1px solid var(--pt-rule-night);
+}
+/* the spine: a hairline that inks in as each level enters */
+.pt .pt-level::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  height: 1px;
+  width: 0;
+  background: var(--pt-accent);
+  transition: width 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.pt .pt-level.lit::before {
+  width: 100%;
+}
+.pt .pt-level-code {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pt-on-night-faint);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: color 0.5s ease;
+}
+.pt .pt-level.lit .pt-level-code {
+  color: var(--pt-signal);
+}
+.pt .pt-level-code .nm {
+  font-family: var(--font-inter), sans-serif;
+  font-size: clamp(19px, 1.9vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--pt-on-night);
+  line-height: 1.1;
+}
+.pt .pt-level dl {
+  margin: 0;
+}
+.pt .pt-level dt {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pt-on-night-soft);
+  margin-bottom: 8px;
+}
+.pt .pt-level dd {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--pt-on-night-soft);
+  max-width: 34ch;
+}
+.pt .pt-level dd strong {
+  color: var(--pt-on-night);
+  font-weight: 600;
+}
+
+/* the base plate: measurement */
+.pt .pt-rig-base {
+  margin-top: clamp(36px, 4.5vw, 60px);
+  padding: clamp(28px, 3.4vw, 42px);
+  border: 1px solid var(--pt-rule-night);
+  border-left: 2px solid var(--pt-signal);
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: clamp(18px, 2.6vw, 40px);
+  align-items: start;
+}
+.pt .pt-rig-base .lbl {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pt-signal);
+}
+.pt .pt-rig-base p {
+  margin: 0;
+  font-size: clamp(16.5px, 1.35vw, 19px);
+  line-height: 1.55;
+  color: var(--pt-on-night-soft);
+  max-width: 62ch;
+}
+.pt .pt-rig-base p strong {
+  color: var(--pt-on-night);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   6. THE FINDINGS  (case study records)
+   Broadsheet record rows, not cards (ref: Outsource Consultants).
+   ========================================================================== */
+
+.pt .pt-records {
+  border-top: 1px solid var(--pt-rule-strong);
+}
+.pt .pt-record {
+  display: grid;
+  grid-template-columns: 150px 1.35fr 0.95fr;
+  gap: clamp(20px, 3vw, 52px);
+  padding: clamp(34px, 4vw, 56px) 0;
+  border-bottom: 1px solid var(--pt-rule);
+  align-items: start;
+}
+.pt .pt-record-mark {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.pt .pt-record-mark .code {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pt-ink-faint);
+}
+.pt .pt-record-mark .logo {
+  width: 100%;
+  max-width: 116px;
+  height: 34px;
+  background-color: var(--pt-ink);
+  opacity: 0.72;
+  -webkit-mask-image: var(--src);
+  mask-image: var(--src);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: left center;
+  mask-position: left center;
+}
+.pt .pt-record-mark .anon {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pt-ink-faint);
+  border: 1px dashed var(--pt-rule-strong);
+  padding: 10px 12px;
+  line-height: 1.5;
+  max-width: 116px;
+}
+.pt .pt-record-body h3 {
+  margin: 0 0 6px;
+  font-size: clamp(21px, 2vw, 27px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.pt .pt-record-body .what {
+  font-size: 15px;
+  color: var(--pt-ink-soft);
+  margin: 0 0 20px;
+  line-height: 1.5;
+  max-width: 46ch;
+}
+.pt .pt-record-body .did {
+  font-size: 16.5px;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+.pt .pt-record-body .quote {
+  margin: 22px 0 0;
+  padding-left: 18px;
+  border-left: 2px solid var(--pt-accent);
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 46ch;
+}
+.pt .pt-record-body .quote cite {
+  display: block;
+  margin-top: 8px;
+  font-style: normal;
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pt-ink-soft);
+}
+.pt .pt-record-figures {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-left: 1px solid var(--pt-rule);
+  padding-left: clamp(20px, 2.4vw, 34px);
+}
+.pt .pt-fig .n {
+  font-size: clamp(26px, 2.7vw, 38px);
+  font-weight: var(--pt-display-weight);
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+.pt .pt-fig .l {
+  font-size: 13.5px;
+  color: var(--pt-evidence);
+  line-height: 1.45;
+  margin-top: 6px;
+  max-width: 26ch;
+}
+.pt .pt-fig.sub .n {
+  font-size: clamp(16px, 1.5vw, 19px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.pt .pt-record-source {
+  margin-top: 4px;
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pt-evidence);
+  line-height: 1.5;
+  max-width: 30ch;
+}
+
+/* ==========================================================================
+   7. INSTRUMENTS
+   ========================================================================== */
+
+/* Broadsheet rows, matching the register set in section 03. Deliberately not
+   a card grid: six equal bordered cells read as a template. */
+.pt .pt-instruments {
+  border-top: 1px solid var(--pt-rule-strong);
+}
+.pt .pt-inst {
+  display: grid;
+  grid-template-columns: 150px 0.9fr 1.5fr;
+  gap: clamp(20px, 3vw, 52px);
+  padding: clamp(24px, 2.8vw, 36px) 0;
+  border-bottom: 1px solid var(--pt-rule);
+  align-items: baseline;
+}
+.pt .pt-inst .num {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--pt-evidence);
+}
+.pt .pt-inst h3 {
+  margin: 0;
+  font-size: clamp(19px, 1.8vw, 24px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.pt .pt-inst p {
+  margin: 0;
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--pt-ink);
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+
+/* ==========================================================================
+   8. THE READOUT SECTION
+   ========================================================================== */
+
+.pt .pt-report-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 76px);
+  align-items: start;
+}
+.pt .pt-report-sticky {
+  position: sticky;
+  top: 116px;
+}
+.pt .pt-report-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.pt .pt-note h3 {
+  margin: 0 0 8px;
+  font-size: clamp(18px, 1.6vw, 21px);
+  font-weight: 700;
+  letter-spacing: -0.016em;
+}
+.pt .pt-note p {
+  margin: 0;
+  font-size: 16.5px;
+  line-height: 1.6;
+  max-width: 50ch;
+  text-wrap: pretty;
+}
+.pt .pt-note.flag {
+  border-left: 2px solid var(--pt-accent);
+  padding-left: 18px;
+}
+
+/* the email artifact */
+.pt .pt-email {
+  background: #fff;
+  border: 1px solid var(--pt-rule);
+  border-radius: var(--pt-radius);
+  overflow: hidden;
+  box-shadow: 0 1px 0 rgba(27, 42, 61, 0.04),
+    0 28px 60px -34px rgba(27, 42, 61, 0.4);
+}
+.pt .pt-email-bar {
+  background: var(--pt-email-brand);
+  color: #fff;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+.pt .pt-email-tot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--pt-rule);
+}
+.pt .pt-email-tot > div {
+  padding: 18px 20px;
+}
+.pt .pt-email-tot > div + div {
+  border-left: 1px solid var(--pt-rule);
+}
+.pt .pt-email-tot .k,
+.pt .pt-email-block .k {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--pt-ink-soft);
+}
+.pt .pt-email-tot .v {
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-top: 5px;
+  font-variant-numeric: tabular-nums;
+}
+.pt .pt-email-block {
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--pt-rule);
+}
+.pt .pt-email-block .k {
+  display: block;
+  margin-bottom: 9px;
+}
+.pt .pt-email-block .cells {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.pt .pt-email-block .cells > span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--pt-ink-soft);
+  font-family: var(--font-jetbrains), monospace;
+  letter-spacing: 0.04em;
+}
+.pt .pt-email-block .cells > span b {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--pt-ink);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.pt .pt-email-foot {
+  padding: 15px 20px 18px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--pt-ink-soft);
+  font-style: italic;
+}
+.pt .pt-email-cap {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pt-ink-soft);
+}
+.pt .pt-email-cap .r {
+  color: var(--pt-ink-faint);
+}
+
+/* ==========================================================================
+   9. CTA
+   ========================================================================== */
+
+.pt .pt-cta {
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.pt .pt-cta .display {
+  margin: 20px 0 26px;
+}
+.pt .pt-cta .pt-lede {
+  margin: 0 auto 40px;
+  max-width: 54ch;
+}
+.pt .pt-cta-trust {
+  margin-top: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pt-on-night-soft);
+}
+.pt .pt-cta-trust span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.pt .pt-cta-trust .check {
+  color: var(--pt-accent);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   10. RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1040px) {
+  .pt .pt-level {
+    grid-template-columns: 108px 1fr 1fr;
+  }
+  .pt .pt-level .pt-measure {
+    grid-column: 2 / -1;
+    padding-top: 4px;
+  }
+  .pt .pt-record {
+    grid-template-columns: 120px 1fr;
+  }
+  .pt .pt-record-figures {
+    grid-column: 2 / -1;
+    border-left: none;
+    padding-left: 0;
+    padding-top: 22px;
+    margin-top: 4px;
+    border-top: 1px solid var(--pt-rule);
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 900px) {
+  .pt .pt-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .pt .pt-hero {
+    padding-top: 116px;
+  }
+  .pt .pt-arg-grid {
+    grid-template-columns: 1fr;
+  }
+  .pt .pt-arg-head {
+    position: static;
+  }
+  .pt .pt-report-grid {
+    grid-template-columns: 1fr;
+  }
+  .pt .pt-report-sticky {
+    position: static;
+  }
+}
+
+@media (max-width: 680px) {
+  .pt .pt-level {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 26px 0;
+  }
+  /* the 1040px rules put these in an implicit second column on a 1fr grid */
+  .pt .pt-level .pt-measure,
+  .pt .pt-record-figures {
+    grid-column: 1 / -1;
+  }
+  .pt .pt-level-code {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .pt .pt-rig-base {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .pt .pt-record {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .pt .pt-record-mark {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+  .pt .pt-record-mark .logo {
+    flex: 0 0 auto;
+    width: 96px;
+    height: 28px;
+    max-width: 96px;
+    -webkit-mask-position: left center;
+    mask-position: left center;
+  }
+  .pt .pt-record-mark .anon {
+    max-width: none;
+  }
+  .pt .pt-record-figures {
+    gap: 20px;
+  }
+  .pt .pt-inst {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 22px 0;
+  }
+  .pt .pt-email-block .cells {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .pt .pt-device {
+    padding: 12px;
+  }
+  .pt .pt-device-screen {
+    padding: 16px 16px 12px;
+    aspect-ratio: auto;
+  }
+  /* keep the numerals clear of the divider rule at small sizes */
+  .pt .pt-device-main {
+    padding: 14px 0 20px;
+  }
+  .pt .pt-device-cap,
+  .pt .pt-email-cap {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .pt .pt-consequence {
+    grid-template-columns: 40px 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pt .pt-crumb-tail {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pt .pt-logo-track {
+    animation: none;
+  }
+  .pt .pt-device-foot .live::before {
+    animation: none;
+  }
+  .pt .pt-level::before {
+    transition: none;
+  }
+}
