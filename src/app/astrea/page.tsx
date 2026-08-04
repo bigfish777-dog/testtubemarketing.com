@@ -62,7 +62,7 @@ const findings = [
   {
     i: "01",
     t: "There is no customer proof anywhere on the site.",
-    n: "No reviews, no ratings, no testimonials, and no review platform installed, on a catalogue with a median price above five thousand pounds. There is no Trustpilot profile to point at either, so there is nothing to borrow. Every competitor we looked at leads with review counts and guarantees.",
+    n: "No reviews, no ratings, no testimonials, and no review platform installed, on a catalogue with a median price above five thousand pounds. There is no Trustpilot profile to point at either, so there is nothing to borrow. Steven Stone, the London jeweller we found advertising in ChatGPT, carries both Trustpilot and Feefo. At this price a buyer is not looking for reassurance, they are looking for permission.",
   },
   {
     i: "02",
@@ -411,13 +411,155 @@ export default function AstreaBrief() {
               your margin as much as your average order value, which is
               something we would need from you rather than guess.
             </p>
+
+            <h3 className="as-sub">Google runs alongside it, not instead</h3>
+            <p>
+              Meta is where you are found. Google is where you are already being
+              looked for, and at this price point that intent is worth more per
+              click than anything we can manufacture.
+            </p>
+            <div className="as-google">
+              <div>
+                <div className="k">Brand search</div>
+                <p>
+                  Bidding on your own name, because a competitor already is.
+                  Search &ldquo;astrea london&rdquo; today and the first thing
+                  on the page is a sponsored result for Diamonds Factory, a
+                  rival lab grown retailer, sitting above your own listing with
+                  five sitelinks into their engagement ring range. Every one of
+                  those clicks is someone who went looking for you. That is the
+                  most expensive way there is to lose a customer, and it is also
+                  the cheapest thing on this page to fix.
+                </p>
+              </div>
+              <div>
+                <div className="k">Non-brand search</div>
+                <p>
+                  The terms people actually type when they do not know you yet.
+                  Lab grown engagement rings, and the specific stones and
+                  settings you sell.
+                </p>
+              </div>
+              <div>
+                <div className="k">Shopping, split by price band</div>
+                <p>
+                  Separate feeds for entry pieces and high value, so the two are
+                  never bid on as though they were the same purchase. This is
+                  the campaign the zero price problem breaks.
+                </p>
+              </div>
+              <div>
+                <div className="k">Demand Gen</div>
+                <p>
+                  What awareness does on Meta, done on YouTube and across
+                  Google&rsquo;s surfaces. It is also the fastest audience
+                  builder we have: on another account it produced fifty thousand
+                  people to retarget inside thirty days.
+                </p>
+              </div>
+            </div>
+
+            <div className="as-shape">
+              <p>
+                <b>To be plain about how we would package this.</b> Meta is the
+                engine and we would not take this on without it. Google runs
+                alongside it and we would push hard for it, because the intent
+                is already there and you are currently not defending your own
+                name. ChatGPT is a deliberately small experiment, for the reason
+                in the next section.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* CHATGPT */}
+        <section className="as-band tint">
+          <div className="as-wrap">
+            <p className="as-eyebrow">Four / The channel nobody has pitched you</p>
+            <h2>You can now advertise inside ChatGPT.</h2>
+            <p className="as-lede">
+              Most brands do not know this exists yet. It opened in the UK on 6
+              June this year, and the window where being early is worth
+              something is open now rather than later.
+            </p>
+
+            <p>
+              When someone asks ChatGPT for the best lab grown engagement rings
+              in the UK, it answers, and underneath the answer there is a
+              sponsored result. It behaves like a shopping listing, sitting at
+              the exact moment a person is asking for a recommendation rather
+              than browsing for one.
+            </p>
+
+            <div className="as-pull">
+              <p>
+                We ran that search. The advertiser that came back was Steven
+                Stone Jewellers, a London jeweller selling lab grown engagement
+                rings through virtual appointments.
+              </p>
+            </div>
+
+            <p>
+              Worth being straight about how we know that: there is no ad
+              library for ChatGPT, because every ad is served privately inside
+              one person&rsquo;s conversation. There is no public feed to
+              archive and no way to look up what a competitor is spending. So
+              that is a live observation from our own search, not a report we
+              can hand you. It does mean nobody can see what you do there
+              either.
+            </p>
+
+            <div className="as-chatgpt">
+              <div>
+                <div className="k">How it is bought</div>
+                <p>
+                  Not keywords, despite how it looks. You give it context hints,
+                  which are plain descriptions of the conversations where your
+                  pieces belong, and it matches against the live thread rather
+                  than a search history.
+                </p>
+              </div>
+              <div>
+                <div className="k">Who sees it</div>
+                <p>
+                  Free and Go users only. Paying ChatGPT subscribers see no ads
+                  at all, which caps the audience and is worth knowing before
+                  anyone gets excited about the reach.
+                </p>
+              </div>
+              <div>
+                <div className="k">Whether it can be measured</div>
+                <p>
+                  Yes, properly. There is a pixel and a server-side conversions
+                  API, so a sale traces back the same way it would on Meta. That
+                  matters more here than the novelty does.
+                </p>
+              </div>
+              <div>
+                <div className="k">The catch</div>
+                <p>
+                  There is no self-serve platform in the UK yet. It is a managed
+                  pilot, so you register interest and work with OpenAI&rsquo;s
+                  team directly. That is friction, and it is also exactly why
+                  the field is still thin.
+                </p>
+              </div>
+            </div>
+
+            <p>
+              We would treat this as a small, deliberately contained experiment
+              rather than a pillar, and we would report it as one. The reason to
+              do it now is not the return. It is that the queue is short, your
+              category is already being advertised in there, and being early in
+              a channel costs a fraction of what catching up costs.
+            </p>
           </div>
         </section>
 
         {/* THE SITE */}
-        <section className="as-band tint">
+        <section className="as-band">
           <div className="as-wrap">
-            <p className="as-eyebrow">Four / What we found on the site</p>
+            <p className="as-eyebrow">Five / What we found on the site</p>
             <h2>The advertising is not the only thing holding this back.</h2>
             <p className="as-lede">
               We reviewed astrealondon.com on 4 August. These are the things we
@@ -464,9 +606,9 @@ export default function AstreaBrief() {
         </section>
 
         {/* QUESTIONS */}
-        <section className="as-band">
+        <section className="as-band tint">
           <div className="as-wrap">
-            <p className="as-eyebrow">Five / What we would like to understand</p>
+            <p className="as-eyebrow">Six / What we would like to understand</p>
             <h2>The things we cannot learn from the data.</h2>
             <p className="as-lede">
               These are the questions we would most like answered on the call.
@@ -486,9 +628,9 @@ export default function AstreaBrief() {
         </section>
 
         {/* SEQUENCE */}
-        <section className="as-band tint">
+        <section className="as-band">
           <div className="as-wrap">
-            <p className="as-eyebrow">Six / How we would sequence it</p>
+            <p className="as-eyebrow">Seven / How we would sequence it</p>
             <h2>Order matters more than budget.</h2>
             <p className="as-lede">
               Deliberately without costs attached. We would rather agree the

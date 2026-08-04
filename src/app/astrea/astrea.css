@@ -408,6 +408,64 @@
   max-width: 66ch;
 }
 
+/* .as-lede carries no bottom margin, since it is usually followed by a block
+   that sets its own top margin. Where body copy follows it directly, it needs
+   the gap putting back. */
+.as .as-lede + p {
+  margin-top: 22px;
+}
+
+/* --- google block, chatgpt block, commercial shape ------------------------ */
+
+.as .as-sub {
+  font-family: var(--font-bodoni), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(22px, 2.3vw, 30px);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: clamp(38px, 4.5vw, 58px) 0 14px;
+}
+
+/* Two columns of hairline-separated notes. Not boxes: the whole document
+   is ruled rather than boxed, and three bordered cards would break it. */
+.as .as-google,
+.as .as-chatgpt {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: clamp(28px, 4vw, 60px);
+  row-gap: 0;
+  margin-top: clamp(24px, 3vw, 36px);
+  border-top: 1px solid var(--as-rule-strong);
+}
+.as .as-google > div,
+.as .as-chatgpt > div {
+  padding: clamp(20px, 2.4vw, 28px) 0;
+  border-bottom: 1px solid var(--as-rule);
+}
+.as .as-google .k,
+.as .as-chatgpt .k {
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--as-ink-faint);
+  margin-bottom: 9px;
+}
+.as .as-google p,
+.as .as-chatgpt p {
+  margin: 0;
+  max-width: 46ch;
+}
+
+.as .as-shape {
+  margin-top: clamp(34px, 4vw, 50px);
+  padding: clamp(22px, 2.6vw, 30px) clamp(24px, 3vw, 34px);
+  background: var(--as-pink);
+}
+.as .as-shape p {
+  margin: 0;
+  max-width: 74ch;
+}
+
 /* --- responsive ---------------------------------------------------------- */
 
 @media (max-width: 900px) {
@@ -428,6 +486,10 @@
   .as .as-build h3,
   .as .as-build p {
     grid-column: 1;
+  }
+  .as .as-google,
+  .as .as-chatgpt {
+    grid-template-columns: 1fr;
   }
   .as .as-level .nm {
     margin-top: 4px;
