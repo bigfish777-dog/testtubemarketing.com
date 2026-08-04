@@ -149,7 +149,9 @@ html.pt-still .pt .pt-level::before {
 }
 .pt .pt-hero-grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  /* Text column widened from 1.05fr so the first sentence of the headline
+     holds on one line at display scale. */
+  grid-template-columns: 1.12fr 0.88fr;
   gap: clamp(32px, 5.5vw, 80px);
   align-items: center;
 }
@@ -460,9 +462,9 @@ html.pt-still .pt .pt-level::before {
   line-height: 1.4;
   font-weight: 600;
   letter-spacing: -0.014em;
-  padding-top: 22px;
-  margin-top: 26px;
-  border-top: 1px solid var(--pt-rule);
+  /* No rule here. The last consequence row already draws one, and two
+     hairlines 26px apart read as a mistake. */
+  margin-top: 34px;
   max-width: 34ch;
 }
 
@@ -774,6 +776,83 @@ html.pt-still .pt .pt-level::before {
   color: var(--pt-ink);
   max-width: 52ch;
   text-wrap: pretty;
+}
+
+/* The new headline is two sentences rather than one phrase, so it needs to
+   sit at a size where each sentence holds together in the hero column. */
+.pt .pt-hero h1.display.xxl {
+  font-size: clamp(42px, 5.1vw, 80px);
+}
+
+/* ==========================================================================
+   7b. THE OPERATORS
+   Same broadsheet rows as 03 and 04, with a plate on the left. Two portraits
+   side by side would read as a team card grid, which is the thing we avoid.
+   ========================================================================== */
+
+.pt .pt-operators {
+  border-top: 1px solid var(--pt-rule-strong);
+}
+.pt .pt-operator {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: clamp(24px, 3.4vw, 56px);
+  padding: clamp(28px, 3vw, 42px) 0;
+  border-bottom: 1px solid var(--pt-rule);
+  align-items: start;
+}
+.pt .pt-operator-photo {
+  margin: 0;
+  position: relative;
+}
+.pt .pt-operator-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.04);
+  border: 1px solid var(--pt-rule);
+}
+.pt .pt-operator-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 16px;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--pt-rule);
+}
+.pt .pt-operator-bar h3 {
+  margin: 0;
+  font-size: clamp(21px, 2vw, 27px);
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+.pt .pt-operator-bar .mono {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.13em;
+  color: var(--pt-evidence);
+}
+.pt .pt-operator-body p {
+  margin: 0;
+  font-size: 16.5px;
+  line-height: 1.62;
+  color: var(--pt-ink);
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+
+@media (max-width: 720px) {
+  .pt .pt-operator {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .pt .pt-operator-photo {
+    max-width: 200px;
+  }
 }
 
 /* ==========================================================================

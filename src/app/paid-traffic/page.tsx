@@ -5,10 +5,13 @@ import "./paid-traffic.css";
 export const metadata: Metadata = {
   title: "Paid Traffic | Test Tube Marketing",
   description:
-    "We build and run paid advertising across every level of intent, not just the last one. And you see the numbers every day, not once a month.",
+    "We take care of paid traffic end to end. Strategy, creative, pages, tracking, reporting. You get on with running the business, and you see the numbers every day.",
 };
 
-const BOOK = "https://book.testtubemarketing.com";
+/* No call booking. The enquiry goes straight to the inbox. */
+const BOOK =
+  "mailto:hello@testtubemarketing.com?subject=Paid%20traffic%20-%20my%20account";
+const CTA = "Send Us Your Account";
 
 /* -------------------------------------------------------------------------
    THE RIG
@@ -66,19 +69,18 @@ const records = [
     what: "Driving lessons for 9 to 17 year olds, from £54.99 to £99.99, across 69 UK venues. Bought by parents and grandparents, usually as a gift.",
     did: "We took the account off the previous agency and rebuilt the funnel onto our own stack, with its own checkout, so every sale ties back to the ad that made it. We wrote the A/B decision rule before the test ran rather than after it. Five creative angle sets, one per buyer we could actually name. Reporting to the client from day one.",
     figures: [
-      { n: "8x", l: "Blended return on ad spend across the account" },
       {
-        n: "9.4x",
-        l: "On the best performing audience, Target Audience Interests",
-        sub: true,
+        n: "83% lower",
+        l: "Cost per sale, against what the account was doing under the previous agency",
       },
       {
-        n: "1,005 purchases",
-        l: "From £3,356 spend, £26,857 in tracked value",
+        n: "Just under 6x",
+        l: "The same number the other way round",
         sub: true,
       },
     ],
-    source: "Meta, 9 Feb to 6 May 2026",
+    source:
+      "Meta, previous agency baseline against the current 7 day average",
     quote: {
       text: "I wish I'd found them years earlier!",
       cite: "Ian Mulligani, Founder and MD, Young Driver",
@@ -87,7 +89,7 @@ const records = [
   {
     code: "REC-02",
     logo: null,
-    anon: "Client named on request",
+    anon: "Details protected under NDA",
     name: "A certification programme with a £497 deposit",
     what: "A certification business selling to women aged 35 to 64. A free three day training, running into an offer taken with a £497 deposit.",
     did: "Full launch architecture: cold prospecting segmented by niche across the UK and Europe, a lookalike ladder, and structured retargeting. We built a server-side bridge from their CRM into Meta so a registration was counted once and only once, and backfilled the registrations the old setup had been dropping.",
@@ -109,15 +111,18 @@ const records = [
     anon: null,
     name: "OptiNeck",
     what: "A £55 patented neck wedge, designed by a chartered physiotherapist with 25+ years in clinic. Made in Britain.",
-    did: "A 26 ad, 7 ad set campaign built entirely from scripted API calls, with a dated snapshot before every push and a paste-ready rollback on every script that changed live objects. Pixel and conversions API across two separate storefronts, deduplicated on event ID. We built him his own ad review app, so every ad went through his review and nothing ran that he had not signed off. And we set a documented claims ceiling, cutting statistics he was perfectly entitled to use because they weren't evidenced well enough to defend.",
+    did: "We produced the whole campaign in-house. Creative built from his product shots through three approved rounds and cut to every placement size, copy written against a documented claims ceiling, then a 26 ad, 7 ad set build out run entirely from scripted API calls, with a dated snapshot before every push and a paste-ready rollback on every script that changed live objects. Pixel and conversions API across two separate storefronts, deduplicated on event ID. We built him his own ad review app, so every ad went through his review and nothing ran that he had not signed off.",
     figures: [
-      { n: "26 ads", l: "Across 7 ad sets, every one through client review" },
-      { n: "Zero", l: "Unreviewed ads. Zero unevidenced claims.", sub: true },
       {
-        n: "Built and approved",
-        l: "Client paused before delivery began, so there is no performance to report",
+        n: "26 ads",
+        l: "Across 7 ad sets, creative produced in-house and cut to every placement size",
+      },
+      {
+        n: "2 storefronts",
+        l: "Pixel and conversions API across both, deduplicated on event ID",
         sub: true,
       },
+      { n: "Zero", l: "Unreviewed ads. Zero unevidenced claims.", sub: true },
     ],
     source: "Build record, July to August 2026",
     quote: null,
@@ -144,7 +149,8 @@ const records = [
         sub: true,
       },
     ],
-    source: "Meta, inherited account, lifetime from April 2025",
+    source:
+      "Audit and rebuild, July 2026. Inherited account figures as reported by Meta",
     quote: {
       text: "There was no real strategy, no real project plan, no bigger picture thinking. It was just, okay, we'll try a few Facebook ads or a few emails.",
       cite: "Katie Bell, Thrive Business Coaching, on life before TTM",
@@ -189,6 +195,28 @@ const instruments = [
   },
 ];
 
+/* -------------------------------------------------------------------------
+   THE OPERATORS
+   Bios and alt text carried verbatim from the main site's founder section.
+   ------------------------------------------------------------------------- */
+
+const founders = [
+  {
+    name: "Nick “Fish” Fisher",
+    role: "CO-FOUNDER / SYSTEMS & STRATEGY",
+    photo: "/assets/founders/nick-fisher.jpg",
+    alt: "Nick Fisher, co-founder of Test Tube Marketing, mid-sentence with a microphone in hand, gesturing, against a dark grey wall",
+    bio: "Fish is a marketer by accident. He dropped out of uni, fell into the nearest job going, and realised he was good at it. Direct response is his lane: emails, offers, funnels, the words that make people buy. He spent years as the behind-the-scenes strategist and copywriter on big launches, the name you never saw on the sales page. Here in the lab he runs systems and strategy, the engine behind every client account. He's also dad to two kids, which he'll tell you is the harder of the two jobs.",
+  },
+  {
+    name: "Adam Ashburn",
+    role: "CO-FOUNDER / CHIEF EXPERIMENTER",
+    photo: "/assets/founders/adam-ashburn.jpg",
+    alt: "Adam Ashburn, co-founder of Test Tube Marketing, seated relaxed in a navy polo shirt against a blue stage curtain",
+    bio: "Adam was meant to be a golf pro. Then he got run over, and marketing got him instead. He spent years as Head of Marketing at Expert Empires, the events business that put names like Gary Vaynerchuk and Grant Cardone on UK stages. Around the office he was known as the founder's no.2, steering marketing across the group's businesses, including Elite Closing Academy, as they grew. Strategy is where he's strongest: positioning, offers, and the plan that decides what's worth doing before anyone touches an ad account. Here in the lab he's our Chief Experimenter, testing ideas with our own money before they go anywhere near yours. Two kids at home, and yes, he still plays golf.",
+  },
+];
+
 /* Logo wall. Order is deliberate: recognisable marks first. */
 const logos = [
   "young-driver-ink.svg",
@@ -199,7 +227,6 @@ const logos = [
   "me-and-my-golf.svg",
   "optineck.png",
   "expert-empires-white.png",
-  "retail-fest.png",
   "wtm-london.png",
   "entrepreneurs-network-white.png",
   "coaches-congress.svg",
@@ -217,12 +244,8 @@ const logos = [
   "5ive.png",
   "ppp.svg",
   "inspire-kbb.png",
-  "dc-practice-growth.png",
-  "biceps-and-banter.png",
   "voiceover-cafe.png",
-  "upa-stamp-auctions.png",
   "proactive-approaches.png",
-  "jossiah-gets-leads.png",
   "ovl.png",
   "tilt-affinity.png",
   "mbs.png",
@@ -253,7 +276,7 @@ export default function PaidTraffic() {
             <img src="/assets/ttm-secondary.png" alt="Test Tube Marketing" />
           </a>
           <a href={BOOK} className="btn btn-outline">
-            Book a Call
+            {CTA}
           </a>
         </div>
       </header>
@@ -273,20 +296,22 @@ export default function PaidTraffic() {
                   </span>
                 </div>
                 <h1 className="display xxl">
-                  One ad doesn&rsquo;t
+                  We run the ads.
                   <br />
-                  make a <span className="pink">customer.</span>
+                  You get the{" "}
+                  <span className="pink">customers.</span>
                 </h1>
                 <p className="pt-sub">
                   <b>
-                    We build and run paid advertising across every level of
-                    intent, not just the last one.
+                    We take care of paid traffic end to end. Strategy, creative,
+                    pages, tracking, reporting.
                   </b>{" "}
-                  And you see the numbers every day, not once a month.
+                  You get on with running the business. And you see the numbers
+                  every day, not once a month.
                 </p>
                 <div>
                   <a href={BOOK} className="btn btn-primary">
-                    Book a Call <span aria-hidden="true">&rarr;</span>
+                    {CTA} <span aria-hidden="true">&rarr;</span>
                   </a>
                 </div>
                 <div className="pt-hero-trust mono">
@@ -344,7 +369,7 @@ export default function PaidTraffic() {
           <p className="pt-sr">
             Selected clients include Young Driver, Thrive Business Coaching,
             Keap, LexisNexis, DigitalMarketer, Me and My Golf, OptiNeck, Expert
-            Empires, Retail Fest and World Travel Market London.
+            Empires and World Travel Market London.
           </p>
           <div className="pt-logos-inner">
             <div className="pt-logo-track">
@@ -412,9 +437,10 @@ export default function PaidTraffic() {
 
               <div className="pt-arg-body pt-rv" style={{ transitionDelay: ".08s" }}>
                 <p>
-                  Run an ad, get a customer. That works when the thing you sell
-                  is cheap, familiar and impulsive. One good ad, a working
-                  checkout, done. We have run exactly that, and it did 8x.
+                  <strong>Run an ad, get a customer.</strong> That works when
+                  the thing you sell is cheap, familiar and impulsive. One good
+                  ad, a working checkout, done. We have run exactly that, and it
+                  did 8x.
                 </p>
                 <p>
                   The moment price, risk or unfamiliarity goes up, it stops
@@ -522,13 +548,14 @@ export default function PaidTraffic() {
           <div className="container">
             <div className="pt-head pt-rv">
               <div className="mono-tag">03 / The Findings</div>
-              <h2 className="display xl" style={{ maxWidth: "13ch" }}>
-                Four accounts.{" "}
-                <span className="pink">Four different problems.</span>
+              <h2 className="display xl" style={{ maxWidth: "14ch" }}>
+                Clients we&rsquo;ve helped in{" "}
+                <span className="pink">the past three months.</span>
               </h2>
               <p className="pt-lede">
-                Not four versions of the same campaign. Every figure below is as
-                reported by the ad platform, for the window stated underneath it.
+                Four different problems, not four versions of the same campaign.
+                Every figure below is as reported by the ad platform, for the
+                window stated underneath it.
               </p>
             </div>
 
@@ -724,8 +751,9 @@ export default function PaidTraffic() {
                 <div className="pt-note">
                   <h3>Built to fail honestly</h3>
                   <p>
-                    The screen and the email count off the same code, so neither can
-                    can&rsquo;t disagree. If a data source goes down, the email
+                    The screen and the email count off the same code, so neither
+                    can invent a number the other doesn&rsquo;t have. If a data
+                    source goes down, the email
                     still sends with a warning on it rather than silently going
                     missing, and any figure the screen can&rsquo;t confirm shows as a
                     dash, never a zero. We get the alert. You still get the
@@ -747,13 +775,57 @@ export default function PaidTraffic() {
         </section>
 
         {/* ---------------------------------------------------------------
-            06 / INITIATE
+            06 / THE OPERATORS
+            Bios are the main site's own founder copy, carried verbatim.
+            --------------------------------------------------------------- */}
+        <section className="pt-band tight pt-alt" id="operators">
+          <div className="container">
+            <div className="pt-head pt-rv">
+              <div className="mono-tag">06 / The Operators</div>
+              <h2 className="display xl" style={{ maxWidth: "16ch" }}>
+                Two founders. <span className="pink">Both in the account.</span>
+              </h2>
+              <p className="pt-lede">
+                Not an account manager, not a junior, not a network of
+                freelancers you never meet. The two people below are the two
+                people who run it.
+              </p>
+            </div>
+
+            <div className="pt-operators">
+              {founders.map((f) => (
+                <article className="pt-operator pt-rv" key={f.name}>
+                  <figure className="pt-operator-photo">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={f.photo}
+                      alt={f.alt}
+                      width={1200}
+                      height={1500}
+                      loading="lazy"
+                    />
+                  </figure>
+                  <div className="pt-operator-body">
+                    <div className="pt-operator-bar">
+                      <h3>{f.name}</h3>
+                      <span className="mono">{f.role}</span>
+                    </div>
+                    <p>{f.bio}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------------------
+            07 / INITIATE
             --------------------------------------------------------------- */}
         <section className="pt-band pt-night-band" id="book">
           <div className="container">
             <div className="pt-cta pt-rv">
               <div className="mono" style={{ display: "block" }}>
-                06 / Initiate
+                07 / Initiate
               </div>
               <h2 className="display xxl">
                 Let&rsquo;s look at{" "}
@@ -762,12 +834,13 @@ export default function PaidTraffic() {
                 </span>
               </h2>
               <p className="pt-lede" style={{ color: "var(--pt-on-night-soft)" }}>
-                Book a call. 40 minutes. We&rsquo;ll go through what&rsquo;s
-                running now, which of the five levels you&rsquo;re actually
-                covered on, and what&rsquo;s missing. No pitch, no pressure.
+                Tell us what you sell and what&rsquo;s running. We&rsquo;ll go
+                through it and tell you which of the five levels you&rsquo;re
+                actually covered on, and what&rsquo;s missing. No pitch, no
+                pressure.
               </p>
               <a href={BOOK} className="btn btn-primary lg">
-                Book a Call <span aria-hidden="true">&rarr;</span>
+                {CTA} <span aria-hidden="true">&rarr;</span>
               </a>
               <div className="pt-cta-trust">
                 <span>
