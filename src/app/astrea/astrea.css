@@ -361,6 +361,72 @@
   color: var(--as-ink-soft);
   line-height: 1.7;
 }
+
+/* Corporate block, carried across from the paid traffic page. Kept in this
+   document's own type and rules so it reads as the last page of the brief
+   rather than a website footer pasted underneath it. */
+.as .as-foot-corp {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(24px, 4vw, 60px);
+  margin-top: clamp(38px, 4.5vw, 56px);
+  padding-top: clamp(28px, 3.4vw, 40px);
+  border-top: 1px solid var(--as-rule);
+  align-items: start;
+}
+.as .as-foot-brand img {
+  display: block;
+  width: 132px;
+  height: auto;
+  margin-bottom: 14px;
+}
+.as .as-foot-brand p {
+  margin: 0;
+  max-width: 42ch;
+}
+.as .as-foot-reg {
+  font-size: 10.5px;
+  letter-spacing: 0.09em;
+  line-height: 2.1;
+  color: var(--as-ink-faint);
+}
+.as .as-foot-reg a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--as-rule);
+}
+.as .as-foot-reg a:hover {
+  color: var(--as-ink);
+}
+.as .as-foot-reg .links {
+  display: flex;
+  gap: 20px;
+  margin-top: 6px;
+}
+
+.as .as-foot-strip {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: clamp(26px, 3vw, 36px);
+  padding-top: 16px;
+  border-top: 1px solid var(--as-rule);
+  font-size: 10.5px;
+  letter-spacing: 0.09em;
+  color: var(--as-ink-faint);
+}
+
+.as .as-foot-notes {
+  margin-top: 18px;
+  font-size: 10.5px;
+  line-height: 1.9;
+  color: var(--as-ink-faint);
+  max-width: 92ch;
+}
+.as .as-foot-notes b {
+  font-weight: 500;
+}
 .as .as-foot .as-wrap > p {
   max-width: 78ch;
 }
@@ -490,6 +556,10 @@
   .as .as-google,
   .as .as-chatgpt {
     grid-template-columns: 1fr;
+  }
+  .as .as-foot-corp {
+    grid-template-columns: 1fr;
+    gap: 26px;
   }
   .as .as-level .nm {
     margin-top: 4px;
