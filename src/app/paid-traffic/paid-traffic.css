@@ -187,20 +187,12 @@ html.pt-still .pt .pt-level::before {
 .pt .pt-device-mount {
   position: relative;
 }
-.pt .pt-device-mount::after {
-  content: "";
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  bottom: -18px;
-  height: 26px;
-  border-radius: 50%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(27, 42, 61, 0.3),
-    rgba(27, 42, 61, 0) 70%
-  );
-  pointer-events: none;
+/* No CSS contact shadow: the device shot carries its own, and stacking the
+   two reads as a halo. */
+.pt .pt-device-shot {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .pt .pt-device {
   position: relative;

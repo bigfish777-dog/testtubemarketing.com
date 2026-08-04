@@ -323,37 +323,17 @@ export default function PaidTraffic() {
               {/* the desk instrument, rendered as an artifact */}
               <div className="pt-rv" style={{ transitionDelay: ".12s" }}>
                 <div className="pt-device-mount">
-                <div className="pt-device">
-                  <div className="pt-device-screen">
-                    <div className="pt-device-top">
-                      <span>Specimen account</span>
-                      <span>Today</span>
-                    </div>
-                    <div className="pt-device-main">
-                      <div className="k">Revenue</div>
-                      <div className="v">&pound;1,284.71</div>
-                    </div>
-                    <div className="pt-device-row">
-                      <div className="c">
-                        <div className="k">Sales</div>
-                        <div className="n">19</div>
-                      </div>
-                      <div className="c">
-                        <div className="k">Spend</div>
-                        <div className="n">&pound;86.00</div>
-                      </div>
-                      <div className="c">
-                        <div className="k">Cost / sale</div>
-                        <div className="n">&pound;4.53</div>
-                      </div>
-                    </div>
-                    <div className="pt-device-foot">
-                      <span className="live">Live 14:32</span>
-                      <span>Sample readout</span>
-                      <span>1 / 4</span>
-                    </div>
-                  </div>
-                </div>
+                  {/* The physical device. Screen is the same render the real
+                      panel serves, composited back on so the type is real
+                      rather than drawn. eslint-disable-next-line */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className="pt-device-shot"
+                    src="/assets/pt-device.webp"
+                    alt="The desk instrument: a reflective display showing a specimen account's revenue of one thousand two hundred and eighty four pounds and seventy one pence today, with 19 sales, £86.00 spend and £4.53 cost per sale"
+                    width={1500}
+                    height={1089}
+                  />
                 </div>
                 <div className="pt-device-cap">
                   <span>FIG. 01 / The instrument</span>
