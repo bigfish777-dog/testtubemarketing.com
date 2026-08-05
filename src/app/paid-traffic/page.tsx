@@ -185,7 +185,10 @@ const instruments = [
 
 /* -------------------------------------------------------------------------
    THE OPERATORS
-   Bios and alt text carried verbatim from the main site's founder section.
+   Fish's and Adam's bios and alt text are carried verbatim from the main
+   site's founder section. Chris's is Fish's own copy. A null photo renders
+   a plate rather than a broken image, so a portrait can be dropped in later
+   without touching the markup.
    ------------------------------------------------------------------------- */
 
 const founders = [
@@ -202,6 +205,13 @@ const founders = [
     photo: "/assets/founders/adam-ashburn.jpg",
     alt: "Adam Ashburn, co-founder of Test Tube Marketing, seated relaxed in a navy polo shirt against a blue stage curtain",
     bio: "Adam was meant to be a golf pro. Then he got run over, and marketing got him instead. He spent years as Head of Marketing at Expert Empires, the events business that put names like Gary Vaynerchuk and Grant Cardone on UK stages. Around the office he was known as the founder's no.2, steering marketing across the group's businesses, including Elite Closing Academy, as they grew. Strategy is where he's strongest: positioning, offers, and the plan that decides what's worth doing before anyone touches an ad account. Here in the lab he's our Chief Experimenter, testing ideas with our own money before they go anywhere near yours. Two young boys at home, and yes, he still plays golf.",
+  },
+  {
+    name: "Chris Black",
+    role: "STRATEGIC ADVISOR",
+    photo: null,
+    alt: null,
+    bio: "Having started, scaled, and exited multiple businesses, Chris has a deep insight into customer psychology and how to turn browsers into buyers. He's profitably run over £1m in paid traffic for clients and is on the cutting edge of advertising technology. His unique abilities enable us to scale accounts quickly and run profitable campaigns for our clients.",
   },
 ];
 
@@ -738,13 +748,14 @@ export default function PaidTraffic() {
           <div className="container">
             <div className="pt-head pt-rv">
               <div className="mono-tag">06 / The Operators</div>
-              <h2 className="display xl" style={{ maxWidth: "16ch" }}>
-                Two founders. <span className="pink">Both in the account.</span>
+              <h2 className="display xl" style={{ maxWidth: "17ch" }}>
+                The people you meet are{" "}
+                <span className="pink">the people who run it.</span>
               </h2>
               <p className="pt-lede">
                 Not an account manager, not a junior, not a network of
-                freelancers you never meet. The two people below are the two
-                people who run it.
+                freelancers you never meet. Whoever you speak to on the first
+                call is still there on the hundredth day.
               </p>
             </div>
 
@@ -752,14 +763,26 @@ export default function PaidTraffic() {
               {founders.map((f) => (
                 <article className="pt-operator pt-rv" key={f.name}>
                   <figure className="pt-operator-photo">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={f.photo}
-                      alt={f.alt}
-                      width={1200}
-                      height={1500}
-                      loading="lazy"
-                    />
+                    {f.photo ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={f.photo}
+                        alt={f.alt ?? ""}
+                        width={1200}
+                        height={1500}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <span className="pt-operator-plate" aria-hidden="true">
+                        {f.name
+                          .replace(/[^A-Za-z ]/g, "")
+                          .split(" ")
+                          .filter(Boolean)
+                          .map((w) => w[0])
+                          .slice(0, 2)
+                          .join("")}
+                      </span>
+                    )}
                   </figure>
                   <div className="pt-operator-body">
                     <div className="pt-operator-bar">

@@ -806,6 +806,21 @@ html.pt-still .pt .pt-level::before {
   filter: grayscale(1) contrast(1.04);
   border: 1px solid var(--pt-rule);
 }
+/* Stands in until a portrait exists. Dashed, like the anonymised client
+   plate in section 03, so it reads as deliberate rather than missing. */
+.pt .pt-operator-plate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border: 1px dashed var(--pt-rule-strong);
+  background: var(--pt-canvas-2);
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 30px;
+  letter-spacing: 0.1em;
+  color: var(--pt-ink-faint);
+}
 .pt .pt-operator-bar {
   display: flex;
   flex-wrap: wrap;
