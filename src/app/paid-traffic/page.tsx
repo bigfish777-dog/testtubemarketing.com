@@ -209,8 +209,10 @@ const founders = [
   {
     name: "Chris Black",
     role: "STRATEGIC ADVISOR",
-    photo: null,
-    alt: null,
+    /* Square source, so the 4:5 crop takes it from the sides. Head is
+       centred, so nothing important is lost. */
+    photo: "/assets/founders/chris-black.jpg",
+    alt: "Chris Black, strategic advisor at Test Tube Marketing, in a black and white head and shoulders portrait against a plain grey background",
     bio: "Having started, scaled, and exited multiple businesses, Chris has a deep insight into customer psychology and how to turn browsers into buyers. He's profitably run over £1m in paid traffic for clients and is on the cutting edge of advertising technology. His unique abilities enable us to scale accounts quickly and run profitable campaigns for our clients.",
   },
 ];
