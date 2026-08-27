@@ -27,6 +27,21 @@ function prefersReduced() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+/* Verification affordance, /next?instant: every phase renders settled, with no
+ * type-on to wait out. Automated browsers throttle setTimeout to roughly one
+ * tick a second in a background tab, which stretched the seven second boot past
+ * three minutes and made the menu impossible to screenshot or put in front of a
+ * critic. Carries no visitor data, so it stays a query param rather than a
+ * fragment. */
+function instantMode() {
+  if (typeof window === "undefined") return false;
+  return new URLSearchParams(window.location.search).has("instant");
+}
+
+function skipTyping() {
+  return prefersReduced() || instantMode();
+}
+
 /* Reveals lines character by character, with a beat at each line end.
  * Reduced motion skips to the end, so the content is all there unmoving. */
 function useTyped(lines: readonly string[], active: boolean) {
@@ -35,7 +50,7 @@ function useTyped(lines: readonly string[], active: boolean) {
 
   useEffect(() => {
     if (!active) return;
-    if (prefersReduced()) {
+    if (skipTyping()) {
       setN(joined.length);
       return;
     }

@@ -10,18 +10,37 @@
  */
 
 .screen {
-  --canvas: #050906;
+  /* Pure black, not near-black. The reference reel lets the corners go
+     completely dead, and any lift in the canvas kills the bloom's falloff. */
+  --canvas: #000000;
   --phosphor: #35e06a;
   --phosphor-bright: #9dffbd;
   --phosphor-read: #2fb457;
   --edge: rgba(53, 224, 106, 0.5);
+
+  /* Real phosphor blows out to white at the centre of a stroke and throws the
+     colour outwards as halation. So the glyph core is a pale green-white and
+     every bit of the green comes from the shadow stack. The 1px lateral pair
+     fakes the horizontal beam smear that text-shadow's isotropic blur cannot. */
+  --core: #eaffee;
+  /* Tight inner ring keeps the stroke legible, wide outer ring does the
+     halation. The lateral pair is deliberately weak: enough to suggest beam
+     smear, not enough to read as a blur on the glyph. */
+  --bloom:
+    -1px 0 1px rgba(53, 224, 106, 0.28), 1px 0 1px rgba(53, 224, 106, 0.28),
+    0 0 1px rgba(53, 224, 106, 0.85), 0 0 4px rgba(53, 224, 106, 0.55),
+    0 0 12px rgba(53, 224, 106, 0.3), 0 0 26px rgba(53, 224, 106, 0.16);
+  /* Quieter stack for chrome that must not compete with the content. */
+  --bloom-soft:
+    0 0 1px rgba(53, 224, 106, 0.6), 0 0 7px rgba(53, 224, 106, 0.25);
 
   position: relative;
   min-height: 100vh;
   min-height: 100dvh;
   width: 100%;
   background: var(--canvas);
-  color: var(--phosphor);
+  color: var(--core);
+  text-shadow: var(--bloom);
   /* One face everywhere. */
   font-family: var(--font-plex-mono), ui-monospace, monospace;
   font-weight: 400;
@@ -47,22 +66,33 @@
   z-index: 2;
   /* Normal blend, not overlay: on a near-black canvas an overlay blend is
      mathematically invisible, which is why the first attempt showed nothing. */
-  opacity: 0.055;
+  /* Against a #050906 canvas 0.055 read as texture. Against pure black the
+     same white noise lifts the whole field to a visible grey, so it comes
+     down: the reference keeps its corners genuinely dead. */
+  opacity: 0.028;
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 140px 140px;
 }
 
-/* Scanlines kept separate so the grain opacity does not drag them down. */
+/*
+ * Scanlines kept separate so the grain opacity does not drag them down.
+ *
+ * z-index 4 puts these ABOVE the content (z-index 3), which is the whole
+ * point: on the reference the raster cuts each glyph into segments. Sat
+ * underneath at z-index 2 they only ever darkened the empty canvas, which is
+ * why the previous pass read as flat green text on a striped background
+ * instead of text on a tube.
+ */
 .screen > .lines {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 2;
+  z-index: 4;
   background: repeating-linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0) 0px,
     rgba(0, 0, 0, 0) 2px,
-    rgba(0, 0, 0, 0.24) 3px
+    rgba(0, 0, 0, 0.34) 3px
   );
 }
 
@@ -74,15 +104,17 @@
   pointer-events: none;
   z-index: 1;
   background:
+    /* The ambient tube wash is now local to where the text actually sits.
+       Spread across the full screen it just made the canvas grey. */
     radial-gradient(
-      110vw 85vh at 50% 45%,
-      rgba(53, 224, 106, 0.03),
-      rgba(53, 224, 106, 0) 72%
+      70vw 46vh at 32% 42%,
+      rgba(53, 224, 106, 0.022),
+      rgba(53, 224, 106, 0) 70%
     ),
     radial-gradient(
-      125% 125% at 50% 50%,
-      rgba(0, 0, 0, 0) 55%,
-      rgba(0, 0, 0, 0.62) 100%
+      120% 120% at 50% 45%,
+      rgba(0, 0, 0, 0) 42%,
+      rgba(0, 0, 0, 0.8) 100%
     );
   animation: crt 7s steps(1, end) infinite;
 }
@@ -119,7 +151,10 @@
   font-size: clamp(9px, 1.55vh, 12px);
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  /* Chrome stays green and quiet. Only the content gets a white-hot core, so
+     the bars never compete with the thing the visitor is reading. */
   color: var(--phosphor);
+  text-shadow: var(--bloom-soft);
 }
 
 .logo {
@@ -168,7 +203,8 @@
   display: inline-block;
   width: 0.6em;
   height: 1em;
-  background: var(--phosphor);
+  background: var(--core);
+  box-shadow: 0 0 4px rgba(53, 224, 106, 0.9), 0 0 12px rgba(53, 224, 106, 0.5);
   vertical-align: -0.13em;
   margin-left: 0.1em;
   animation: blink 1.15s steps(1, end) infinite;
@@ -200,6 +236,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--phosphor);
+  text-shadow: var(--bloom-soft);
 }
 
 /* ---------- the menu ---------- */
@@ -227,7 +264,7 @@
   text-align: left;
   text-decoration: none;
   cursor: pointer;
-  color: var(--phosphor);
+  color: var(--core);
   font-family: inherit;
   font-size: clamp(0.85rem, min(1.6vw, 2.6vh), 1.15rem);
   line-height: 1.35;
@@ -235,9 +272,12 @@
   box-sizing: border-box;
 }
 
+/* The numeral sits back, the way the reference's ">" prompt is dimmer than the
+   line it introduces. Green, no white core. */
 .num {
   flex: none;
   color: var(--phosphor);
+  text-shadow: var(--bloom-soft);
 }
 
 /*
@@ -250,9 +290,13 @@
   margin-left: -0.45ch;
 }
 
+/* Knocked-out type carries no halation: the glow belongs to the lit block, not
+   to the dark glyphs sitting in it. */
 .item[data-on="true"] .label {
   background: var(--phosphor);
   color: var(--canvas);
+  text-shadow: none;
+  box-shadow: 0 0 10px rgba(53, 224, 106, 0.45);
 }
 
 .item:focus-visible {
@@ -331,6 +375,8 @@
   background: var(--phosphor);
   color: var(--canvas);
   border-color: var(--phosphor);
+  text-shadow: none;
+  box-shadow: 0 0 12px rgba(53, 224, 106, 0.4);
 }
 .go:hover,
 .skip:hover,
@@ -383,6 +429,7 @@
   right: 6px;
   bottom: 6px;
   z-index: 6;
+  text-shadow: none;
 }
 
 @media (max-width: 680px) {

@@ -12,7 +12,7 @@ export const DRAFT = {
   bootLines: [
     "TTM/terminal v2.4 - ready",
     "Most sites serve everyone the same page.",
-    "This one does not. Tell it why you are here.",
+    "This one doesn't. Tell it why you're here.",
   ],
 
   options: [
