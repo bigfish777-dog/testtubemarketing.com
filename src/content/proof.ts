@@ -132,6 +132,8 @@ export const FLEX_QUOTES: {
   { quote: "Everyone needs an Ad & Fish", name: "Andy Proudman", descriptor: "Co-Founder, Me and My Golf" },
   { quote: "Absolutely golden ideas!", name: "Daniel Priestley", descriptor: "Dent" },
   { quote: "You guys are sick", name: "Frank Kern", descriptor: "Internet Marketer" },
+  // "Mulligani" is CORRECT and confirmed by Fish 2026-08-28. It is a name of
+  // African origin, not a typo for Mulligan. Do not "fix" it.
   { quote: "I wish I’d found them years earlier!", name: "Ian Mulligani", descriptor: "CEO, Young Driver" },
   { quote: "These guys know marketing", name: "Marcus Murphy", descriptor: "Hot Juice Studios" },
   { quote: "Ice cold marketers", name: "Wim Hof", descriptor: "The Iceman" },
