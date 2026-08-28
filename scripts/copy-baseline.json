@@ -254,8 +254,47 @@
     "Your rights",
     "bigfish@testtubemarketing.com"
   ],
+  "src/app/speaking/arrival.tsx": [
+    "&gt;",
+    "for whoever you are"
+  ],
   "src/app/speaking/page.tsx": [
-    "/speaking"
+    "&gt;",
+    "&pound;15,000",
+    "// from &pound;15,000 plus expenses",
+    "// from the stage",
+    "// next",
+    "// rooms",
+    "// what it costs",
+    "// who turns up",
+    "Adam Ashburn",
+    "Adam Ashburn, co-founder of Test Tube Marketing, seated relaxed in a navy polo shirt against a blue stage curtain",
+    "Adam was meant to be a golf pro. Then he got run over, and marketing got him instead. He spent years as Head of Marketing at Expert Empires, the events business that put names like Gary Vaynerchuk and Grant Cardone on UK stages. Around the office he was known as the founder&apos;s no.2, steering marketing across the group&apos;s businesses, including Elite Closing Academy, as they grew. Strategy is where he&apos;s strongest: positioning, offers, and the plan that decides what&apos;s worth doing before anyone touches an ad account. Here in the lab he&apos;s our Chief Experimenter, testing ideas with our own money before they go anywhere near yours. Two kids at home, and yes, he still plays golf.",
+    "Awaiting Fish&apos;s real list. Nothing invented here.",
+    "Big rooms, a few different countries, other people&apos;s events. If you want one of us at yours, that starts at",
+    "Book a call",
+    "Booking us to speak",
+    "Both of us are in every room.",
+    "Co-founder / Chief Experimenter",
+    "Co-founder / Systems &amp; Strategy",
+    "Date, audience, what you want them walking out believing. Forty minutes, no pitch, no pressure.",
+    "Fish is a marketer by accident. He dropped out of uni, fell into the nearest job going, and realised he was good at it. Direct response is his lane: emails, offers, funnels, the words that make people buy. He spent years as the behind-the-scenes strategist and copywriter on big launches, the name you never saw on the sales page. Here in the lab he runs systems and strategy, the engine behind every client account. He&apos;s also dad to two kids, which he&apos;ll tell you is the harder of the two jobs.",
+    "Most people don&apos;t come to us that way though. They come because they saw us do it, or because someone who did told them to. Put that same thinking to work inside your business and you&apos;re into retainer territory, which is a good deal less than fifteen grand for a morning.",
+    "Nick &ldquo;Fish&rdquo; Fisher",
+    "Nick Fisher and Adam Ashburn on stage at an Education and Coaching Academy event, both holding microphones in front of an ECA backdrop",
+    "Nick Fisher, co-founder of Test Tube Marketing, mid-sentence with a microphone in hand, gesturing, against a dark grey wall",
+    "Tell us about the room.",
+    "Test Tube Marketing",
+    "Test Tube Marketing Ltd &nbsp;&middot;&nbsp; Reg no. 15388084",
+    "The Education &amp; Coaching Academy, Belfast",
+    "Two founders, two microphones, and a habit of being asked back.",
+    "We&apos;re more often on someone else&apos;s stage.",
+    "Where we&apos;ve stood.",
+    "[..]",
+    "[01]",
+    "draft",
+    "plus expenses.",
+    "verified"
   ],
   "src/app/track-record/page.tsx": [
     "/track-record"

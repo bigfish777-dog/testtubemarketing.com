@@ -1,0 +1,137 @@
+/*
+ * The CRT unblank. Timings are deliberately tight: this sits between a
+ * visitor's click and the thing they asked to see, so it has to read as the
+ * screen coming up rather than as a loading screen. Total 1.15s.
+ *
+ * Everything animated here is transform or opacity, so the whole sequence
+ * stays on the compositor and never triggers layout.
+ */
+
+/*
+ * The sheet settles to the hero's own night rather than staying black. A
+ * white beam dissolving over black mixes to a dirty olive halfway through,
+ * and the page behind this is a night band, so ending on #14121A makes the
+ * final dissolve night-to-night and invisible.
+ */
+.arrival {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  animation: sheet 1.15s ease-in forwards;
+}
+
+/*
+ * The beam. A single bright line at the vertical centre that opens into a
+ * full frame, then drains from phosphor green to white to nothing. The green
+ * has to leave before the page shows, or the paper underneath reads sickly.
+ */
+.scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 100vh;
+  transform: translateY(-50%) scaleY(0.006);
+  transform-origin: 50% 50%;
+  background: #35e06a;
+  box-shadow: 0 0 60px rgba(53, 224, 106, 0.9);
+  animation:
+    open 0.26s cubic-bezier(0.16, 0.84, 0.44, 1) forwards,
+    drain 0.62s ease-out 0.24s forwards;
+}
+
+.lines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.45) 3px
+  );
+  animation: destripe 0.75s ease-out 0.2s forwards;
+}
+
+/* Hairline to full frame. */
+@keyframes open {
+  from {
+    transform: translateY(-50%) scaleY(0.006);
+  }
+  to {
+    transform: translateY(-50%) scaleY(1);
+  }
+}
+
+/* Phosphor leaves, brightness peaks, then the beam is gone well before the
+   sheet lifts. Draining fully by 70% is what stops the muddy middle. */
+@keyframes drain {
+  0% {
+    background: #35e06a;
+    box-shadow: 0 0 60px rgba(53, 224, 106, 0.9);
+    opacity: 1;
+  }
+  38% {
+    background: #eafff1;
+    box-shadow: 0 0 44px rgba(234, 255, 241, 0.6);
+    opacity: 1;
+  }
+  70%,
+  100% {
+    background: #eafff1;
+    box-shadow: none;
+    opacity: 0;
+  }
+}
+
+/* The raster gives out as the tube settles. */
+@keyframes destripe {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes sheet {
+  0%,
+  22% {
+    background: #000;
+    opacity: 1;
+  }
+  55% {
+    background: #14121a;
+    opacity: 1;
+  }
+  74% {
+    background: #14121a;
+    opacity: 1;
+  }
+  100% {
+    background: #14121a;
+    opacity: 0;
+  }
+}
+
+/* ---------- the greeting line ---------- */
+
+.greetLine {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: clamp(13px, 1.5vw, 15px);
+  letter-spacing: 0.04em;
+  color: #35e06a;
+  margin: 0 0 clamp(0.8rem, 2vh, 1.2rem);
+  min-height: 1.4em;
+}
+
+.caret {
+  opacity: 0.65;
+}
+
+/* Nothing moves, and the overlay never mounts in the first place. */
+@media (prefers-reduced-motion: reduce) {
+  .arrival,
+  .scan,
+  .lines {
+    animation: none;
+    display: none;
+  }
+}

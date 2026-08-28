@@ -201,10 +201,18 @@ export default function Terminal() {
 
   useEffect(() => {
     if (phase.kind !== "assemble" || !assembling.done) return;
-    const id = window.setTimeout(
-      () => router.push(`/${phase.slug}`),
-      prefersReduced() ? 0 : 900
-    );
+    const id = window.setTimeout(() => {
+      /* Tells the landing page it was reached through the boot, so it plays
+         the CRT unblank. A visitor arriving on a path URL cold has no flag and
+         gets the page with no theatrics. Cleared by the page on read, so a
+         refresh is not a fresh arrival. */
+      try {
+        sessionStorage.setItem("ttm.booted", "1");
+      } catch {
+        // Private mode: no flag, no transition, page still works.
+      }
+      router.push(`/${phase.slug}`);
+    }, prefersReduced() ? 0 : 900);
     return () => window.clearTimeout(id);
   }, [phase, assembling.done, router]);
 
