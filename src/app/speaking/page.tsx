@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import styles from "./speaking.module.css";
-import { Arrival } from "./arrival";
+import styles from "@/styles/path.module.css";
+import { Arrival } from "@/components/arrival";
 import { Intro, RoomsLine, CtaLine } from "./intro";
 
 /*

@@ -1,7 +1,7 @@
 "use client";
 
 import { useVisitor, shapeOf } from "@/personalisation/use-visitor";
-import styles from "./speaking.module.css";
+import styles from "@/styles/path.module.css";
 
 /*
  * The personalised opener.
@@ -30,7 +30,7 @@ export function Intro() {
     return (
       <div className={styles.intro}>
         <p>
-          A little birdy told us that {company} are looking for a handsome,
+          A little birdy told us that {company}{" "}are looking for a handsome,
           charming double-act to grace the stage at their next event.
         </p>
         <p>
@@ -51,7 +51,7 @@ export function Intro() {
     return (
       <div className={styles.intro}>
         <p>
-          A little birdy told us that {company} are looking for a handsome,
+          A little birdy told us that {company}{" "}are looking for a handsome,
           charming double-act to grace the stage at their next event.
         </p>
         <p>
