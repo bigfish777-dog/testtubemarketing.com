@@ -228,6 +228,35 @@
   color: rgba(247, 243, 236, 0.78);
 }
 
+/*
+ * The personalised opener. Deliberately set at reading size rather than
+ * headline size: it is a letter to one person, and blowing it up would make
+ * the joke shout. Measure held near 52ch so three short paragraphs still scan
+ * as a single held thought.
+ */
+.intro {
+  margin: clamp(1.6rem, 4vh, 2.4rem) 0 0;
+  max-width: 52ch;
+  font-size: clamp(17px, 1.75vw, 19px);
+  line-height: 1.62;
+  color: rgba(247, 243, 236, 0.82);
+}
+
+.intro p {
+  margin: 0 0 1.05em;
+}
+
+.intro p:last-child {
+  margin-bottom: 0;
+}
+
+/* A later name drop, sitting under a section heading. */
+.dropLine {
+  margin: clamp(0.6rem, 1.8vh, 1rem) 0 0;
+  max-width: 46ch;
+  color: var(--ink-soft);
+}
+
 /* Full-bleed stage photograph, bottom-anchored so the founders sit on the
    fold. Warm-toned to sit with paper rather than fight it. */
 .heroShot {

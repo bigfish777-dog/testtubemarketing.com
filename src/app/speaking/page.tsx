@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import styles from "./speaking.module.css";
-import { Arrival, Greeting } from "./arrival";
+import { Arrival } from "./arrival";
+import { Intro, RoomsLine, CtaLine } from "./intro";
 
 /*
  * /speaking - "I want you to speak at my event".
@@ -38,16 +39,12 @@ export default function Page() {
             <span>// from the stage</span>
           </p>
 
-          <Greeting />
-
           <h1 className={`${styles.display} ${styles.heroHead}`}>
             We&apos;re more often on someone else&apos;s stage.
           </h1>
 
-          {/* DRAFT COPY - Claude's placeholder, not Fish's. */}
-          <p className={styles.heroSub}>
-            Two founders, two microphones, and a habit of being asked back.
-          </p>
+          {/* Fish's copy, personalised. See intro.tsx for provenance. */}
+          <Intro />
         </div>
 
         <figure className={styles.heroShot}>
@@ -109,6 +106,7 @@ export default function Page() {
             <h2 className={styles.h2} id="stages-h">
               Where we&apos;ve stood.
             </h2>
+            <RoomsLine />
             <ul className={styles.stageList}>
               <li className={styles.stageRow}>
                 <span className={styles.stageIdx}>[01]</span>
@@ -221,10 +219,7 @@ export default function Page() {
             <h2 className={`${styles.h2} ${styles.ctaHead}`} id="cta-h">
               Tell us about the room.
             </h2>
-            <p className={styles.lead}>
-              Date, audience, what you want them walking out believing. Forty
-              minutes, no pitch, no pressure.
-            </p>
+            <CtaLine />
             <div className={styles.ctaRow}>
               <a className={styles.book} href={BOOK_URL}>
                 <span aria-hidden="true">&gt;</span> Book a call

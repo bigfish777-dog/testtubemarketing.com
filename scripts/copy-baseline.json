@@ -254,9 +254,27 @@
     "Your rights",
     "bigfish@testtubemarketing.com"
   ],
-  "src/app/speaking/arrival.tsx": [
-    "&gt;",
-    "for whoever you are"
+  "src/app/speaking/arrival.tsx": [],
+  "src/app/speaking/intro.tsx": [
+    ", we might not have the same Geordie appeal as the famed presenter duo. But we&apos;d hazard a bet we know more about marketing - plus neither of us have been arrested for drink-driving after crashing our car.",
+    ", we might not have the same Geordie appeal as the famed presenter duo. But we&apos;d hazard a bet we know more about marketing - plus neither of us have been arrested for drink-driving after crashing our car.",
+    ". Date, audience, and what you want them walking out believing. Forty minutes, no pitch, no pressure.",
+    "A little birdy told us somebody out there is looking for a handsome, charming double-act to grace the stage at their next event. The birdy didn&apos;t catch a name and you didn&apos;t fancy leaving one, which is fair enough.",
+    "A little birdy told us that",
+    "A little birdy told us that",
+    "A little birdy told us you&apos;re looking for a handsome, charming double-act to grace the stage at your next event.",
+    "And look,",
+    "And look,",
+    "And look, we might not have the same Geordie appeal as the famed presenter duo. But we&apos;d hazard a bet we know more about marketing - plus neither of us have been arrested for drink-driving after crashing our car.",
+    "And look, whoever you are, we might not have the same Geordie appeal as the famed presenter duo. But we&apos;d hazard a bet we know more about marketing - plus neither of us have been arrested for drink-driving after crashing our car.",
+    "Date, audience, and what you want them walking out believing. Forty minutes, no pitch, no pressure.",
+    "Go on then,",
+    "Unfortunately, Ant &amp; Dec were busy, so they&apos;ve had to move to the next name on their list...",
+    "Unfortunately, Ant &amp; Dec were busy, so they&apos;ve had to move to the next name on their list...",
+    "Unfortunately, Ant &amp; Dec were busy, so they&apos;ve had to move to the next name on their list...",
+    "Unfortunately, Ant &amp; Dec were busy, so you&apos;ve had to move to the next name on the list...",
+    "are looking for a handsome, charming double-act to grace the stage at their next event.",
+    "are looking for a handsome, charming double-act to grace the stage at their next event."
   ],
   "src/app/speaking/page.tsx": [
     "&gt;",
@@ -277,7 +295,6 @@
     "Both of us are in every room.",
     "Co-founder / Chief Experimenter",
     "Co-founder / Systems &amp; Strategy",
-    "Date, audience, what you want them walking out believing. Forty minutes, no pitch, no pressure.",
     "Fish is a marketer by accident. He dropped out of uni, fell into the nearest job going, and realised he was good at it. Direct response is his lane: emails, offers, funnels, the words that make people buy. He spent years as the behind-the-scenes strategist and copywriter on big launches, the name you never saw on the sales page. Here in the lab he runs systems and strategy, the engine behind every client account. He&apos;s also dad to two kids, which he&apos;ll tell you is the harder of the two jobs.",
     "Most people don&apos;t come to us that way though. They come because they saw us do it, or because someone who did told them to. Put that same thinking to work inside your business and you&apos;re into retainer territory, which is a good deal less than fifteen grand for a morning.",
     "Nick &ldquo;Fish&rdquo; Fisher",
@@ -287,7 +304,6 @@
     "Test Tube Marketing",
     "Test Tube Marketing Ltd &nbsp;&middot;&nbsp; Reg no. 15388084",
     "The Education &amp; Coaching Academy, Belfast",
-    "Two founders, two microphones, and a habit of being asked back.",
     "We&apos;re more often on someone else&apos;s stage.",
     "Where we&apos;ve stood.",
     "[..]",
@@ -298,5 +314,6 @@
   ],
   "src/app/track-record/page.tsx": [
     "/track-record"
-  ]
+  ],
+  "src/personalisation/use-visitor.ts": []
 }

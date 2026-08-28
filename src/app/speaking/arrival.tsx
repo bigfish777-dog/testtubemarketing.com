@@ -18,7 +18,6 @@ import styles from "./arrival.module.css";
  */
 
 const BOOT_FLAG = "ttm.booted";
-const STORE_KEY = "ttm.visitor";
 
 export function Arrival() {
   // "idle" renders nothing at all, so direct arrivals never get a black frame.
@@ -53,32 +52,7 @@ export function Arrival() {
 }
 
 /*
- * The name, when there is one. Renders the no-name state on the server and
- * swaps on hydration, so the fallback is the default and nothing jumps.
- * The name is read from sessionStorage and never leaves the browser.
+ * The name used to be shown here as a mono system label. It now does real work
+ * inside the opening prose instead (see intro.tsx), which is Fish's call of
+ * 2026-08-28: the personalisation should carry a joke, not sit in a tag.
  */
-export function Greeting() {
-  const [line, setLine] = useState<string | null>(null);
-
-  useEffect(() => {
-    try {
-      const raw = sessionStorage.getItem(STORE_KEY);
-      if (!raw) return;
-      const { n, c } = JSON.parse(raw) as { n?: string; c?: string };
-      const name = (n ?? "").trim();
-      if (!name) return;
-      const co = (c ?? "").trim();
-      setLine(co ? `${name} / ${co}` : name);
-    } catch {
-      /* nothing stored, which is a supported state */
-    }
-  }, []);
-
-  // DRAFT COPY - Claude's placeholder, not Fish's.
-  return (
-    <p className={styles.greetLine}>
-      <span className={styles.caret}>&gt;</span>{" "}
-      {line ? `for ${line}` : "for whoever you are"}
-    </p>
-  );
-}
