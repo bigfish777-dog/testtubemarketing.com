@@ -153,6 +153,20 @@ for (const vp of targets) {
           innerHeight: window.innerHeight,
           scrollWidth: d.scrollWidth,
           innerWidth: window.innerWidth,
+          /*
+           * iOS Safari zooms the page in on focus when a text field's font
+           * size is under 16px, and never zooms back out. It is invisible in
+           * a screenshot because it only happens on focus on a real handset,
+           * so it gets measured instead. Fish hit it on the name step.
+           */
+          smallFields: [...document.querySelectorAll("input, textarea, select")]
+            .map((el) => ({
+              el: `${el.tagName.toLowerCase()}${el.type ? `[${el.type}]` : ""}`,
+              px: parseFloat(getComputedStyle(el).fontSize),
+            }))
+            .filter((f) => f.px < 16)
+            .map((f) => `${f.el} ${f.px}px`),
+
           // Anything actually sticking out to the right, named, so the fix has
           // somewhere to go rather than "something overflows".
           wide: [...document.querySelectorAll("body *")]
@@ -194,6 +208,7 @@ for (const vp of targets) {
         ? Math.max(0, metrics.scrollWidth - metrics.innerWidth)
         : null,
       wide: metrics?.wide ?? [],
+      smallFields: metrics?.smallFields ?? [],
       errors,
     };
     report.push(row);
@@ -202,6 +217,9 @@ for (const vp of targets) {
       row.status !== "ok" ? row.status : null,
       row.vOverflow ? `SCROLLS ${row.vOverflow}px` : null,
       row.hOverflow ? `H-OVERFLOW ${row.hOverflow}px` : null,
+      row.smallFields.length
+        ? `IOS ZOOM ON FOCUS: ${row.smallFields.join(", ")}`
+        : null,
       row.errors.length ? `${row.errors.length} js error(s)` : null,
     ].filter(Boolean);
     console.log(
@@ -220,7 +238,12 @@ await browser.close();
 await writeFile(path.join(OUT, "report.json"), JSON.stringify(report, null, 2));
 
 const failed = report.filter(
-  (r) => r.status !== "ok" || r.vOverflow || r.hOverflow || r.errors.length
+  (r) =>
+    r.status !== "ok" ||
+    r.vOverflow ||
+    r.hOverflow ||
+    r.smallFields.length ||
+    r.errors.length
 );
 console.log(
   `\n${report.length} captures in ${OUT}/, ${failed.length} with something to look at.`

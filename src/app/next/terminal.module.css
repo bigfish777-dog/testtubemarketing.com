@@ -342,11 +342,26 @@
 
 /* ---------- name capture ---------- */
 
+/*
+ * iOS Safari zooms the whole page in when a focused input's font size is under
+ * 16px, and it does not zoom back out. On a 390px phone the clamp below bottoms
+ * out at 13.6px, so tapping the name field threw the visitor into a zoomed,
+ * horizontally panned page with the left edge of the terminal cut off. Fish hit
+ * this on a real handset, 2026-08-29.
+ *
+ * The floor goes on the row, not just the input, so the ">" prompt and what the
+ * visitor types stay the same size. In a monospace terminal a prompt one size
+ * off the text next to it is obvious.
+ *
+ * Deliberately NOT fixed with maximum-scale=1 or user-scalable=no: that stops
+ * the zoom by taking pinch zoom away from everyone, which is an accessibility
+ * failure, not a fix.
+ */
 .answerRow {
   display: flex;
   align-items: baseline;
   gap: 0.75ch;
-  font-size: clamp(0.85rem, min(1.6vw, 2.6vh), 1.15rem);
+  font-size: max(16px, clamp(0.85rem, min(1.6vw, 2.6vh), 1.15rem));
 }
 
 .entry {
