@@ -43,6 +43,10 @@
   text-shadow: var(--bloom);
   /* One face everywhere. */
   font-family: var(--font-plex-mono), ui-monospace, monospace;
+  /* Fish's call 2026-08-29: ALL CAPS on the terminal, sentence case the moment
+     you leave the tube. Done as a transform, not in the strings, so his real
+     copy arrives written normally and the copy guard reads normal prose. */
+  text-transform: uppercase;
   font-weight: 400;
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
@@ -169,7 +173,6 @@
 
 .statusbar {
   color: var(--phosphor-read);
-  text-transform: none;
   letter-spacing: 0.02em;
 }
 
@@ -237,6 +240,19 @@
   text-transform: uppercase;
   color: var(--phosphor);
   text-shadow: var(--bloom-soft);
+}
+
+/*
+ * Buttons and inputs reset text-transform to none in the UA stylesheet, so the
+ * screen's caps have to be handed back explicitly. Without this the three real
+ * options (anchors) came out caps while the gag, the name field and the two
+ * actions (buttons and an input) stayed sentence case.
+ */
+.item,
+.entry,
+.go,
+.skip {
+  text-transform: inherit;
 }
 
 /* ---------- the menu ---------- */
