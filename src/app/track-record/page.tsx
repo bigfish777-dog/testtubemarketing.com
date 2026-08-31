@@ -31,9 +31,9 @@ import {
 const BOOK_URL = "https://book.testtubemarketing.com";
 
 export const metadata: Metadata = {
-  title: "The Record - Test Tube Marketing",
+  title: "Our Record - Test Tube Marketing",
   description:
-    "Ten engagements from 153+ campaigns since 2014. Real businesses, real numbers, real outcomes.",
+    "A sample of just eight of our engagements, from 153+ campaigns since 2014. Real businesses, real numbers, real outcomes.",
   robots: { index: false, follow: false },
 };
 
@@ -66,15 +66,22 @@ export default function Page() {
         <section className={styles.band} aria-labelledby="record-h">
           <div className={styles.container}>
             <p className={styles.sys}>
-              <span>// the record</span>
+              <span>// our record</span>
             </p>
             <h2 className={styles.h2} id="record-h">
-              The Record.
+              Our Record.
             </h2>
-            {/* Fish's line, verbatim. */}
+            {/*
+              Fish's amend 2026-08-31: frame the list as a sample rather than a
+              total. He asked for "a sample of just ten"; the list holds EIGHT
+              rows, so the number follows the list. Flagged to him. If he
+              supplies two more engagements this becomes ten and the count moves
+              with it. The count and the rows must never disagree on the page
+              whose entire job is standing up to a check.
+            */}
             <p className={styles.dropLine}>
-              Ten engagements from 153+ campaigns since 2014. Real businesses,
-              real numbers, real outcomes.
+              A sample of just eight of our engagements, from 153+ campaigns
+              since 2014. Real businesses, real numbers, real outcomes.
             </p>
 
             <ol className={styles.recordList}>

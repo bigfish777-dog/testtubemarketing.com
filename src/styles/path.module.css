@@ -543,6 +543,11 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 0.6rem 2rem;
+  /* Fish 2026-08-31: the rule was crowding the last line of the intro, so the
+     award read as the end of that paragraph rather than as the next thing.
+     The space goes above the border rather than inside it, so the band itself
+     keeps its proportions. */
+  margin-top: clamp(2.2rem, 7vh, 4.5rem);
   padding-block: clamp(1rem, 3vh, 1.6rem);
   border-top: 1px solid var(--night-rule);
   border-bottom: 1px solid var(--night-rule);

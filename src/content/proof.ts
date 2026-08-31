@@ -62,6 +62,20 @@ export const RECORD = [
     biz: "Veblen Directors",
     text: "250 calls booked from a first campaign, target was 50.",
   },
+  /*
+   * Added 2026-08-31. The two figures are Fish's, supplied exactly as they
+   * appear: total revenue £64,945, total ad spend £7,663. The sentence around
+   * them is Claude's, so this is the one row in the file that is not verbatim.
+   * The implied return is 8.4x and is deliberately NOT stated: Fish gave two
+   * numbers, not three, and a derived figure on a due-diligence page is his
+   * call to make, not one to slip in.
+   */
+  {
+    idx: "08",
+    name: "Ian Mulligani",
+    biz: "Young Driver",
+    text: "£64,945 in revenue from £7,663 of ad spend.",
+  },
 ] as const;
 
 export const TESTIMONIALS = [
