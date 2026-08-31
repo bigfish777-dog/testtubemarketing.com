@@ -18,6 +18,10 @@ this build.
 From Fish, 2026-07-29 to 2026-07-31. Do not reopen.
 
 1. Intent router as the front door: three real options plus one gag option.
+   **REVERSED by Fish 2026-08-31: the gag is gone.** The dodging button
+   misbehaved in use. He considered having it disappear on click or return an
+   error code instead, then decided the joke was not earning its place. Three
+   real options, nothing else. See 3b, which is now history rather than spec.
 2. One component set. Each path is a different ordering and framing of the same
    components. Not four codebases, not four copy trees.
 3. Every path is a real, server-rendered, indexable URL. Arriving directly at a
@@ -55,6 +59,11 @@ there is a brief moment before the name appears. Unavoidable in any architecture
 that keeps the promise, and invisible on a fast connection.
 
 ### 3b. The gag sits inline with the real options, visually cheaper
+
+> **SUPERSEDED 2026-08-31. The gag was removed entirely (see decision 1).**
+> Kept for the reasoning, which still applies if it is ever revived: the
+> accessibility constraints below are not optional, and a control that evades
+> the pointer must never be keyboard reachable or announced.
 
 The joke only lands if it reads as a fourth item in the same list. Moved
 somewhere else it stops being an option and becomes a widget. It is rendered as

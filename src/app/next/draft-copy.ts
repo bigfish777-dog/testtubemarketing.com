@@ -31,8 +31,10 @@ export const DRAFT = {
     },
   ],
 
-  gag: "I'm contacting you on behalf of HMRC",
-  gagPunchline: "Process terminated.",
+  // The fourth "gag" option is gone: Fish's call 2026-08-31, after the dodging
+  // button misbehaved. He weighed a disappear-on-click and an error-code
+  // variant and decided the joke was not earning its place. The wording and the
+  // dodge behaviour are in git if it is ever revived.
 
   namePrompt: "ok, what's your name?",
   companyPrompt: "and the company? (optional)",

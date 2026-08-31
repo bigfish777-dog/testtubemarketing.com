@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./terminal.module.css";
 import { DRAFT } from "./draft-copy";
@@ -82,14 +82,9 @@ export default function Terminal() {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [history, setHistory] = useState<string[]>([]);
-  const [punchline, setPunchline] = useState(false);
   // Item 1 is highlighted on arrival, the way the reference menu is.
   const [cursor, setCursor] = useState(0);
   const [stamp, setStamp] = useState("");
-
-  const gagRef = useRef<HTMLButtonElement>(null);
-  const dodges = useRef(0);
-  const gagOrigin = useRef<number | null>(null);
 
   const intro = useTyped(DRAFT.bootLines, phase.kind === "intro");
 
@@ -111,43 +106,6 @@ export default function Terminal() {
         d.getMonth() + 1
       ).padStart(2, "0")}/${String(d.getFullYear()).slice(2)}`
     );
-  }, []);
-
-  /* ---- the gag -------------------------------------------------------
-   * Desktop steps away from the pointer, clamped inside the viewport so it
-   * cannot be chased off an edge. Mobile puffs on tap. Reduced motion does
-   * neither. aria-hidden and out of the tab order throughout, because a
-   * control that evades the cursor must not be keyboard reachable.
-   */
-  const dodge = useCallback(() => {
-    const el = gagRef.current;
-    if (!el || prefersReduced()) return;
-    if (window.matchMedia("(hover: none)").matches) return;
-
-    const rect = el.getBoundingClientRect();
-    if (gagOrigin.current === null) gagOrigin.current = rect.left;
-
-    const margin = 16;
-    const maxLeft = window.innerWidth - rect.width - margin;
-    if (maxLeft <= margin) return;
-
-    dodges.current += 1;
-    const stops = [0.62, 0.12, 0.86, 0.3, 0.48];
-    const stop = stops[dodges.current % stops.length];
-    const target = margin + (maxLeft - margin) * stop;
-    el.style.transform = `translateX(${Math.round(
-      target - gagOrigin.current
-    )}px)`;
-  }, []);
-
-  const puff = useCallback(() => {
-    if (prefersReduced()) {
-      setPunchline(true);
-      return;
-    }
-    const el = gagRef.current;
-    if (el) el.classList.add(styles.gagPuffed);
-    window.setTimeout(() => setPunchline(true), 320);
   }, []);
 
   /* ---- flow ---- */
@@ -296,29 +254,6 @@ export default function Terminal() {
                   </a>
                 </li>
               ))}
-
-              <li className={styles.row} aria-hidden="true">
-                {punchline ? (
-                  <p className={styles.punchline}>
-                    {DRAFT.options.length + 1}. {DRAFT.gagPunchline}
-                  </p>
-                ) : (
-                  <button
-                    ref={gagRef}
-                    type="button"
-                    className={`${styles.item} ${styles.gag}`}
-                    tabIndex={-1}
-                    onMouseEnter={dodge}
-                    onMouseMove={dodge}
-                    onClick={puff}
-                  >
-                    <span className={styles.num}>
-                      {DRAFT.options.length + 1}.
-                    </span>
-                    <span className={styles.label}>{DRAFT.gag}</span>
-                  </button>
-                )}
-              </li>
             </ol>
           )}
 
@@ -400,8 +335,6 @@ export default function Terminal() {
           {stamp ? `  ${stamp}` : ""}
         </span>
       </div>
-
-      <p className={styles.draftFlag}>Draft copy - Claude&apos;s, not Fish&apos;s</p>
     </main>
   );
 }
