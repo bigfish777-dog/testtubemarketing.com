@@ -60,13 +60,21 @@ export const RECORD = [
     idx: "07",
     name: "Michelle Clarke",
     biz: "Veblen Directors",
-    text: "250 calls booked from a first campaign, target was 50.",
+    /*
+     * Fish's amend 2026-08-31: "qualified" calls, and the target reframed as
+     * what they told us rather than a flat number. "Over the moon with 50"
+     * makes the 250 land; "target was 50" just sat there. His words.
+     */
+    text: "250 qualified calls booked from a first campaign. They’d told us they’d be over the moon with 50.",
   },
   /*
    * Added 2026-08-31. The two figures are Fish's, supplied exactly as they
-   * appear: total revenue £64,945, total ad spend £7,663. The sentence around
-   * them is Claude's, so this is the one row in the file that is not verbatim.
-   * The implied return is 8.4x and is deliberately NOT stated: Fish gave two
+   * appear: total revenue £64,945, total ad spend £7,663. The closing clause is
+   * his too, added 2026-08-31, and the quotation marks are load-bearing: they
+   * attribute "couldn't be profitably scaled" to whoever told him that, rather
+   * than letting it read as our own characterisation of the account.
+   *
+   * The implied return is 8.4x and is deliberately NOT stated. Fish gave two
    * numbers, not three, and a derived figure on a due-diligence page is his
    * call to make, not one to slip in.
    */
@@ -74,7 +82,7 @@ export const RECORD = [
     idx: "08",
     name: "Ian Mulligani",
     biz: "Young Driver",
-    text: "£64,945 in revenue from £7,663 of ad spend.",
+    text: "£64,945 in revenue from £7,663 of ad spend on an account he’d been told “couldn’t be profitably scaled”.",
   },
 ] as const;
 

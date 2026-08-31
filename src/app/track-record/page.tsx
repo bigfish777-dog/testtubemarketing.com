@@ -96,6 +96,20 @@ export default function Page() {
                 </li>
               ))}
             </ol>
+
+            {/*
+              DRAFT COPY - Claude's wording of Fish's instruction 2026-08-31,
+              not his prose. He asked for an offer to introduce the visitor to
+              anyone on the list, plus the point that they are welcome to go
+              round us and ask them directly. That second half is the part that
+              carries the weight: offering an introduction is what everyone
+              says, inviting someone to check without us in the room is not.
+            */}
+            <p className={styles.recordOffer}>
+              Want to speak to any of them? Say the word and we’ll make the
+              introduction. Or go and find them online and ask them yourself,
+              without us in the room. They’ll tell you the same thing.
+            </p>
           </div>
         </section>
 

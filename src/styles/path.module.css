@@ -181,7 +181,14 @@
   background: var(--night);
   color: var(--paper);
   isolation: isolate;
-  padding-block: clamp(4.5rem, 13vh, 9rem) 0;
+  /*
+   * Fish 2026-08-31: the bottom was zero, so the last line of the intro ran
+   * straight into the end of the night band. On /track-record the award block
+   * masked it; on /marketing-leadership and /speaking there is nothing between
+   * the last line and the edge, so the crowding was plain. Fixed on the hero
+   * rather than per page, so all three bands breathe the same.
+   */
+  padding-block: clamp(4.5rem, 13vh, 9rem) clamp(2.5rem, 8vh, 5rem);
   overflow: hidden;
 }
 
@@ -533,6 +540,17 @@
   .recordResult {
     grid-column: auto;
   }
+}
+
+/*
+ * The offer to be put in touch, sitting under the record list. Prose rather
+ * than a mono system label: it is an invitation from us, not a machine
+ * annotation, and the switch of voice is the point.
+ */
+.recordOffer {
+  margin: clamp(1.8rem, 5vh, 3rem) 0 0;
+  max-width: 54ch;
+  color: var(--ink-soft);
 }
 
 /* ---------- award ---------- */
