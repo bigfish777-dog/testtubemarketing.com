@@ -4,6 +4,7 @@ import { HeroGradient } from "./hero-gradient";
 import { BeakerScrub } from "./beaker-scrub";
 import { AwardViewer } from "./award-viewer";
 import { CoffeeTicker } from "./coffee-ticker";
+import { FOUNDERS } from "@/content/founders";
 
 /*
  * TWO SPEEDS rebuild (design-direction-v2.md + site-copy-v2.md, 2026-07-23).
@@ -666,67 +667,30 @@ export default function Home() {
               delegated to someone you&apos;ve never met.
             </p>
             <div className="founders-grid">
-              <article className="founder-unit" data-founder-unit>
-                <figure className="founder-photo">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/assets/founders/nick-fisher.jpg"
-                    alt="Nick Fisher, co-founder of Test Tube Marketing, mid-sentence with a microphone in hand, gesturing, against a dark grey wall"
-                    width={1200}
-                    height={1500}
-                  />
-                </figure>
-                <div className="founder-name-bar">
-                  <h3 className="h3">Nick &ldquo;Fish&rdquo; Fisher</h3>
-                  <span className="mono">CO-FOUNDER / SYSTEMS &amp; STRATEGY</span>
-                </div>
-                <div className="founder-bio">
-                  <p>
-                    Fish is a marketer by accident. He dropped out of uni, fell
-                    into the nearest job going, and realised he was good at it.
-                    Direct response is his lane: emails, offers, funnels, the
-                    words that make people buy. He spent years as the
-                    behind-the-scenes strategist and copywriter on big
-                    launches, the name you never saw on the sales page. Here in
-                    the lab he runs systems and strategy, the engine behind
-                    every client account. He&apos;s also dad to two kids, which
-                    he&apos;ll tell you is the harder of the two jobs.
-                  </p>
-                </div>
-              </article>
-              {/* Unit: Adam. Adam owns the EE / Vaynerchuk / Cardone story. */}
-              <article className="founder-unit" data-founder-unit>
-                <figure className="founder-photo">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/assets/founders/adam-ashburn.jpg"
-                    alt="Adam Ashburn, co-founder of Test Tube Marketing, seated relaxed in a navy polo shirt against a blue stage curtain"
-                    width={1000}
-                    height={1250}
-                  />
-                </figure>
-                <div className="founder-name-bar">
-                  <h3 className="h3">Adam Ashburn</h3>
-                  <span className="mono">CO-FOUNDER / CHIEF EXPERIMENTER</span>
-                </div>
-                <div className="founder-bio">
-                  <p>
-                    Adam was meant to be a golf pro. Then he got run over, and
-                    marketing got him instead. He spent years as Head of
-                    Marketing at Expert Empires, the events business that put
-                    names like Gary Vaynerchuk and Grant Cardone on UK stages.
-                    Around the office he was known as the founder&apos;s no.2,
-                    steering marketing across the group&apos;s businesses,
-                    including Elite Closing Academy, as they grew. Strategy is
-                    where he&apos;s strongest: positioning, offers, and the
-                    plan that decides what&apos;s worth doing before anyone
-                    touches an ad account. Here in the lab he&apos;s our Chief
-                    Experimenter, testing ideas with our own money before they
-                    go anywhere near yours. Two kids at home, and yes, he
-                    still plays golf.
-                  </p>
-                </div>
-              </article>
+              {FOUNDERS.map((f) => (
+                <article
+                  className="founder-unit"
+                  data-founder-unit
+                  key={f.key}
+                >
+                  <figure className="founder-photo">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={f.photo}
+                      alt={f.alt}
+                      width={f.width}
+                      height={f.height}
+                    />
+                  </figure>
+                  <div className="founder-name-bar">
+                    <h3 className="h3">{f.name}</h3>
+                    <span className="mono">{f.role.toUpperCase()}</span>
+                  </div>
+                  <div className="founder-bio">
+                    <p>{f.bio}</p>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>

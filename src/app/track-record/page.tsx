@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import styles from "@/styles/path.module.css";
 import { Arrival } from "@/components/arrival";
+import { FOUNDERS } from "@/content/founders";
 import { Intro, StatementsLine, CtaLine } from "./intro";
 import {
   AWARD,
@@ -33,7 +34,7 @@ const BOOK_URL = "https://book.testtubemarketing.com";
 export const metadata: Metadata = {
   title: "Our Record - Test Tube Marketing",
   description:
-    "A sample of just eight of our engagements, from 153+ campaigns since 2014. Real businesses, real numbers, real outcomes.",
+    "A sample of just a handful of our engagements, across 153+ campaigns we've run since 2014. Real businesses, real numbers, real outcomes.",
   robots: { index: false, follow: false },
 };
 
@@ -72,16 +73,15 @@ export default function Page() {
               Our Record.
             </h2>
             {/*
-              Fish's amend 2026-08-31: frame the list as a sample rather than a
-              total. He asked for "a sample of just ten"; the list holds EIGHT
-              rows, so the number follows the list. Flagged to him. If he
-              supplies two more engagements this becomes ten and the count moves
-              with it. The count and the rows must never disagree on the page
-              whose entire job is standing up to a check.
+              Fish's line, verbatim 2026-09-01. "A handful" replaces the counted
+              version and settles the problem underneath it: a stated number has
+              to match the rows, and it did not. This does not state one, so the
+              list can grow or shrink without the copy going stale or wrong.
             */}
             <p className={styles.dropLine}>
-              A sample of just eight of our engagements, from 153+ campaigns
-              since 2014. Real businesses, real numbers, real outcomes.
+              A sample of just a handful of our engagements, across 153+
+              campaigns we&apos;ve run since 2014. Real businesses, real
+              numbers, real outcomes.
             </p>
 
             <ol className={styles.recordList}>
@@ -171,8 +171,9 @@ export default function Page() {
 
         {/* ---------- founders ---------- */}
         {/*
-         * Both bios verbatim. Adam owns the Expert Empires / Vaynerchuk /
-         * Cardone story; Fish's bio has none of it. Locked fact.
+         * Bios come from src/content/founders.ts so an edit reaches every page
+         * that shows them. Adam owns the Vaynerchuk / Cardone story; Fish's bio
+         * has none of it. Locked fact.
          */}
         <section className={styles.band} aria-labelledby="who-h">
           <div className={styles.container}>
@@ -188,66 +189,24 @@ export default function Page() {
             </p>
 
             <div className={styles.who}>
-              <article className={styles.person}>
-                <figure className={styles.portrait}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/assets/founders/nick-fisher.jpg"
-                    alt="Nick Fisher, co-founder of Test Tube Marketing, mid-sentence with a microphone in hand, gesturing, against a dark grey wall"
-                    width={1200}
-                    height={1500}
-                  />
-                </figure>
-                <div className={styles.nameBar}>
-                  <h3 className={styles.h3}>Nick &ldquo;Fish&rdquo; Fisher</h3>
-                  <span className={styles.role}>
-                    Co-founder / Systems &amp; Strategy
-                  </span>
-                </div>
-                <p className={styles.bio}>
-                  Fish is a marketer by accident. He dropped out of uni, fell
-                  into the nearest job going, and realised he was good at it.
-                  Direct response is his lane: emails, offers, funnels, the
-                  words that make people buy. He spent years as the
-                  behind-the-scenes strategist and copywriter on big launches,
-                  the name you never saw on the sales page. Here in the lab he
-                  runs systems and strategy, the engine behind every client
-                  account. He&apos;s also dad to two kids, which he&apos;ll tell
-                  you is the harder of the two jobs.
-                </p>
-              </article>
-
-              <article className={styles.person}>
-                <figure className={styles.portrait}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/assets/founders/adam-ashburn.jpg"
-                    alt="Adam Ashburn, co-founder of Test Tube Marketing, seated relaxed in a navy polo shirt against a blue stage curtain"
-                    width={1000}
-                    height={1250}
-                  />
-                </figure>
-                <div className={styles.nameBar}>
-                  <h3 className={styles.h3}>Adam Ashburn</h3>
-                  <span className={styles.role}>
-                    Co-founder / Chief Experimenter
-                  </span>
-                </div>
-                <p className={styles.bio}>
-                  Adam was meant to be a golf pro. Then he got run over, and
-                  marketing got him instead. He spent years as Head of Marketing
-                  at Expert Empires, the events business that put names like
-                  Gary Vaynerchuk and Grant Cardone on UK stages. Around the
-                  office he was known as the founder&apos;s no.2, steering
-                  marketing across the group&apos;s businesses, including Elite
-                  Closing Academy, as they grew. Strategy is where he&apos;s
-                  strongest: positioning, offers, and the plan that decides
-                  what&apos;s worth doing before anyone touches an ad account.
-                  Here in the lab he&apos;s our Chief Experimenter, testing
-                  ideas with our own money before they go anywhere near yours.
-                  Two kids at home, and yes, he still plays golf.
-                </p>
-              </article>
+              {FOUNDERS.map((f) => (
+                <article className={styles.person} key={f.key}>
+                  <figure className={styles.portrait}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={f.photo}
+                      alt={f.alt}
+                      width={f.width}
+                      height={f.height}
+                    />
+                  </figure>
+                  <div className={styles.nameBar}>
+                    <h3 className={styles.h3}>{f.name}</h3>
+                    <span className={styles.role}>{f.role}</span>
+                  </div>
+                  <p className={styles.bio}>{f.bio}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
