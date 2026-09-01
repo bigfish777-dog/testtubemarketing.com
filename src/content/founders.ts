@@ -16,8 +16,11 @@
  *     written from Fish's instruction, and he overwrites them.
  *   - "Two girls" for Fish and "two boys" for Adam are both his corrections.
  *
- * The role labels and the "here in the lab" sentence inside each bio have to
- * agree. If one moves, the other moves with it.
+ * ROLES, settled by Fish 2026-09-01: FISH is Chief Experimenter, ADAM is
+ * Systems & Strategy. This is the swap from how it read before, and the two
+ * "here in the lab" sentences swapped with the titles rather than staying put,
+ * because a label saying one thing over a paragraph saying the other is worse
+ * than either arrangement. Do not move one without the other.
  */
 
 export type Founder = {
@@ -35,7 +38,7 @@ export const FOUNDERS: readonly Founder[] = [
   {
     key: "fish",
     name: "Nick “Fish” Fisher",
-    role: "Co-founder / Systems & Strategy",
+    role: "Co-founder / Chief Experimenter",
     photo: "/assets/founders/nick-fisher.jpg",
     alt: "Nick Fisher, co-founder of Test Tube Marketing, mid-sentence with a microphone in hand, gesturing, against a dark grey wall",
     width: 1200,
@@ -48,15 +51,15 @@ export const FOUNDERS: readonly Founder[] = [
       "launches, the name you never saw on the sales page, and has consulted " +
       "with everything from pre-revenue start-ups to 9-figure multinationals. " +
       "He’s an inventor and a serious tinkerer too: he codes, and he builds " +
-      "hardware and electronics for the fun of it. Here in the lab he runs " +
-      "systems and strategy, the engine behind every client account. He’s " +
-      "also dad to two girls, which he’ll tell you is the harder of the two " +
-      "jobs.",
+      "hardware and electronics for the fun of it. Here in the lab he’s our " +
+      "Chief Experimenter, testing ideas with our own money before they go " +
+      "anywhere near yours. He’s also dad to two girls, which he’ll tell you " +
+      "is the harder of the two jobs.",
   },
   {
     key: "adam",
     name: "Adam Ashburn",
-    role: "Co-founder / Chief Experimenter",
+    role: "Co-founder / Systems & Strategy",
     photo: "/assets/founders/adam-ashburn.jpg",
     alt: "Adam Ashburn, co-founder of Test Tube Marketing, seated relaxed in a navy polo shirt against a blue stage curtain",
     width: 1000,
@@ -67,8 +70,8 @@ export const FOUNDERS: readonly Founder[] = [
       "companies, including the events business that put names like Gary " +
       "Vaynerchuk and Grant Cardone on UK stages. Strategy is where he’s " +
       "strongest: positioning, offers, and the plan that decides what’s worth " +
-      "doing before anyone touches an ad account. Here in the lab he’s our " +
-      "Chief Experimenter, testing ideas with our own money before they go " +
-      "anywhere near yours. Two boys at home, and yes, he still plays golf.",
+      "doing before anyone touches an ad account. Here in the lab he runs " +
+      "systems and strategy, the engine behind every client account. Two boys " +
+      "at home, and yes, he still plays golf.",
   },
 ] as const;
