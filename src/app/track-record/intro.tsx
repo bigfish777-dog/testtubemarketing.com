@@ -28,7 +28,7 @@ export function Intro() {
         <p>
           So somebody has mentioned us to {company}, and now you&apos;re doing
           the sensible thing: checking whether we&apos;re any good, or just two
-          blokes who can talk a good game, but don&apos;t know what an open rate from an open bar.
+          blokes who can talk a good game, but don&apos;t know an open rate from an open bar.
         </p>
         <p>
           Good instinct. We&apos;d do the same. It&apos;s a bit awkward being
@@ -48,7 +48,7 @@ export function Intro() {
         <p>
           So somebody has mentioned us to {company}, and now you&apos;re doing
           the sensible thing: checking whether we&apos;re any good, or just two
-          blokes who can talk a good game, but don&apos;t know what an open rate from an open bar.
+          blokes who can talk a good game, but don&apos;t know an open rate from an open bar.
         </p>
         <p>
           Good instinct. We&apos;d do the same. It&apos;s a bit awkward being
@@ -68,7 +68,7 @@ export function Intro() {
         <p>
           So somebody has mentioned us to you, {name}, and now you&apos;re doing
           the sensible thing: checking whether we&apos;re any good, or just two
-          blokes who can talk a good game, but don&apos;t know what an open rate from an open bar.
+          blokes who can talk a good game, but don&apos;t know an open rate from an open bar.
         </p>
         <p>
           Good instinct. We&apos;d do the same. It&apos;s a bit awkward being
@@ -87,7 +87,7 @@ export function Intro() {
       <p>
         So somebody has mentioned us to you, and now you&apos;re doing the
         sensible thing: checking whether we&apos;re any good, or just two blokes
-        who can talk a good game, but don&apos;t know what an open rate from an open bar.
+        who can talk a good game, but don&apos;t know an open rate from an open bar.
       </p>
       <p>
         Good instinct. We&apos;d do the same. You didn&apos;t fancy telling us
