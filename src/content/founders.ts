@@ -43,18 +43,26 @@ export const FOUNDERS: readonly Founder[] = [
     alt: "Nick Fisher, co-founder of Test Tube Marketing, mid-sentence with a microphone in hand, gesturing, against a dark grey wall",
     width: 1200,
     height: 1500,
+    /*
+     * Redrafted 2026-09-01 on two notes from Fish. First, "the words that make
+     * people buy" framed him as the copywriter, which collides with Adam:
+     * messaging is Adam's ground too, so it stopped being a distinction. Fish's
+     * actual line is generating buyers out of thin air, so demand is what the
+     * bio now claims. Second, his bio ran half as long again as Adam's; it is
+     * cut to roughly Adam's length, since two founders presented side by side
+     * at unequal length reads as a pecking order.
+     *
+     * Still CLAUDE'S DRAFT of Fish's material. He overwrites.
+     */
     bio:
       "Fish is a marketer by accident. He dropped out of uni, fell into the " +
-      "nearest job going, and realised he was good at it. Direct response is " +
-      "his lane: emails, offers, funnels, the words that make people buy. He " +
-      "spent years as the behind-the-scenes strategist and copywriter on big " +
-      "launches, the name you never saw on the sales page, and has consulted " +
-      "with everything from pre-revenue start-ups to 9-figure multinationals. " +
-      "He’s an inventor and a serious tinkerer too: he codes, and he builds " +
-      "hardware and electronics for the fun of it. Here in the lab he’s our " +
-      "Chief Experimenter, testing ideas with our own money before they go " +
-      "anywhere near yours. He’s also dad to two girls, which he’ll tell you " +
-      "is the harder of the two jobs.",
+      "nearest job going, and turned out to be unreasonably good at it. " +
+      "Demand is his lane: conjuring buyers out of thin air, for everything " +
+      "from pre-revenue start-ups to 9-figure multinationals. He’s an " +
+      "inventor too, who codes and builds hardware and electronics for the " +
+      "fun of it. Here in the lab he’s our Chief " +
+      "Experimenter, testing ideas with our own money before they go anywhere " +
+      "near yours. Dad to two girls, which he’ll tell you is the harder job.",
   },
   {
     key: "adam",
