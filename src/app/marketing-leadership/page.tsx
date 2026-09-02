@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import styles from "@/styles/path.module.css";
 import { Arrival } from "@/components/arrival";
+import { SiteFooter } from "@/components/site-footer";
 import { CONTACT_LABEL, whatsappHref } from "@/content/contact";
 import { Intro, BillLine, CtaLine } from "./intro";
 import { PRICING, PRICING_FOOTNOTE } from "@/content/proof";
@@ -287,23 +288,7 @@ export default function Page() {
         </section>
       </main>
 
-      <footer className={styles.night}>
-        <div className={styles.container}>
-          <div className={styles.foot}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className={styles.footLogo}
-              src="/assets/ttm-secondary-wht.png"
-              alt="Test Tube Marketing"
-              width={1600}
-              height={467}
-            />
-            <span>
-              Test Tube Marketing Ltd &nbsp;&middot;&nbsp; Reg no. 15388084
-            </span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

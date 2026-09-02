@@ -136,6 +136,28 @@ export const TESTIMONIALS = [
     name: "Richard Parsons",
     biz: "Platinum Commercial Academy",
   },
+  /*
+   * Supplied by Fish 2026-09-02, the eighth statement. Two things about it:
+   *
+   *   - "f*ck all" is censored exactly as he sent it. Not uncensored to match
+   *     James Sinclair's line in FLEX_QUOTES, which he signed off in full, and
+   *     not censored any further. His asterisk, his call.
+   *   - The only edit is "acquisiton" to "acquisition", a plain misspelling of
+   *     a common word. Flagged to him. Ian Mulligani's NAME is untouched and
+   *     stays as it is; that one is correct and is not a typo.
+   *
+   * Note for whoever reads this next: the £10 out for every £1 in here is a
+   * 10:1 return, while the Young Driver row in RECORD works out at 8.5:1
+   * (£64,945 from £7,663). Different periods, presumably. Raised with Fish
+   * rather than silently reconciled, because both figures are his.
+   */
+  {
+    kicker: "“These guys are magicians”",
+    quote:
+      "I’ve been through every marketing agency around and every single one promised the world and delivered f*ck all. They all told me our paid ads were ‘impossible to scale’. Then Fish and Ad took over - and we’re getting £10 out for every £1 we put in. They’ve reduced our customer acquisition cost by over 80% while quadrupling the volume. I don’t know how they do it - I suspect witchcraft!",
+    name: "Ian Mulligani",
+    biz: "Young Driver",
+  },
 ] as const;
 
 /*

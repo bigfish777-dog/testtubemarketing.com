@@ -2,6 +2,20 @@
 
 import { useVisitor, shapeOf } from "@/personalisation/use-visitor";
 import styles from "@/styles/path.module.css";
+import { TESTIMONIALS } from "@/content/proof";
+
+/*
+ * Spelt out, because "8 of them, in full" reads like a spec sheet in the middle
+ * of a sentence. Derived from the data rather than typed, so adding a ninth
+ * statement cannot leave the prose claiming eight. Falls back to the numeral
+ * past twelve, at which point the sentence needs rewriting anyway.
+ */
+const NUMBER_WORDS = [
+  "Zero", "One", "Two", "Three", "Four", "Five", "Six",
+  "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve",
+];
+const statementCount =
+  NUMBER_WORDS[TESTIMONIALS.length] ?? String(TESTIMONIALS.length);
 
 /*
  * DRAFT COPY throughout. Claude's wording, written to Fish's register from the
@@ -108,8 +122,8 @@ export function StatementsLine() {
 
   const line =
     shape === "both" || shape === "company"
-      ? `Seven of them, in full, with names attached. Nothing trimmed to make us look better to ${visitor.company}.`
-      : "Seven of them, in full, with names attached. Nothing trimmed to make us look better.";
+      ? `${statementCount} of them, in full, with names attached. Nothing trimmed to make us look better to ${visitor.company}.`
+      : `${statementCount} of them, in full, with names attached. Nothing trimmed to make us look better.`;
 
   return <p className={styles.dropLine}>{line}</p>;
 }

@@ -859,6 +859,74 @@
   width: auto;
 }
 
+/*
+ * The legal block. Deliberately the quietest type on the site: it has to be
+ * present and readable, not competing. Sentence case rather than the footer's
+ * uppercase, because uppercase at this size is genuinely harder to read and
+ * this is the one block where someone may actually need to read the words.
+ */
+.legal {
+  border-top: 1px solid var(--night-rule);
+  padding-block: clamp(1.2rem, 3.5vh, 1.8rem);
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: var(--t-mono);
+  line-height: 1.7;
+  color: rgba(247, 243, 236, 0.45);
+}
+
+.legalRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 2rem;
+  justify-content: space-between;
+  margin: 0 0 clamp(0.8rem, 2.4vh, 1.2rem);
+}
+
+.legalLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+}
+
+.legalLinks a {
+  color: rgba(247, 243, 236, 0.7);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(53, 224, 106, 0.4);
+}
+.legalLinks a:hover,
+.legalLinks a:focus-visible {
+  color: var(--phosphor);
+}
+
+/* Numbered to match the live site's [1] [2] [3], which is how these read as
+   disclaimers rather than as stray sentences. */
+.disclaimers {
+  list-style: none;
+  margin: 0 0 clamp(0.8rem, 2.4vh, 1.2rem);
+  padding: 0;
+  counter-reset: disclaimer;
+  max-width: 90ch;
+}
+
+.disclaimers li {
+  counter-increment: disclaimer;
+  position: relative;
+  /* "[1]" is three monospace characters, so anything under 4ch has the marker
+     touching the sentence. It did, at 2.6ch. */
+  padding-left: 4ch;
+}
+
+.disclaimers li::before {
+  content: "[" counter(disclaimer) "]";
+  position: absolute;
+  left: 0;
+  color: rgba(247, 243, 236, 0.35);
+}
+
+.copyright {
+  margin: 0;
+}
+
 .srOnly {
   position: absolute;
   width: 1px;

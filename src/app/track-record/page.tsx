@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import styles from "@/styles/path.module.css";
 import { Arrival } from "@/components/arrival";
+import { SiteFooter } from "@/components/site-footer";
 import { CONTACT_LABEL, whatsappHref } from "@/content/contact";
 import { FOUNDERS } from "@/content/founders";
 import { Intro, StatementsLine, CtaLine } from "./intro";
@@ -117,7 +118,11 @@ export default function Page() {
         <section className={styles.band} aria-labelledby="said-h">
           <div className={styles.container}>
             <p className={styles.sys}>
-              <span>// on the record / 7 verified statements</span>
+              {/* Count comes from the data. A hand-typed one is how the record
+                  lede ended up claiming ten against seven rows. */}
+              <span>
+                // on the record / {TESTIMONIALS.length} verified statements
+              </span>
             </p>
             <h2 className={styles.h2} id="said-h">
               In their words, not ours.
@@ -243,23 +248,7 @@ export default function Page() {
         </section>
       </main>
 
-      <footer className={styles.night}>
-        <div className={styles.container}>
-          <div className={styles.foot}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className={styles.footLogo}
-              src="/assets/ttm-secondary-wht.png"
-              alt="Test Tube Marketing"
-              width={1600}
-              height={467}
-            />
-            <span>
-              Test Tube Marketing Ltd &nbsp;&middot;&nbsp; Reg no. 15388084
-            </span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

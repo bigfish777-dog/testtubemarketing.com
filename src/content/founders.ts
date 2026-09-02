@@ -39,8 +39,8 @@ export const FOUNDERS: readonly Founder[] = [
     key: "fish",
     name: "Nick “Fish” Fisher",
     role: "Co-founder / Chief Experimenter",
-    photo: "/assets/founders/nick-fisher.jpg",
-    alt: "Nick Fisher, co-founder of Test Tube Marketing, mid-sentence with a microphone in hand, gesturing, against a dark grey wall",
+    photo: "/assets/founders/nick-fisher-award.jpg",
+    alt: "Nick Fisher, co-founder of Test Tube Marketing, smiling in an olive shirt and holding a Midlands StartUp Awards certificate reading Marketing and Advertising StartUp of the Year",
     width: 1200,
     height: 1500,
     /*
@@ -68,10 +68,10 @@ export const FOUNDERS: readonly Founder[] = [
     key: "adam",
     name: "Adam Ashburn",
     role: "Co-founder / Systems & Strategy",
-    photo: "/assets/founders/adam-ashburn.jpg",
-    alt: "Adam Ashburn, co-founder of Test Tube Marketing, seated relaxed in a navy polo shirt against a blue stage curtain",
-    width: 1000,
-    height: 1250,
+    photo: "/assets/founders/adam-ashburn-eca.jpg",
+    alt: "Adam Ashburn, co-founder of Test Tube Marketing, speaking on stage with a microphone, in a white shirt over a Test Tube Marketing t-shirt",
+    width: 1200,
+    height: 1500,
     bio:
       "Adam was meant to be a golf pro. Then he got run over, and marketing " +
       "got him instead. He spent years as CMO at a group of training " +
