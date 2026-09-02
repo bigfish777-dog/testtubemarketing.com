@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./terminal.module.css";
 import { DRAFT } from "./draft-copy";
+import { whatsappHref } from "@/content/contact";
 
 /*
  * The terminal. Fish's direction 2026-07-31, second pass against his
@@ -329,7 +330,7 @@ export default function Terminal() {
       <div className={styles.statusbar}>
         <span>{phase.kind === "intro" ? DRAFT.hint : DRAFT.hintQuiet}</span>
         <span className={styles.statusRight}>
-          <a className={styles.statusLink} href="https://book.testtubemarketing.com">
+          <a className={styles.statusLink} href={whatsappHref("the terminal")}>
             {DRAFT.footRight}
           </a>
           {stamp ? `  ${stamp}` : ""}

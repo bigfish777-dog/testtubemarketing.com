@@ -122,15 +122,14 @@ export function CtaLine() {
   if (shape === "both" || shape === "name") {
     return (
       <p className={styles.lead}>
-        Satisfied, {visitor.name}? Then the next bit is a conversation. Forty
-        minutes, no pitch, no pressure.
+        Satisfied, {visitor.name}? Then the next bit is a conversation. No pitch, no pressure.
       </p>
     );
   }
 
   return (
     <p className={styles.lead}>
-      Satisfied? Then the next bit is a conversation. Forty minutes, no pitch,
+      Satisfied? Then the next bit is a conversation. No pitch,
       no pressure.
     </p>
   );

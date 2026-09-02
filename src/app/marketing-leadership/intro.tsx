@@ -127,7 +127,7 @@ export function CtaLine() {
   if (shape === "both" || shape === "name") {
     return (
       <p className={styles.lead}>
-        Worth a conversation, {visitor.name}? Forty minutes, no pitch, no
+        Worth a conversation, {visitor.name}? No pitch, no
         pressure, and we&apos;ll tell you if we&apos;re not the right fit.
       </p>
     );
@@ -135,7 +135,7 @@ export function CtaLine() {
 
   return (
     <p className={styles.lead}>
-      Worth a conversation? Forty minutes, no pitch, no pressure, and
+      Worth a conversation? No pitch, no pressure, and
       we&apos;ll tell you if we&apos;re not the right fit.
     </p>
   );

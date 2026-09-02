@@ -141,15 +141,14 @@ export function CtaLine() {
     return (
       <p className={styles.lead}>
         Go on then, {visitor.name}. Date, audience, and what you want them
-        walking out believing. Forty minutes, no pitch, no pressure.
+        walking out believing. No pitch, no pressure.
       </p>
     );
   }
 
   return (
     <p className={styles.lead}>
-      Date, audience, and what you want them walking out believing. Forty
-      minutes, no pitch, no pressure.
+      Date, audience, and what you want them walking out believing. No pitch, no pressure.
     </p>
   );
 }

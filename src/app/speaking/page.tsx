@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import styles from "@/styles/path.module.css";
 import { Arrival } from "@/components/arrival";
+import { CONTACT_LABEL, whatsappHref } from "@/content/contact";
 import { FOUNDERS } from "@/content/founders";
 import { Intro, RoomsLine, CtaLine } from "./intro";
 
@@ -18,7 +19,6 @@ import { Intro, RoomsLine, CtaLine } from "./intro";
  *   - The stage list is DELIBERATELY UNPOPULATED. See the note above it.
  */
 
-const BOOK_URL = "https://book.testtubemarketing.com";
 
 export const metadata: Metadata = {
   title: "Speaking - Test Tube Marketing",
@@ -180,8 +180,8 @@ export default function Page() {
             </h2>
             <CtaLine />
             <div className={styles.ctaRow}>
-              <a className={styles.book} href={BOOK_URL}>
-                <span aria-hidden="true">&gt;</span> Book a call
+              <a className={styles.book} href={whatsappHref("the speaking page")}>
+                <span aria-hidden="true">&gt;</span> {CONTACT_LABEL}
               </a>
               <p className={styles.ctaNote}>
                 // from &pound;15,000 plus expenses

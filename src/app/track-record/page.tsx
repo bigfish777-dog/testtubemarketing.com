@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import styles from "@/styles/path.module.css";
 import { Arrival } from "@/components/arrival";
+import { CONTACT_LABEL, whatsappHref } from "@/content/contact";
 import { FOUNDERS } from "@/content/founders";
 import { Intro, StatementsLine, CtaLine } from "./intro";
 import {
@@ -29,7 +30,6 @@ import {
  * The wording here matches what was signed off; do not promote it to a win.
  */
 
-const BOOK_URL = "https://book.testtubemarketing.com";
 
 export const metadata: Metadata = {
   title: "Our Record - Test Tube Marketing",
@@ -225,10 +225,19 @@ export default function Page() {
             </h2>
             <CtaLine />
             <div className={styles.ctaRow}>
-              <a className={styles.book} href={BOOK_URL}>
-                <span aria-hidden="true">&gt;</span> Book a call
+              <a className={styles.book} href={whatsappHref("the due diligence page")}>
+                <span aria-hidden="true">&gt;</span> {CONTACT_LABEL}
               </a>
-              <p className={styles.ctaNote}>// no pitch, no pressure</p>
+              {/*
+                DRAFT - Claude's, not Fish's. It used to read "// no pitch, no
+                pressure", which worked while the lead above it said "Forty
+                minutes, no pitch, no pressure". Dropping the forty minutes,
+                since there is no call to book, left the two saying the same six
+                words one under the other. This says something the lead does
+                not, and it is true of a WhatsApp in a way it was never true of
+                a booking form.
+              */}
+              <p className={styles.ctaNote}>// straight to us, not a form</p>
             </div>
           </div>
         </section>

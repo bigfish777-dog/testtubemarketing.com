@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import styles from "@/styles/path.module.css";
 import { Arrival } from "@/components/arrival";
+import { CONTACT_LABEL, whatsappHref } from "@/content/contact";
 import { Intro, BillLine, CtaLine } from "./intro";
 import { PRICING, PRICING_FOOTNOTE } from "@/content/proof";
 
@@ -19,7 +20,6 @@ import { PRICING, PRICING_FOOTNOTE } from "@/content/proof";
  *   - The personalised opener and section framing are Claude's draft.
  */
 
-const BOOK_URL = "https://book.testtubemarketing.com";
 
 const RETAINER_YEAR = [
   {
@@ -279,8 +279,8 @@ export default function Page() {
             </h2>
             <CtaLine />
             <div className={styles.ctaRow}>
-              <a className={styles.book} href={BOOK_URL}>
-                <span aria-hidden="true">&gt;</span> Book a call
+              <a className={styles.book} href={whatsappHref("the retainer page")}>
+                <span aria-hidden="true">&gt;</span> {CONTACT_LABEL}
               </a>
             </div>
           </div>

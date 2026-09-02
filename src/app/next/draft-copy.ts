@@ -62,5 +62,5 @@ export const DRAFT = {
   hintQuiet: "Press Return to continue",
 
   footLeft: "Fractional marketing leadership",
-  footRight: "Book a call",
+  footRight: "WhatsApp us",
 } as const;
