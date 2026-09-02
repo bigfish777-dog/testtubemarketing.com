@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { whatsappHref } from "@/content/contact";
 
 /*
  * AI Leverage Ladder opt-in (round 4).
@@ -76,7 +77,8 @@ export async function POST(req: Request) {
         "",
         "It shows you the five rungs, where most established businesses actually sit, and what one rung up looks like. It takes about four minutes to read, and it prints cleanly if you want it on paper.",
         "",
-        "If you read it and want to talk about where your business sits, book a Marketing Growth Call: https://book.testtubemarketing.com",
+        // Was a booking link that resolves but serves nothing. Fish 2026-09-02.
+        `If you read it and want to talk about where your business sits, send us a WhatsApp: ${whatsappHref("the AI ladder email")}`,
         "",
         "No pressure either way.",
         "",

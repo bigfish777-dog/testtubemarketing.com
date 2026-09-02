@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { whatsappHref } from "@/content/contact";
 
 /*
  * THE AI LEVERAGE LADDER (round 4 opt-in asset).
@@ -133,12 +134,10 @@ export default function AiLadder() {
             If you want a second pair of eyes on where your business sits and
             which rung to take next, that&apos;s a conversation we have with
             clients every week.{" "}
-            <a className="ladder-link" href="https://book.testtubemarketing.com">
-              Book a Marketing Growth Call <span aria-hidden="true">&rarr;</span>
+            <a className="ladder-link" href={whatsappHref("the AI ladder")}>
+              Send us a WhatsApp <span aria-hidden="true">&rarr;</span>
             </a>{" "}
-            <span className="body-soft">
-              40 minutes, no pitch, no pressure.
-            </span>
+            <span className="body-soft">No pitch, no pressure.</span>
           </p>
         </section>
 

@@ -5,6 +5,7 @@ import { BeakerScrub } from "./beaker-scrub";
 import { AwardViewer } from "./award-viewer";
 import { CoffeeTicker } from "./coffee-ticker";
 import { FOUNDERS } from "@/content/founders";
+import { whatsappHref } from "@/content/contact";
 
 /*
  * TWO SPEEDS rebuild (design-direction-v2.md + site-copy-v2.md, 2026-07-23).
@@ -14,7 +15,13 @@ import { FOUNDERS } from "@/content/founders";
  * section CANNOT go to production with placeholders in it.
  */
 
-const BOOK_URL = "https://book.testtubemarketing.com";
+/* Was BOOK_URL, pointing at a booking page that answers 200 with an empty
+   body. Fish 2026-09-02: there is no call booking, so every CTA goes to
+   WhatsApp. Context strings say which surface the enquiry came from. */
+const WA_HEADER = whatsappHref("the site header");
+const WA_HERO = whatsappHref("the homepage hero");
+const WA_PRICING = whatsappHref("the pricing section");
+const WA_LADDER = whatsappHref("the AI ladder section");
 
 /*
  * Worked-with marquee (round 4, item 8): dual streams, monochrome ink.
@@ -221,7 +228,7 @@ export default function Home() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/ttm-secondary.png" alt="" width={6621} height={1899} />
           </a>
-          <a href={BOOK_URL} className="btn btn-outline">
+          <a href={WA_HEADER} className="btn btn-outline">
             See If We&apos;re A Fit
           </a>
         </div>
@@ -276,8 +283,8 @@ export default function Home() {
               <CaptureForm idPrefix="hero" />
               <p className="mono hero-note">
                 {"// FOR ESTABLISHED BUSINESSES"}{" "}
-                <a className="quiet-link" href={BOOK_URL}>
-                  OR BOOK A CALL <span aria-hidden="true">&rarr;</span>
+                <a className="quiet-link" href={WA_HERO}>
+                  OR WHATSAPP US <span aria-hidden="true">&rarr;</span>
                 </a>
               </p>
             </div>
@@ -830,7 +837,7 @@ export default function Home() {
               STANDALONE SESSIONS: PLUS 7.5% EXPENSES WITHIN THE UK.
               INTERNATIONAL SESSIONS QUOTED INDIVIDUALLY.
             </p>
-            <a href={BOOK_URL} className="btn btn-outline pricing-cta">
+            <a href={WA_PRICING} className="btn btn-outline pricing-cta">
               See If We&apos;re A Fit <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
@@ -876,10 +883,9 @@ export default function Home() {
               {"// NO SPAM. UNSUBSCRIBE WHENEVER YOU LIKE."}
             </p>
             <p className="cta-book-line">
-              Rather just talk to us? Book a Marketing Growth Call. 40
-              minutes. No pitch, no pressure.{" "}
-              <a className="ladder-link" href={BOOK_URL}>
-                Book a call <span aria-hidden="true">&rarr;</span>
+              Rather just talk to us? No pitch, no pressure.{" "}
+              <a className="ladder-link" href={WA_LADDER}>
+                WhatsApp us <span aria-hidden="true">&rarr;</span>
               </a>
             </p>
           </div>

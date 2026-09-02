@@ -8,13 +8,10 @@
  * has a "Book Your Free Marketing Growth Call" title, but serves an empty
  * body, so every CTA pointing at it was sending people to a dead end.
  *
- * ┌───────────────────────────────────────────────────────────────────────┐
- * │ UNVERIFIED: the number below is the TTM WhatsApp number on file, which │
- * │ is the Whapi-bridged bot/agent line used for posting into groups. It   │
- * │ is NOT confirmed as the right destination for inbound enquiries from   │
- * │ the public site. Fish has been asked. Until he confirms, treat this as │
- * │ a placeholder that happens to be plausible, not a checked fact.        │
- * └───────────────────────────────────────────────────────────────────────┘
+ * The number is CONFIRMED by Fish, 2026-09-02, after being shown that it is the
+ * Whapi-bridged TTM line rather than a personal handset. It is the destination
+ * for every inbound enquiry from the site, so anything that changes how that
+ * line is monitored changes where leads land.
  */
 
 /* International format, digits only: no +, no spaces. wa.me rejects anything else. */
