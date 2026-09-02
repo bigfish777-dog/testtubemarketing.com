@@ -23,7 +23,14 @@ const S = {
   } as React.CSSProperties,
   h2: { fontSize: 22, marginTop: 40, marginBottom: 12 } as React.CSSProperties,
   p: { color: "var(--ink-soft)", marginBottom: 14 } as React.CSSProperties,
-  ul: { color: "var(--ink-soft)", paddingLeft: 22, marginBottom: 14 } as React.CSSProperties,
+  /* The global reset strips list markers, which left the policy's lists as
+     unmarked indented lines. Restored here only, so nothing else moves. */
+  ul: {
+    color: "var(--ink-soft)",
+    listStyle: "disc",
+    paddingLeft: 22,
+    marginBottom: 14,
+  } as React.CSSProperties,
 };
 
 export default function PrivacyPolicy() {
