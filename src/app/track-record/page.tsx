@@ -27,8 +27,10 @@ import {
  *   - Both founder bios are Fish's, verbatim.
  *   - The personalised opener and section framing are Claude's draft.
  *
- * The award line says StartUp of the Year but it is a QUALIFIER, not a win.
- * The wording here matches what was signed off; do not promote it to a win.
+ * The award line claims the Midlands StartUp Awards 2026 win, confirmed by Fish
+ * 2026-09-15 and signed off in that wording. An earlier note here called it a
+ * qualifier and said never to promote it; that was wrong and is reversed.
+ * The national final is a separate thing and is NOT claimed. Do not add it.
  */
 
 

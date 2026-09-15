@@ -8,13 +8,17 @@
  *
  * Locked facts that live here and must not drift:
  *   - Ian Davis, not Davies.
- *   - "Midlands StartUp Awards 2026" is a QUALIFIER, not a win.
+ *   - The Midlands StartUp Awards 2026 category WAS won. Fish confirmed the win
+ *     2026-09-15: he won the Midlands category, which qualified TTM for the
+ *     national final. Earlier comments here called it a qualifier, not a win,
+ *     and that was wrong. Do not demote it back.
+ *   - The national final outcome is NOT claimed anywhere. Do not add it.
  *   - The profanity in James Sinclair's line has Fish's explicit sign-off.
  *   - No row may carry a placeholder. "[quote coming]" never ships.
  */
 
 export const AWARD = {
-  title: "Marketing & Advertising StartUp of the Year",
+  title: "Winner: Marketing & Advertising StartUp of the Year",
   body: "Midlands StartUp Awards 2026",
 } as const;
 

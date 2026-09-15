@@ -40,7 +40,7 @@ export const FOUNDERS: readonly Founder[] = [
     name: "Nick “Fish” Fisher",
     role: "Co-founder / Chief Experimenter",
     photo: "/assets/founders/nick-fisher-award.jpg",
-    alt: "Nick Fisher, co-founder of Test Tube Marketing, smiling in an olive shirt and holding a Midlands StartUp Awards certificate reading Marketing and Advertising StartUp of the Year",
+    alt: "Nick Fisher, co-founder of Test Tube Marketing, smiling in an olive shirt and holding a Midlands StartUp Awards certificate reading Winner 2026, Marketing and Advertising StartUp of the Year",
     width: 1200,
     height: 1500,
     /*

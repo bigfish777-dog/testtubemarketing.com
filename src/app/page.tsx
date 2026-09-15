@@ -709,7 +709,7 @@ export default function Home() {
             <div className="award" data-fade>
               <div>
                 <p className="h3">
-                  Marketing &amp; Advertising StartUp of the Year
+                  Winner: Marketing &amp; Advertising StartUp of the Year
                 </p>
                 <span className="mono award-sub">
                   MIDLANDS STARTUP AWARDS 2026
