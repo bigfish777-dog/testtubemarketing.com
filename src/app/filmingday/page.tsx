@@ -45,6 +45,16 @@ const steps = [
   },
 ];
 
+// Frames from ads we've already made, picked by Fish (11 Nov 2026). Labelled
+// by business, not by person. wide = a landscape frame.
+const reel = [
+  { src: "/assets/filmingday/reel-fish.jpg", who: "Test Tube Marketing" },
+  { src: "/assets/filmingday/reel-tess.jpg", who: "Tess Cope" },
+  { src: "/assets/filmingday/reel-evoke.jpg", who: "Evoke Tree Services", wide: true },
+  { src: "/assets/filmingday/reel-thrive.jpg", who: "Thrive" },
+  { src: "/assets/filmingday/reel-ad.jpg", who: "Test Tube Marketing" },
+];
+
 export default function FilmingDay() {
   return (
     <div className={s.page}>
@@ -133,6 +143,18 @@ export default function FilmingDay() {
               Fish<span>Co-founder, Test Tube Marketing</span>
             </p>
           </div>
+        </section>
+
+        <section className={`container ${s.reel}`} aria-label="Frames from ads we've made with clients">
+          <ul className={s.reelStrip}>
+            {reel.map((r) => (
+              <li key={r.src} className={r.wide ? s.reelWide : undefined}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={r.src} alt={`A frame from a ${r.who} ad`} loading="lazy" />
+                <span>{r.who}</span>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section className={`container ${s.how}`}>

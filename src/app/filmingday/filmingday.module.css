@@ -79,6 +79,26 @@
 .sign { font-weight: 700; color: var(--ink) !important; margin-top: 26px !important; font-size: 20px; }
 .sign span { display: block; font-weight: 400; font-size: 14px; color: var(--ink-soft); }
 
+/* Reel: frames from ads already made, one row at a shared height. Columns are
+   sized by aspect ratio (9:16 portrait = 81, 16:9 landscape = 256) so every
+   frame shows whole at the same height. */
+.reel { padding-bottom: clamp(56px, 8vw, 104px); }
+.reelStrip {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: 81fr 81fr 256fr 81fr 81fr; gap: 12px;
+}
+.reelStrip li { min-width: 0; margin: 0; }
+.reelStrip img {
+  display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover;
+  border-radius: 6px; box-shadow: var(--shadow-img); background: var(--ink);
+}
+.reelStrip .reelWide img { aspect-ratio: 16 / 9; height: auto; }
+.reelStrip span {
+  display: block; margin-top: 10px;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft);
+}
+
 /* How */
 .how {
   display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 72px); align-items: start;
@@ -155,6 +175,13 @@
 @media (max-width: 860px) {
   .hero, .why, .formSection, .how, .tbcSection { grid-template-columns: 1fr; }
   .photo, .sideHead { position: static; }
+  /* Too narrow for one row: the strip scrolls sideways inside itself */
+  .reelStrip {
+    display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
+    padding-bottom: 8px; -webkit-overflow-scrolling: touch;
+  }
+  .reelStrip li { flex: 0 0 auto; scroll-snap-align: start; }
+  .reelStrip img, .reelStrip .reelWide img { height: 300px; width: auto; }
 }
 @media (max-width: 520px) {
   .form { grid-template-columns: 1fr; }
