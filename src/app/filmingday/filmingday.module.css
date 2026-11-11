@@ -90,7 +90,7 @@
 .reelStrip li { min-width: 0; margin: 0; }
 .reelStrip img {
   display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover;
-  border-radius: 6px; box-shadow: var(--shadow-img); background: var(--ink);
+  border-radius: 6px; background: var(--ink);
 }
 .reelStrip .reelWide img { aspect-ratio: 16 / 9; height: auto; }
 .reelStrip span {
@@ -181,7 +181,7 @@
     padding-bottom: 8px; -webkit-overflow-scrolling: touch;
   }
   .reelStrip li { flex: 0 0 auto; scroll-snap-align: start; }
-  .reelStrip img, .reelStrip .reelWide img { height: 300px; width: auto; }
+  .reelStrip img, .reelStrip .reelWide img { height: 280px; width: auto; }
 }
 @media (max-width: 520px) {
   .form { grid-template-columns: 1fr; }
