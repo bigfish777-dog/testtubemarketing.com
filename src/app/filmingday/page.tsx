@@ -176,6 +176,38 @@ export default function FilmingDay() {
           </ol>
         </section>
 
+        <section className={`container ${s.invest}`}>
+          <div className={s.sideHead}>
+            <h2 className={s.h2}>The investment</h2>
+            <p>We don&apos;t have prices yet.</p>
+          </div>
+          <div className={s.investBody}>
+            <p>
+              We&apos;re getting quotes from a few hotels and videographers to work out what the day
+              will cost. We&apos;ll confirm the figure along with the date and venue.
+            </p>
+            <p>
+              This day isn&apos;t designed to make us money. There&apos;ll be an investment to secure
+              your place, and for our clients it&apos;ll be less than you&apos;d pay to hire a
+              videographer yourself.
+            </p>
+            <dl className={s.tiers}>
+              <div>
+                <dt>Our clients</dt>
+                <dd>Places are offered to you first.</dd>
+              </div>
+              <div>
+                <dt>Invited guests</dt>
+                <dd>
+                  Depending on demand, we may invite a small number of past clients and people we know
+                  well, who we think would be good to have there. Their places cost more.
+                </dd>
+              </div>
+            </dl>
+            <p className={s.policy}>And we have a strict &ldquo;no dickhead&rdquo; policy.</p>
+          </div>
+        </section>
+
         <section className={s.band}>
           <div className={`container ${s.tbcSection}`}>
           <h2 className={s.h2}>What we don&apos;t know yet</h2>
@@ -187,10 +219,6 @@ export default function FilmingDay() {
             <div>
               <dt>The venue</dt>
               <dd>We&apos;re talking to a shortlist of spa hotels in the Midlands now.</dd>
-            </div>
-            <div>
-              <dt>The price</dt>
-              <dd>There&apos;ll be a fee. We&apos;ll confirm it along with the date and venue.</dd>
             </div>
           </dl>
           </div>

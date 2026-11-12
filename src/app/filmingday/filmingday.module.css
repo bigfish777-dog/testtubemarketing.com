@@ -119,6 +119,26 @@
   font-size: 11.5px !important; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft) !important;
 }
 
+/* Investment: same side-heading layout as How, prices still to come */
+.invest {
+  display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 72px); align-items: start;
+  padding-top: clamp(56px, 8vw, 104px); padding-bottom: clamp(56px, 8vw, 104px); border-top: 1px solid var(--rule);
+}
+.investBody { min-width: 0; max-width: 36em; }
+.investBody > p { margin: 0 0 18px; color: var(--ink-2); }
+.tiers { margin: 28px 0; }
+.tiers > div {
+  display: grid; grid-template-columns: 9em minmax(0, 1fr); gap: 16px;
+  padding: 18px 0; border-bottom: 1px solid var(--rule);
+}
+.tiers > div:first-child { border-top: 1px solid var(--rule); }
+.tiers dt {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pink); padding-top: 4px;
+}
+.tiers dd { margin: 0; color: var(--ink-2); }
+.policy { font-weight: 700; color: var(--ink) !important; font-size: 20px; margin: 0 !important; }
+
 /* Unknowns */
 .band { background: var(--ink); color: var(--cream); position: relative; z-index: 2; }
 .tbcSection {
@@ -173,7 +193,7 @@
 .foot a { color: var(--ink-soft); }
 
 @media (max-width: 860px) {
-  .hero, .why, .formSection, .how, .tbcSection { grid-template-columns: 1fr; }
+  .hero, .why, .formSection, .how, .invest, .tbcSection { grid-template-columns: 1fr; }
   .photo, .sideHead { position: static; }
   /* Too narrow for one row: the strip scrolls sideways inside itself */
   .reelStrip {
@@ -186,7 +206,7 @@
 @media (max-width: 520px) {
   .form { grid-template-columns: 1fr; }
   .step { grid-template-columns: 40px minmax(0, 1fr); gap: 10px; }
-  .unknowns > div { grid-template-columns: 1fr; gap: 4px; }
+  .unknowns > div, .tiers > div { grid-template-columns: 1fr; gap: 4px; }
   .sheetRow { grid-template-columns: 6.2em minmax(0, 1fr); }
   .top :global(.btn-outline) { padding: 10px 16px; font-size: 13px; }
 }
