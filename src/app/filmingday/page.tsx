@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InterestForm } from "./interest-form";
+import { ReelRing } from "./reel-ring";
 import s from "./filmingday.module.css";
 
 // Interest page for the spring 2027 client filming day. Self-contained on
@@ -43,16 +44,6 @@ const steps = [
     title: "Your content, edited and ready",
     text: "Your footage comes back edited and ready to use. There'll be a sensible limit on how much each person films, so everyone gets a proper turn.",
   },
-];
-
-// Frames from ads we've already made, picked by Fish (11 Nov 2026). Labelled
-// by business, not by person. wide = a landscape frame.
-const reel = [
-  { src: "/assets/filmingday/reel-fish.jpg", who: "Test Tube Marketing" },
-  { src: "/assets/filmingday/reel-tess.jpg", who: "Tess Cope" },
-  { src: "/assets/filmingday/reel-evoke.jpg", who: "Evoke Tree Services", wide: true },
-  { src: "/assets/filmingday/reel-thrive.jpg", who: "Thrive" },
-  { src: "/assets/filmingday/reel-ad.jpg", who: "Test Tube Marketing" },
 ];
 
 export default function FilmingDay() {
@@ -116,12 +107,10 @@ export default function FilmingDay() {
         </section>
 
         <section className={`container ${s.why}`}>
-          <figure className={s.photo}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/hero-founders.jpg" alt="Ad and Fish, the founders of Test Tube Marketing" />
-          </figure>
-          <div className={s.prose}>
+          <div className={s.sideHead}>
             <h2 className={s.h2}>Why we&apos;re doing this</h2>
+          </div>
+          <div className={s.prose}>
             <p>
               We&apos;re making more ads and videos for our clients than ever. Most of them start the same
               way: a script from us, then you, a phone and a spare ten minutes.
@@ -145,17 +134,7 @@ export default function FilmingDay() {
           </div>
         </section>
 
-        <section className={`container ${s.reel}`} aria-label="Frames from ads we've made with clients">
-          <ul className={s.reelStrip}>
-            {reel.map((r) => (
-              <li key={r.src} className={r.wide ? s.reelWide : undefined}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={r.src} alt={`A frame from a ${r.who} ad`} loading="lazy" />
-                <span>{r.who}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <ReelRing />
 
         <section className={`container ${s.how}`}>
           <div className={s.sideHead}>

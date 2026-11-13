@@ -1,8 +1,17 @@
-/* Client filming day page. Uses the site tokens from globals.css (cream, ink,
-   pink, Inter + JetBrains Mono). Signature: the hero's call sheet, a real
-   film-production document carrying the facts we know so far. */
+/* Client filming day page. Site tokens from globals.css (ink, pink, amber,
+   Inter + JetBrains Mono) on a white page, not the homepage cream (Fish,
+   13 Nov 2026). Signature: the ring of client ad clips turning in 3D, with
+   the hero's call sheet as the supporting document. */
 
-.page { position: relative; }
+.page {
+  position: relative;
+  background: #fff;
+  --rule: rgba(27, 42, 61, 0.1);
+  --mist: #F3F5F8;
+}
+/* White page: drop the site's cream and paper grain on this route only */
+:global(body):has(.page) { background: #fff !important; }
+:global(body):has(.page)::before { display: none; }
 
 .top { position: relative; z-index: 3; padding: 22px 0; }
 .topInner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
@@ -59,45 +68,98 @@
   font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--amber);
 }
 .rec { display: inline-flex; align-items: center; gap: 8px; color: var(--cream); }
-.rec i { width: 9px; height: 9px; border-radius: 50%; background: var(--pink); }
+.rec i { width: 9px; height: 9px; border-radius: 50%; background: var(--pink); animation: rec 1.6s ease-in-out infinite; }
+@keyframes rec { 50% { opacity: 0.25; } }
+.sheetRow { animation: rowIn 0.5s cubic-bezier(.2,.7,.2,1) both; }
+.sheetRow:nth-child(1) { animation-delay: 0.25s; }
+.sheetRow:nth-child(2) { animation-delay: 0.35s; }
+.sheetRow:nth-child(3) { animation-delay: 0.45s; }
+.sheetRow:nth-child(4) { animation-delay: 0.55s; }
+.sheetRow:nth-child(5) { animation-delay: 0.65s; }
+.sheetRow:nth-child(6) { animation-delay: 0.75s; }
+@keyframes rowIn { from { opacity: 0; transform: translateY(6px); } }
 
 /* Shared type */
 .h2 { font-size: clamp(30px, 3.6vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin: 0 0 22px; text-wrap: balance; }
 .h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.015em; margin: 2px 0 8px; }
 
-/* Why */
+/* Why: side heading, same as How and The investment */
 .why {
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(32px, 6vw, 80px); align-items: start;
-  padding-top: clamp(56px, 8vw, 104px); padding-bottom: clamp(56px, 8vw, 104px);
+  display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(28px, 5vw, 72px); align-items: start;
+  padding-top: clamp(56px, 8vw, 104px); padding-bottom: clamp(24px, 4vw, 48px);
   border-top: 1px solid var(--rule);
 }
-.photo { margin: 0; position: sticky; top: 32px; }
-.photo img { width: 100%; height: auto; display: block; border-radius: 6px; box-shadow: var(--shadow-img); }
 .prose { max-width: 36em; min-width: 0; }
 .prose p { margin: 0 0 18px; color: var(--ink-2); }
 .sign { font-weight: 700; color: var(--ink) !important; margin-top: 26px !important; font-size: 20px; }
 .sign span { display: block; font-weight: 400; font-size: 14px; color: var(--ink-soft); }
 
-/* Reel: frames from ads already made, one row at a shared height. Columns are
-   sized by aspect ratio (9:16 portrait = 81, 16:9 landscape = 256) so every
-   frame shows whole at the same height. */
-.reel { padding-bottom: clamp(56px, 8vw, 104px); }
-.reelStrip {
-  list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: 81fr 81fr 256fr 81fr 81fr; gap: 12px;
+/* Reel ring: ten cards (five clips, each twice) fixed round a circle, tilted
+   towards the viewer and leaning forward, turning slowly. reel-ring.tsx sets
+   the turn and --facing (1 = facing us, -1 = facing away) on every frame. */
+.reel {
+  --w: 200px; --h: 356px; --r: 350px;
+  position: relative; overflow: hidden;
+  padding-bottom: clamp(56px, 8vw, 96px);
 }
-.reelStrip li { min-width: 0; margin: 0; }
-.reelStrip img {
-  display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover;
-  border-radius: 6px; background: var(--ink);
+.stage {
+  position: relative;
+  height: calc(var(--h) * 1.4 + var(--r) * 0.42);
+  perspective: 1700px; perspective-origin: 50% 35%;
 }
-.reelStrip .reelWide img { aspect-ratio: 16 / 9; height: auto; }
-.reelStrip span {
-  display: block; margin-top: 10px;
+.tilt {
+  position: absolute; left: 50%; top: 44%;
+  width: var(--w); height: var(--h);
+  margin: calc(var(--h) / -2) 0 0 calc(var(--w) / -2);
+  transform-style: preserve-3d; transform: rotateX(-11deg);
+}
+.spinner, .ring { position: absolute; inset: 0; transform-style: preserve-3d; }
+.spinner { will-change: transform; }
+.ring { list-style: none; margin: 0; padding: 0; }
+.card {
+  position: absolute; inset: 0; margin: 0; transform-style: preserve-3d;
+  transform: rotateY(calc(var(--i) * 36deg)) translateZ(var(--r)) rotateX(-7deg);
+  --facing: 1;
+}
+.face, .back {
+  position: absolute; inset: 0; border-radius: 14px; overflow: hidden;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.face {
+  background: var(--ink);
+  box-shadow: 0 26px 50px -26px rgba(27, 42, 61, 0.55);
+  opacity: calc(0.3 + 0.7 * max(var(--facing), 0));
+}
+.face video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.back {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  transform: rotateY(180deg); filter: grayscale(1); opacity: 0.16;
+}
+.who {
+  position: absolute; left: 10px; bottom: 10px; max-width: calc(100% - 20px);
+  padding: 5px 8px; border-radius: 6px;
+  background: rgba(27, 42, 61, 0.78); color: #fff;
   font-family: var(--font-jetbrains), ui-monospace, monospace;
-  font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft);
+  font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.3;
 }
+.floor {
+  position: absolute; left: 50%; bottom: 2%;
+  width: calc(var(--r) * 2.3); height: 80px; transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(27, 42, 61, 0.16), rgba(27, 42, 61, 0));
+  pointer-events: none;
+}
+.ringToggle {
+  display: flex; align-items: center; gap: 8px; margin: 0 auto;
+  padding: 8px 14px; border-radius: 999px; cursor: pointer;
+  background: transparent; color: var(--ink-soft); border: 1px solid var(--rule);
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.ringToggle:hover { color: var(--ink); border-color: var(--rule-strong); }
+.ringToggle:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
+.icoPause { width: 8px; height: 10px; border-left: 3px solid currentColor; border-right: 3px solid currentColor; }
+.icoPlay { width: 0; height: 0; border-left: 9px solid currentColor; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
 
 /* How */
 .how {
@@ -153,7 +215,7 @@
 .unknowns dd { margin: 0; color: rgba(245, 241, 235, 0.86); font-size: 18px; }
 
 /* Form */
-.formBand { background: var(--cream-2); position: relative; z-index: 2; }
+.formBand { background: var(--mist); position: relative; z-index: 2; }
 .formSection {
   display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
   gap: clamp(28px, 5vw, 72px); align-items: start;
@@ -172,7 +234,7 @@
 .optional { font-weight: 400; color: var(--ink-soft); font-size: 13px; margin-left: 4px; }
 .field input, .field textarea {
   font: inherit; font-size: 16px; color: var(--ink);
-  background: var(--cream); border: 1px solid var(--rule-strong); border-radius: 10px;
+  background: var(--mist); border: 1px solid var(--rule-strong); border-radius: 10px;
   padding: 12px 14px; width: 100%;
 }
 .field textarea { resize: vertical; min-height: 110px; }
@@ -194,14 +256,10 @@
 
 @media (max-width: 860px) {
   .hero, .why, .formSection, .how, .invest, .tbcSection { grid-template-columns: 1fr; }
-  .photo, .sideHead { position: static; }
-  /* Too narrow for one row: the strip scrolls sideways inside itself */
-  .reelStrip {
-    display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
-    padding-bottom: 8px; -webkit-overflow-scrolling: touch;
-  }
-  .reelStrip li { flex: 0 0 auto; scroll-snap-align: start; }
-  .reelStrip img, .reelStrip .reelWide img { height: 280px; width: auto; }
+  .sideHead { position: static; }
+  .why .h2 { margin-bottom: 0; }
+  .reel { --w: 132px; --h: 235px; --r: 232px; }
+  .stage { perspective: 1100px; }
 }
 @media (max-width: 520px) {
   .form { grid-template-columns: 1fr; }
@@ -209,4 +267,9 @@
   .unknowns > div, .tiers > div { grid-template-columns: 1fr; gap: 4px; }
   .sheetRow { grid-template-columns: 6.2em minmax(0, 1fr); }
   .top :global(.btn-outline) { padding: 10px 16px; font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheetRow, .rec i { animation: none; }
+  .ringToggle { display: none; }
 }
