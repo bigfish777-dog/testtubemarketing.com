@@ -5,7 +5,8 @@
 
 .page {
   position: relative;
-  background: #fff;
+  /* Pale tint behind the header and hero, fading to white (Fish, 14 Nov) */
+  background: linear-gradient(180deg, #EEF1F5 0, #F5F7F9 520px, #fff 860px) no-repeat, #fff;
   --rule: rgba(27, 42, 61, 0.1);
   --mist: #F3F5F8;
 }
