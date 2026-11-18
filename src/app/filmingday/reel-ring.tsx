@@ -1,7 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import s from "./filmingday.module.css";
+import base from "./filmingday.module.css";
+
+// Each page variant passes its own CSS module as `skin`. A skin must define
+// reel, stage, tilt, spinner, ring, card, face, back, who, floor, ringToggle,
+// icoPause and icoPlay, and place cards with rotateY(calc(var(--i) * 36deg)).
+type Skin = Record<string, string>;
 
 // Clips from ads we've already made, picked by Fish (11 Nov 2026), labelled by
 // business, not by person. Each clip appears twice, on opposite sides of the
@@ -17,7 +22,16 @@ const cards = [...clips, ...clips];
 const STEP = 360 / cards.length;
 const SECONDS_PER_TURN = 48;
 
-export function ReelRing() {
+export function ReelRing({
+  skin,
+  children,
+  label = "Clips from ads we've made with clients",
+}: {
+  skin?: Skin;
+  children?: React.ReactNode;
+  label?: string;
+}) {
+  const s = skin ?? base;
   const stage = useRef<HTMLDivElement>(null);
   const spinner = useRef<HTMLDivElement>(null);
   const cardEls = useRef<(HTMLLIElement | null)[]>([]);
@@ -86,7 +100,7 @@ export function ReelRing() {
   return (
     <section
       className={s.reel}
-      aria-label="Clips from ads we've made with clients"
+      aria-label={label}
     >
       <div className={s.stage} ref={stage}>
         <div className={s.tilt}>
@@ -131,6 +145,7 @@ export function ReelRing() {
           </div>
         </div>
         <div className={s.floor} aria-hidden="true" />
+        {children}
       </div>
       {/* Hidden under reduced motion, where nothing moves (see CSS) */}
       <button
