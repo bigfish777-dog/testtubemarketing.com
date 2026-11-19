@@ -1,6 +1,6 @@
 /* Variant 3: "Wrap party zine". White canvas; colour only arrives as big
    rounded tone-on-tone pastel blocks (pastel fill, deepened same-hue text).
-   Bricolage Grotesque for display, Figtree for body, Caveat only for the
+   Inter (the original page's display face) for headings, Figtree for body, Caveat only for the
    handwritten business names on the polaroids and the "Fish" signature.
    One motion moment: the ring of polaroid clips in the hero. */
 
@@ -19,7 +19,7 @@
   --hair: rgba(27, 27, 31, 0.1);
 
   /* Type */
-  --f-display: var(--v3-display), sans-serif;
+  --f-display: var(--font-inter), system-ui, sans-serif; /* Inter: the original page's display face (Fish, 19 Nov) */
   --f-body: var(--v3-body), sans-serif;
   --f-hand: var(--v3-hand), cursive;
   --fs-hero: clamp(52px, 6.6vw, 112px);
@@ -68,13 +68,13 @@
 
 /* Shared type */
 .h2 {
-  font-family: var(--f-display); font-weight: 600; font-size: var(--fs-h2);
-  letter-spacing: -0.035em; line-height: 0.98; margin: 0 0 22px;
-  font-variation-settings: "wdth" 92; text-wrap: balance;
+  font-family: var(--f-display); font-weight: 800; font-size: var(--fs-h2);
+  letter-spacing: -0.035em; line-height: 1; margin: 0 0 22px;
+  text-wrap: balance;
 }
 .h3 {
-  font-family: var(--f-display); font-weight: 600; font-size: var(--fs-h3);
-  letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 12px;
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-h3);
+  letter-spacing: -0.015em; line-height: 1.1; margin: 0 0 12px;
 }
 
 /* Hero */
@@ -88,9 +88,8 @@
 }
 .h1 {
   grid-area: h1; align-self: end;
-  font-family: var(--f-display); font-weight: 600; font-size: var(--fs-hero);
-  letter-spacing: -0.032em; line-height: 0.95; margin: 0;
-  font-variation-settings: "wdth" 90;
+  font-family: var(--f-display); font-weight: 800; font-size: var(--fs-hero);
+  letter-spacing: -0.035em; line-height: 0.96; margin: 0;
   position: relative; isolation: isolate;
 }
 .swash { position: relative; white-space: nowrap; color: var(--pink-deep); padding: 0 0.06em; }
@@ -280,7 +279,7 @@
   position: absolute; top: -0.3em; right: 18px; pointer-events: none;
   color: var(--deep);
   font-family: var(--f-display); font-weight: 700; font-size: 150px; line-height: 1;
-  letter-spacing: -0.05em; font-variation-settings: "wdth" 100;
+  letter-spacing: -0.05em;
 }
 .when, .sticker .h3 { padding-right: 104px; }
 .when { margin: 0 0 6px; font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
@@ -344,7 +343,7 @@
   display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
   gap: clamp(28px, 5vw, 72px); align-items: start;
 }
-.formH2 { font-size: clamp(52px, 8vw, 104px); }
+.formH2 { font-size: clamp(52px, 4.6vw, 68px); }
 .formIntro p { margin: 0; max-width: 24em; font-size: var(--fs-lead); }
 .form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; min-width: 0; }
 .field { display: grid; gap: 7px; min-width: 0; }

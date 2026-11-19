@@ -1,17 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import base from "./filmingday.module.css";
 
 type State = { kind: "idle" } | { kind: "sending" } | { kind: "sent"; first: string } | { kind: "error"; message: string };
 
-// `skin`: a variant's CSS module with form, field, wide, optional, submitRow,
+// `skin`: the page's CSS module with form, field, wide, optional, submitRow,
 // err, hp, done, doneTitle; `button`: the submit button's class.
 export function InterestForm({
   skin,
   button = "btn btn-primary",
-}: { skin?: Record<string, string>; button?: string } = {}) {
-  const s = skin ?? base;
+}: { skin: Record<string, string>; button?: string }) {
+  const s = skin;
   const [state, setState] = useState<State>({ kind: "idle" });
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {

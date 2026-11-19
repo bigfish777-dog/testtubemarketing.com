@@ -1,5 +1,5 @@
-// Every word on the filming day page, shared by the main page and the three
-// design variants (v1, v2, v3) so the copy can't drift between them. Copy is
+// Every word on the filming day page, kept apart from the layout so the
+// copy survives redesigns untouched. Copy is
 // Fish's (and the approved Investment section); don't rewrite it here.
 
 export const hero = {

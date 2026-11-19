@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import base from "./filmingday.module.css";
-
-// Each page variant passes its own CSS module as `skin`. A skin must define
+// The page passes its CSS module as `skin`. A skin must define
 // reel, stage, tilt, spinner, ring, card, face, back, who, floor, ringToggle,
 // icoPause and icoPlay, and place cards with rotateY(calc(var(--i) * 36deg)).
 type Skin = Record<string, string>;
@@ -27,11 +25,11 @@ export function ReelRing({
   children,
   label = "Clips from ads we've made with clients",
 }: {
-  skin?: Skin;
+  skin: Skin;
   children?: React.ReactNode;
   label?: string;
 }) {
-  const s = skin ?? base;
+  const s = skin;
   const stage = useRef<HTMLDivElement>(null);
   const spinner = useRef<HTMLDivElement>(null);
   const cardEls = useRef<(HTMLLIElement | null)[]>([]);
