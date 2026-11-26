@@ -17,6 +17,16 @@ export const metadata: Metadata = {
   title: "Client Filming Day 2027 - Test Tube Marketing",
   description:
     "One day at a spa hotel in the Midlands. We plan your shoot with you, a professional videographer films it, and you get it back edited and ready to use.",
+  // Share card for WhatsApp, email and social links (built from the page's
+  // own polaroids and headline, rendered in headless Chrome, 26 Nov 2026).
+  openGraph: {
+    type: "website",
+    url: "https://testtubemarketing.com/filmingday",
+    title: "Get months of ads and content filmed in a single day.",
+    description: "Client filming day / Spring 2027. One day at a spa hotel in the Midlands.",
+    images: [{ url: "https://testtubemarketing.com/assets/filmingday/og.jpg", width: 1200, height: 630, alt: "Get months of ads and content filmed in a single day." }],
+  },
+  twitter: { card: "summary_large_image", images: ["https://testtubemarketing.com/assets/filmingday/og.jpg"] },
 };
 
 const tones = [s.tPink, s.tMint, s.tButter, s.tLilac];
