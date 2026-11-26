@@ -1,11 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import s from "./filmingday.module.css";
 
 type State = { kind: "idle" } | { kind: "sending" } | { kind: "sent"; first: string } | { kind: "error"; message: string };
 
-export function InterestForm() {
+// `skin`: the page's CSS module with form, field, wide, optional, submitRow,
+// err, hp, done, doneTitle; `button`: the submit button's class.
+export function InterestForm({
+  skin,
+  button = "btn btn-primary",
+}: { skin: Record<string, string>; button?: string }) {
+  const s = skin;
   const [state, setState] = useState<State>({ kind: "idle" });
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -69,7 +74,7 @@ export function InterestForm() {
         <input id="fd-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
       <div className={`${s.wide} ${s.submitRow}`}>
-        <button type="submit" className="btn btn-primary" disabled={state.kind === "sending"}>
+        <button type="submit" className={button} disabled={state.kind === "sending"}>
           {state.kind === "sending" ? "Sending..." : "I'm interested"}
         </button>
         {state.kind === "error" && (

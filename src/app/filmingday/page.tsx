@@ -1,246 +1,182 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Caveat, Figtree } from "next/font/google";
 import { InterestForm } from "./interest-form";
-import s from "./filmingday.module.css";
+import { ReelRing } from "./reel-ring";
+import { hero, sheet, why, how, invest, unknowns, form, foot } from "./content";
+import s from "./zine.module.css";
 
-// Interest page for the spring 2027 client filming day. Self-contained on
-// purpose (own styles, own form handler at /api/filmingday) so it can be
-// carried across to the rebuild-2026-07 branch when that ships.
+// Variant 3: "Wrap party zine". White canvas, colour arrives as big rounded
+// tone-on-tone pastel blocks. The ring sits in the hero on a pink panel, its
+// clips framed as polaroids with the business names handwritten underneath.
+
+const body = Figtree({ subsets: ["latin"], variable: "--v3-body", display: "swap" });
+const hand = Caveat({ subsets: ["latin"], variable: "--v3-hand", display: "swap" });
 
 export const metadata: Metadata = {
   title: "Client Filming Day 2027 - Test Tube Marketing",
   description:
     "One day at a spa hotel in the Midlands. We plan your shoot with you, a professional videographer films it, and you get it back edited and ready to use.",
+  // Share card for WhatsApp, email and social links (built from the page's
+  // own polaroids and headline, rendered in headless Chrome, 26 Nov 2026).
+  openGraph: {
+    type: "website",
+    url: "https://testtubemarketing.com/filmingday",
+    title: "Get months of ads and content filmed in a single day.",
+    description: "Client filming day / Spring 2027. One day at a spa hotel in the Midlands.",
+    images: [{ url: "https://testtubemarketing.com/assets/filmingday/og.jpg", width: 1200, height: 630, alt: "Get months of ads and content filmed in a single day." }],
+  },
+  twitter: { card: "summary_large_image", images: ["https://testtubemarketing.com/assets/filmingday/og.jpg"] },
 };
 
-const sheet = [
-  { k: "Production", v: "TTM client filming day" },
-  { k: "When", v: "Late March or April 2027", note: "date to be confirmed" },
-  { k: "Where", v: "A spa hotel in the Midlands", note: "venue to be confirmed" },
-  { k: "Cast", v: "TTM clients, and a few friends of TTM" },
-  { k: "Crew", v: "A professional videographer, plus Ad and Fish from TTM" },
-  { k: "Wrap", v: "Dinner together, then stay over" },
-];
+const tones = [s.tPink, s.tMint, s.tButter, s.tLilac];
 
-const steps = [
-  {
-    when: "Before the day",
-    title: "We plan your shoot with you",
-    text: "We'll get on a call and work out exactly what you're filming: the ads you need now, the ones you'll want later in the year, and some social content to keep you going in between. We'll help you with the scripts too, so you're not making it up on the spot.",
-  },
-  {
-    when: "On the day",
-    title: "Your slot with the videographer",
-    text: "You get your own time on camera, filmed around the house and grounds, with us there to keep it on track. When you're not filming, there's the spa, and a room full of other business owners we rate.",
-  },
-  {
-    when: "In the evening",
-    title: "Dinner, and a bed for the night",
-    text: "We all eat together. Most people will stay over, so nobody's racing home straight after.",
-  },
-  {
-    when: "Afterwards",
-    title: "Your content, edited and ready",
-    text: "Your footage comes back edited and ready to use. There'll be a sensible limit on how much each person films, so everyone gets a proper turn.",
-  },
-];
-
-// Frames from ads we've already made, picked by Fish (11 Nov 2026). Labelled
-// by business, not by person. wide = a landscape frame.
-const reel = [
-  { src: "/assets/filmingday/reel-fish.jpg", who: "Test Tube Marketing" },
-  { src: "/assets/filmingday/reel-tess.jpg", who: "Tess Cope" },
-  { src: "/assets/filmingday/reel-evoke.jpg", who: "Evoke Tree Services", wide: true },
-  { src: "/assets/filmingday/reel-thrive.jpg", who: "Thrive" },
-  { src: "/assets/filmingday/reel-ad.jpg", who: "Test Tube Marketing" },
-];
-
-export default function FilmingDay() {
+export default function FilmingDayV3() {
   return (
-    <div className={s.page}>
+    <div className={`${s.page} ${body.variable} ${hand.variable}`}>
       <header className={s.top}>
-        <div className={`container ${s.topInner}`}>
-          <Link href="/" className="brand" aria-label="Test Tube Marketing home">
+        <div className={`${s.wrap} ${s.topInner}`}>
+          <Link href="/" className={s.logo} aria-label="Test Tube Marketing home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/ttm-secondary.png" alt="Test Tube Marketing" />
           </Link>
-          <a href="#interested" className="btn btn-outline">
-            I&apos;m interested
+          <a href="#interested" className={s.navCta}>
+            {hero.navCta}
           </a>
         </div>
       </header>
 
       <main>
-        <section className={`container ${s.hero}`}>
+        <section className={`${s.wrap} ${s.hero}`}>
+          <h1 className={s.h1}>
+            {hero.h1Lead} <span className={s.swash}>{hero.h1Accent}</span>
+          </h1>
           <div className={s.heroCopy}>
-            <p className="mono-tag">Client filming day / Spring 2027</p>
-            <h1 className={`display ${s.h1}`}>
-              Get months of ads and content filmed in a <span className={s.pink}>single day.</span>
-            </h1>
-            <p className={s.sub}>
-              One day at a spa hotel in the Midlands next spring. We plan your shoot with you first, a
-              professional videographer films it, and you get it back edited and ready to use. Then
-              dinner, and a bed for the night.
+            <p className={s.sub}>{hero.sub}</p>
+            <a href="#interested" className={s.cta}>
+              {hero.cta}
+            </a>
+            <p className={s.ctaNote}>{hero.ctaNote}</p>
+          </div>
+          <div className={s.panel}>
+            <p className={s.panelTag}>{hero.tag}</p>
+            <ReelRing skin={s} />
+          </div>
+        </section>
+
+        <section className={`${s.wrap} ${s.letterRow}`}>
+          <div className={s.letter}>
+            <h2 className={s.h2}>{why.h2}</h2>
+            {why.paras.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
+            <p className={s.sign}>
+              <span className={s.signName}>{why.sign}</span>
+              <span className={s.signRole}>{why.signRole}</span>
             </p>
-            <div className={s.ctaRow}>
-              <a href="#interested" className="btn btn-primary">
-                I&apos;m interested <span aria-hidden="true">&rarr;</span>
-              </a>
-              <span className={s.ctaNote}>No booking and nothing to pay yet.</span>
-            </div>
           </div>
 
-          <aside className={s.sheet} aria-label="The day at a glance">
-            <div className={s.sheetHead}>
-              <span>Call sheet</span>
-              <span>TTM-FD-01</span>
+          <aside className={s.ticket} aria-label="The day at a glance">
+            <div className={s.stub}>
+              <span className={s.stubTitle}>{sheet.head[0]}</span>
+              <span className={s.stubRef}>{sheet.head[1]}</span>
             </div>
-            <dl className={s.sheetList}>
-              {sheet.map((r) => (
-                <div key={r.k} className={s.sheetRow}>
-                  <dt>{r.k}</dt>
-                  <dd>
-                    {r.v}
-                    {r.note && <span className={s.tbc}>{r.note}</span>}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-            <div className={s.sheetFoot}>
-              <span>Places limited</span>
-              <span className={s.rec}>
-                <i aria-hidden="true" /> Taking names
-              </span>
+            <div className={s.ticketMain}>
+              <dl className={s.rows}>
+                {sheet.rows.map((r) => (
+                  <div key={r.k} className={s.row}>
+                    <dt>{r.k}</dt>
+                    <dd>
+                      {r.v}
+                      {r.note && <span className={s.tbc}>{r.note}</span>}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <div className={s.ticketFoot}>
+                <span>{sheet.foot[0]}</span>
+                <span>{sheet.foot[1]}</span>
+              </div>
             </div>
           </aside>
         </section>
 
-        <section className={`container ${s.why}`}>
-          <figure className={s.photo}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/hero-founders.jpg" alt="Ad and Fish, the founders of Test Tube Marketing" />
-          </figure>
-          <div className={s.prose}>
-            <h2 className={s.h2}>Why we&apos;re doing this</h2>
-            <p>
-              We&apos;re making more ads and videos for our clients than ever. Most of them start the same
-              way: a script from us, then you, a phone and a spare ten minutes.
-            </p>
-            <p>
-              Most of our clients are brilliant in a room. Then the camera goes on and it all goes a bit wooden.
-              That&apos;s normal, and it&apos;s why most ads filmed on a phone don&apos;t look like the
-              person we know.
-            </p>
-            <p>
-              Hiring a videographer for a day yourself costs a grand or more to do properly, and that&apos;s
-              before anyone&apos;s planned what to film.
-            </p>
-            <p>
-              So Ad and I are doing it once, for everyone. Somewhere lovely, a proper videographer,
-              everybody&apos;s shoot planned in advance, and the lot filmed in one day.
-            </p>
-            <p className={s.sign}>
-              Fish<span>Co-founder, Test Tube Marketing</span>
-            </p>
+        <section className={`${s.wrap} ${s.how}`}>
+          <div className={s.howHead}>
+            <h2 className={s.h2}>{how.h2}</h2>
+            <p>{how.intro}</p>
           </div>
-        </section>
-
-        <section className={`container ${s.reel}`} aria-label="Frames from ads we've made with clients">
-          <ul className={s.reelStrip}>
-            {reel.map((r) => (
-              <li key={r.src} className={r.wide ? s.reelWide : undefined}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={r.src} alt={`A frame from a ${r.who} ad`} loading="lazy" />
-                <span>{r.who}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section className={`container ${s.how}`}>
-          <div className={s.sideHead}>
-            <h2 className={s.h2}>How the day works</h2>
-            <p>Four parts. You only need to be on camera for one of them.</p>
-          </div>
-          <ol className={s.steps}>
-            {steps.map((st, i) => (
-              <li key={st.when} className={s.step}>
-                <span className={s.stepNo}>{String(i + 1).padStart(2, "0")}</span>
-                <div>
-                  <p className={s.stepWhen}>{st.when}</p>
-                  <h3 className={s.h3}>{st.title}</h3>
-                  <p>{st.text}</p>
-                </div>
+          <ol className={s.collage}>
+            {how.steps.map((st, i) => (
+              <li key={st.when} className={`${s.sticker} ${tones[i]}`}>
+                <span className={s.num} aria-hidden="true">
+                  {i + 1}
+                </span>
+                <p className={s.when}>{st.when}</p>
+                <h3 className={s.h3}>{st.title}</h3>
+                <p className={s.stepText}>{st.text}</p>
               </li>
             ))}
           </ol>
         </section>
 
-        <section className={`container ${s.invest}`}>
-          <div className={s.sideHead}>
-            <h2 className={s.h2}>The investment</h2>
-            <p>We don&apos;t have prices yet.</p>
+        <section className={s.wrap}>
+          <div className={`${s.block} ${s.invest}`}>
+            <div className={s.investCopy}>
+              <h2 className={s.h2}>{invest.h2}</h2>
+              <p className={s.lead}>{invest.intro}</p>
+              {invest.paras.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+            <div className={s.investSide}>
+              <dl className={s.tiers}>
+                {invest.tiers.map((t) => (
+                  <div key={t.k} className={s.tier}>
+                    <dt>{t.k}</dt>
+                    <dd>{t.v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+            <p className={s.policy}>
+              <span>{invest.policyLead}</span>
+              <span className={s.badge}>
+                <span>&ldquo;{invest.policyQuote}&rdquo;</span>
+              </span>
+              <span>{invest.policyTail}</span>
+            </p>
           </div>
-          <div className={s.investBody}>
-            <p>
-              We&apos;re getting quotes from a few hotels and videographers to work out what the day
-              will cost. We&apos;ll confirm the figure along with the date and venue.
-            </p>
-            <p>
-              This day isn&apos;t designed to make us money. There&apos;ll be an investment to secure
-              your place, and for our clients it&apos;ll be less than you&apos;d pay to hire a
-              videographer yourself.
-            </p>
-            <dl className={s.tiers}>
-              <div>
-                <dt>Our clients</dt>
-                <dd>Places are offered to you first.</dd>
-              </div>
-              <div>
-                <dt>Invited guests</dt>
-                <dd>
-                  Depending on demand, we may invite a small number of past clients and people we know
-                  well, who we think would be good to have there. Their places cost more.
-                </dd>
-              </div>
+        </section>
+
+        <section className={s.wrap}>
+          <div className={`${s.block} ${s.unknown}`}>
+            <h2 className={s.h2}>{unknowns.h2}</h2>
+            <dl className={s.chips}>
+              {unknowns.rows.map((r) => (
+                <div key={r.k} className={s.chip}>
+                  <dt>{r.k}</dt>
+                  <dd>{r.v}</dd>
+                </div>
+              ))}
             </dl>
-            <p className={s.policy}>And we have a strict &ldquo;no dickhead&rdquo; policy.</p>
           </div>
         </section>
 
-        <section className={s.band}>
-          <div className={`container ${s.tbcSection}`}>
-          <h2 className={s.h2}>What we don&apos;t know yet</h2>
-          <dl className={s.unknowns}>
-            <div>
-              <dt>The date</dt>
-              <dd>Late March or April 2027. We&apos;ll confirm it as soon as the venue&apos;s booked.</dd>
+        <section id="interested" className={`${s.wrap} ${s.formWrap}`}>
+          <div className={`${s.block} ${s.formBlock}`}>
+            <div className={s.formIntro}>
+              <h2 className={`${s.h2} ${s.formH2}`}>{form.h2}</h2>
+              <p>{form.intro}</p>
             </div>
-            <div>
-              <dt>The venue</dt>
-              <dd>We&apos;re talking to a shortlist of spa hotels in the Midlands now.</dd>
-            </div>
-          </dl>
-          </div>
-        </section>
-
-        <section id="interested" className={s.formBand}>
-          <div className={`container ${s.formSection}`}>
-          <div className={s.formIntro}>
-            <h2 className={s.h2}>Interested?</h2>
-            <p>
-              Leave your details and Ad or I will be in touch once the date and venue are set. This
-              isn&apos;t a booking, and there&apos;s nothing to pay yet.
-            </p>
-          </div>
-          <InterestForm />
+            <InterestForm skin={s} button={s.submit} />
           </div>
         </section>
       </main>
 
-      <footer className={`container ${s.foot}`}>
-        <span>Test Tube Marketing Ltd, Balsall Common</span>
-        <Link href="/privacy">Privacy policy</Link>
+      <footer className={`${s.wrap} ${s.foot}`}>
+        <span>{foot.company}</span>
+        <Link href="/privacy">{foot.privacy}</Link>
       </footer>
     </div>
   );
